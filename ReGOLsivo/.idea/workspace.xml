@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6106aae7-03fb-4b48-82ed-26e826fce232" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/viewsets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ReGOLsivo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ReGOLsivo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/asgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1alZCOcpGXMhFhpJOgmLKFJ9jCU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6106aae7-03fb-4b48-82ed-26e826fce232" name="Default Changelist" comment="" />
+      <created>1587312012916</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587312012916</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="745" y="77" key="CommitChangelistDialog2" timestamp="1587313187442">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="745" y="77" key="CommitChangelistDialog2/0.0.1680.1010@0.0.1680.1010" timestamp="1587313187442" />
+  </component>
+</project>
