@@ -2,26 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6106aae7-03fb-4b48-82ed-26e826fce232" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/viewsets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ReGOLsivo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ReGOLsivo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/Apps/Aplicacion/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReGOLsivo/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Aplicacion/ListUsuario.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +27,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -55,9 +43,29 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="432" y="146" key="#Plugins" timestamp="1587324583001">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="432" y="146" key="#Plugins/0.0.1680.1010@0.0.1680.1010" timestamp="1587324583001" />
+    <state x="588" y="163" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587323054053">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="588" y="163" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1587323054053" />
+    <state x="1005" y="310" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587322245186">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="1005" y="310" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1680.1010@0.0.1680.1010" timestamp="1587322245186" />
     <state x="745" y="77" key="CommitChangelistDialog2" timestamp="1587313187442">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="745" y="77" key="CommitChangelistDialog2/0.0.1680.1010@0.0.1680.1010" timestamp="1587313187442" />
+    <state x="620" y="246" key="FileChooserDialogImpl" timestamp="1587325427433">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="620" y="246" key="FileChooserDialogImpl/0.0.1680.1010@0.0.1680.1010" timestamp="1587325427433" />
+    <state x="682" y="149" key="SettingsEditor" timestamp="1587325607111">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="682" y="149" key="SettingsEditor/0.0.1680.1010@0.0.1680.1010" timestamp="1587325607111" />
   </component>
 </project>
