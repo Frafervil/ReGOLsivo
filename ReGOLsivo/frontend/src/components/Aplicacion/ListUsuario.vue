@@ -6,6 +6,16 @@
 
         <div class="col-md-12">
           <b-table striped hover :items="usuarios" :fields="fields">
+
+            <template v-slot:cell(action)="data">
+              <b-button size="sm" variant="primary">
+                Editar
+              </b-button>
+              <b-button size="sm" variant="danger">
+                Eliminar
+              </b-button>
+            </template>
+
           </b-table>
 
         </div>
@@ -26,7 +36,7 @@ export default {
         { key: 'Apellidos', label: 'Apellidos' },
         { key: 'Email', label: 'Email' },
         { key: 'Karma', label: 'Karma' },
-        { key: 'action', label: 'Acción' }
+        { key: 'action', label: '' }
       ],
       usuarios: []
     }
