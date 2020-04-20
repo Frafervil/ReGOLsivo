@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 
 import ListUsuario from '@/components/Aplicacion/ListUsuario'
+import CreateUsuario from '@/components/Aplicacion/CreateUsuario'
 import EditUsuario from '@/components/Aplicacion/EditUsuario'
 import DeleteUsuario from '@/components/Aplicacion/DeleteUsuario'
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/usuarios',
       name: 'ListUsuario',
       component: ListUsuario
+    },
+    {
+      path: '/usuarios/create',
+      name: 'CreateUsuario',
+      component: CreateUsuario
     },
     {
       path: '/usuarios/:usuarioId/edit',

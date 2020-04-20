@@ -2,8 +2,13 @@
   <div class="container">
     <div class="row">
       <div class="col text-left">
-        <h2>Listado de usuarios</h2>
-
+        <div class="">
+          <h2>Listado de usuarios</h2>
+          <b-button size="sm" :to="{name: 'CreateUsuario'}" variant="primary">
+            Crear usuario
+          </b-button>
+        </div>
+        <br>
         <div class="col-md-12">
           <b-table striped hover :items="usuarios" :fields="fields">
 
