@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 
 import ListUsuario from '@/components/Aplicacion/ListUsuario'
 import EditUsuario from '@/components/Aplicacion/EditUsuario'
+import DeleteUsuario from '@/components/Aplicacion/DeleteUsuario'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/usuarios/:usuarioId/edit',
       name: 'EditUsuario',
       component: EditUsuario
+    },
+    {
+      path: '/usuarios/:usuarioId/delete',
+      name: 'DeleteUsuario',
+      component: DeleteUsuario
     }
   ],
   mode: 'history'
