@@ -17,21 +17,21 @@
                         <div class="form-group row">
                             <label for="Nombre" class="col-sm-2 col-form-label">Nombre</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Nombre" name="Nombre" class="form-control">
+                             <input type="text" placeholder="Nombre" name="Nombre" class="form-control" v-model.trim="form.Nombre">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="Apellidos" class="col-sm-2 col-form-label">Apellidos</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Apellidos" name="Apellido" class="form-control">
+                             <input type="text" placeholder="Apellidos" name="Apellido" class="form-control" v-model.trim="form.Apellidos">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="Email" class="col-sm-2 col-form-label">Email</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Email" name="Email" class="form-control">
+                             <input type="text" placeholder="Email" name="Email" class="form-control" v-model.trim="form.Email">
                             </div>
                         </div>
 
@@ -54,7 +54,42 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
+    data() {
+        return {
+            usuarioId: this.$route.params.usuarioId,
+            form: {
+                Nombre: '',
+                Apellidos: '',
+                Email: ''
+            }
+        }
+    },
+    methods: {
+        onSubmit(evt){
+            evt.preventDefault()
+        },
+
+        getUsuario (){
+            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+
+            axios.get(path).then((response) =>{
+
+                this.form.Nombre = response.data.Nombre
+                this.form.Apellidos = response.data.Apellidos
+                this.form.Email = response.data.Email
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        }
+    },
+    created() {
+        this.getUsuario()
+    }
 }
 </script>>
 
