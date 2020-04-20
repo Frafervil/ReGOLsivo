@@ -55,6 +55,7 @@
 
 <script>
 import axios from 'axios'
+import swal from 'sweetalert'
 
 export default {
     data() {
@@ -79,7 +80,7 @@ export default {
                 this.form.Apellidos = response.data.Apellidos
                 this.form.Email = response.data.Email
 
-                alert("¡Usuario actualizado con éxito!")
+                swal("¡Usuario actualizado con éxito!", "", "success")
             })
             .catch((error) => {
                 console.log(error)
