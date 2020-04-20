@@ -12,7 +12,7 @@
                    <div class="card-body">
 
                        <form>
-                        <form @onSubmit="onSubmit">
+                        <form @submit="onSubmit">
 
                         <div class="form-group row">
                             <label for="Nombre" class="col-sm-2 col-form-label">Nombre</label>    
@@ -70,6 +70,21 @@ export default {
     methods: {
         onSubmit(evt){
             evt.preventDefault()
+
+            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+
+            axios.put(path, this.form).then((response) =>{
+
+                this.form.Nombre = response.data.Nombre
+                this.form.Apellidos = response.data.Apellidos
+                this.form.Email = response.data.Email
+
+                alert("¡Usuario actualizado con éxito!")
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
         },
 
         getUsuario (){
