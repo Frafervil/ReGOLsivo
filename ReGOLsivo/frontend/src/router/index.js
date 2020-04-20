@@ -2,10 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 
-import ListUsuario from '@/components/Aplicacion/ListUsuario'
-import CreateUsuario from '@/components/Aplicacion/CreateUsuario'
-import EditUsuario from '@/components/Aplicacion/EditUsuario'
-import DeleteUsuario from '@/components/Aplicacion/DeleteUsuario'
+import ListUsuario from '@/components/Usuario/ListUsuario'
+import CreateUsuario from '@/components/Usuario/CreateUsuario'
+import EditUsuario from '@/components/Usuario/EditUsuario'
+import DeleteUsuario from '@/components/Usuario/DeleteUsuario'
+import RegistrarUsuario from '@/components/Usuario/RegistrarUsuario'
 
 Vue.use(Router)
 
@@ -15,6 +16,11 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/registroUsuario',
+      name: 'RegistrarUsuario',
+      component: RegistrarUsuario
     },
     {
       path: '/usuarios',

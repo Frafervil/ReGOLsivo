@@ -2,7 +2,7 @@
     <div class="container">
        <div class="row">
            <div class="col text-left">
-               <h2>Editar usuario</h2>
+               <h2>Registrar usuario</h2>
            </div>
        </div>
 
@@ -24,7 +24,7 @@
                         <div class="form-group row">
                             <label for="Apellidos" class="col-sm-2 col-form-label">Apellidos</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Apellidos" name="Apellido" class="form-control" v-model.trim="form.Apellidos">
+                             <input type="text" placeholder="Apellidos" name="Apellidos" class="form-control" v-model.trim="form.Apellidos">
                             </div>
                         </div>
 
@@ -37,8 +37,8 @@
 
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button type="submit" variant="primary">Editar</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListUsuario'}">Cancelar</b-button>
+                            <b-button type="submit" variant="primary">Registrarse</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'HelloWorld'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -60,7 +60,6 @@ import swal from 'sweetalert'
 export default {
     data() {
         return {
-            usuarioId: this.$route.params.usuarioId,
             form: {
                 Nombre: '',
                 Apellidos: '',
@@ -72,39 +71,23 @@ export default {
         onSubmit(evt){
             evt.preventDefault()
 
-            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+            const path = 'http://localhost:8000/api/v1.0/usuarios/'
 
-            axios.put(path, this.form).then((response) =>{
+            axios.post(path, this.form).then((response) =>{
 
                 this.form.Nombre = response.data.Nombre
                 this.form.Apellidos = response.data.Apellidos
                 this.form.Email = response.data.Email
 
-                swal("¡Usuario actualizado con éxito!", "", "success")
+                swal("¡Usuario creado con éxito!", "", "success")
             })
             .catch((error) => {
-                console.log(error)
+                swal("¡El usuario no ha sido creado!", "", "error")
             })
 
         },
-
-        getUsuario (){
-            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
-
-            axios.get(path).then((response) =>{
-
-                this.form.Nombre = response.data.Nombre
-                this.form.Apellidos = response.data.Apellidos
-                this.form.Email = response.data.Email
-
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        }
     },
     created() {
-        this.getUsuario()
     }
 }
 </script>>
