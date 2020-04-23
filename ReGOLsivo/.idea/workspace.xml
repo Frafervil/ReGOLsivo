@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6106aae7-03fb-4b48-82ed-26e826fce232" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/Aplicacion/ListUsuario.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/aplicacion/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/aplicacion/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/aplicacion/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/aplicacion/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/aplicacion/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/aplicacion/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/aplicacion/viewsets.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReGOLsivo/aplicacion/viewsets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReGOLsivo/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/ReGOLsivo/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +45,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="1145" y="368" key="#Notifications" timestamp="1587599790017">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="1145" y="368" key="#Notifications/0.0.1680.1010@0.0.1680.1010" timestamp="1587599790017" />
     <state x="432" y="146" key="#Plugins" timestamp="1587324583001">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
@@ -63,9 +69,13 @@
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="620" y="246" key="FileChooserDialogImpl/0.0.1680.1010@0.0.1680.1010" timestamp="1587325427433" />
-    <state x="682" y="149" key="SettingsEditor" timestamp="1587325607111">
+    <state x="682" y="149" key="SettingsEditor" timestamp="1587599815654">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state x="682" y="149" key="SettingsEditor/0.0.1680.1010@0.0.1680.1010" timestamp="1587325607111" />
+    <state x="682" y="149" key="SettingsEditor/0.0.1680.1010@0.0.1680.1010" timestamp="1587599815654" />
+    <state x="967" y="217" width="585" height="582" key="find.popup" timestamp="1587602246223">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="967" y="217" width="585" height="582" key="find.popup/0.0.1680.1010@0.0.1680.1010" timestamp="1587602246223" />
   </component>
 </project>
