@@ -9,11 +9,6 @@ class CuentaDeUsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = CuentaDeUsuarioSerializer
 
 
-"""class ActorViewSet(viewsets.ModelViewSet):
-    queryset = Actor.objects.all()
-    serializer_class = ActorSerializer"""
-
-
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer

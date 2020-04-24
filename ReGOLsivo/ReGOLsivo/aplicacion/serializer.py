@@ -7,11 +7,6 @@ class CuentaDeUsuarioSerializer(serializers.ModelSerializer):
         model = CuentaDeUsuario
         fields = '__all__'
 
-"""class ActorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Actor
-        fields = '__all__'"""
-
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario

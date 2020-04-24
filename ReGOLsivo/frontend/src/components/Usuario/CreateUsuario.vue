@@ -15,23 +15,30 @@
                         <form @submit="onSubmit">
 
                         <div class="form-group row">
-                            <label for="Nombre" class="col-sm-2 col-form-label">Nombre</label>    
+                            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Nombre" name="Nombre" class="form-control" v-model.trim="form.Nombre">
+                             <input type="text" placeholder="Nombre" name="nombre" class="form-control" v-model.trim="form.nombre">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="Apellidos" class="col-sm-2 col-form-label">Apellidos</label>    
+                            <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Apellidos" name="Apellido" class="form-control" v-model.trim="form.Apellidos">
+                             <input type="text" placeholder="Apellidos" name="apellidos" class="form-control" v-model.trim="form.apellidos">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="Email" class="col-sm-2 col-form-label">Email</label>    
+                            <label for="email" class="col-sm-2 col-form-label">Email</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Email" name="Email" class="form-control" v-model.trim="form.Email">
+                             <input type="text" placeholder="Email" name="email" class="form-control" v-model.trim="form.email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="cuentaDeUsuario" class="col-sm-2 col-form-label">Cuenta de usuario</label>    
+                            <div class="col-sm-6">
+                             <input type="text" placeholder="Cuenta de usuario" name="cuentaDeUsuario" class="form-control" v-model.trim="form.cuentaDeUsuario">
                             </div>
                         </div>
 
@@ -61,9 +68,10 @@ export default {
     data() {
         return {
             form: {
-                Nombre: '',
-                Apellidos: '',
-                Email: ''
+                nombre: '',
+                apellidos: '',
+                email: '',
+                cuentaDeUsuario: ''
             }
         }
     },
@@ -75,9 +83,10 @@ export default {
 
             axios.post(path, this.form).then((response) =>{
 
-                this.form.Nombre = response.data.Nombre
-                this.form.Apellidos = response.data.Apellidos
-                this.form.Email = response.data.Email
+                this.form.nombre = response.data.nombre
+                this.form.apellidos = response.data.apellidos
+                this.form.email = response.data.email
+                this.form.cuentaDeUsuario = response.data.cuentaDeUsuario
 
                 swal("¡Usuario creado con éxito!", "", "success")
             })

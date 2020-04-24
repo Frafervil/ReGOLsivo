@@ -4,10 +4,10 @@
             <div class="col">
          
                 <h3>¿Seguro que quieres eliminar este usuario?</h3>
-                <p>Nombre : {{ this.element.Nombre }}</p>
-                <p>Apellidos : {{ this.element.Apellidos }}</p>
-                <p>Email : {{ this.element.Email }}</p>
-                <p>Karma : {{ this.element.Karma }}</p>
+                <p>Nombre : {{ this.element.nombre }}</p>
+                <p>Apellidos : {{ this.element.apellidos }}</p>
+                <p>Email : {{ this.element.email }}</p>
+                <p>Karma : {{ this.element.karma }}</p>
 
             </div> 
         </div> 
@@ -31,10 +31,10 @@ export default {
         return {
             usuarioId: this.$route.params.usuarioId,
             element: {
-                Nombre: '',
-                Apellidos: '',
-                Email: '',
-                Karma: ''
+                nombre: '',
+                apellidos: '',
+                email: '',
+                karma: ''
             }
         }
     },
@@ -44,10 +44,10 @@ export default {
 
             axios.get(path).then((response) =>{
 
-                this.element.Nombre = response.data.Nombre
-                this.element.Apellidos = response.data.Apellidos
-                this.element.Email = response.data.Email
-                this.element.Karma = response.data.Karma
+                this.element.nombre = response.data.nombre
+                this.element.apellidos = response.data.apellidos
+                this.element.email = response.data.email
+                this.element.karma = response.data.karma
 
             })
             .catch((error) => {

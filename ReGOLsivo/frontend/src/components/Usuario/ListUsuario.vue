@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col text-left">
         <div class="">
-          <h2>Listado de usuarios</h2>
+          <h2>Lista de usuarios</h2>
           <b-button size="sm" :to="{name: 'CreateUsuario'}" variant="primary">
             Crear usuario
           </b-button>
@@ -37,10 +37,10 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'Nombre', label: 'Nombre' },
-        { key: 'Apellidos', label: 'Apellidos' },
-        { key: 'Email', label: 'Email' },
-        { key: 'Karma', label: 'Karma' },
+        { key: 'nombre', label: 'Nombre' },
+        { key: 'apellidos', label: 'Apellidos' },
+        { key: 'email', label: 'Email' },
+        { key: 'karma', label: 'Karma' },
         { key: 'action', label: '' }
       ],
       usuarios: []
