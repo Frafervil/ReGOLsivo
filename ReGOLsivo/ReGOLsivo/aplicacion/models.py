@@ -32,16 +32,21 @@ class Administrador(Actor):
     def __str__(self):
         return super().nombre
 
+class Resultado(models.TextChoices):
+    Local = '1'
+    Empate = 'X'
+    Visitante = '2'
+
 class Dificultad(models.TextChoices):
-    Facil = 'Facil'
+    Facil = 'Fácil'
     Intermedia = 'Intermedia'
-    Dificil = 'Dificil'
+    Dificil = 'Difícil'
 
 class Partido(models.Model):
     nombreLocal = models.CharField(max_length=35, null=False, blank=False)
     nombreVisitante = models.CharField(max_length=35, null=False, blank=False)
-    resultado = models.CharField(max_length=35, null=False, blank=False)
-    pronosticoSistema = models.CharField(max_length=35, null=False, blank=False)
+    resultado = models.CharField(max_length=35, choices=Resultado.choices, null=False, blank=False)
+    pronosticoSistema = models.CharField(max_length=35, choices=Resultado.choices, null=False, blank=False)
     premio = models.PositiveIntegerField(null=False, blank=False)
     dificultad = models.CharField(max_length=35, choices=Dificultad.choices, null=False, blank=False)
 
