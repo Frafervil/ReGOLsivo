@@ -2,7 +2,7 @@
     <div class="container">
        <div class="row">
            <div class="col text-left">
-               <h2>Editar usuario</h2>
+               <h2>Editar administrador</h2>
            </div>
        </div>
 
@@ -38,7 +38,7 @@
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Editar</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListUsuario'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListAdministrador'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -60,7 +60,7 @@ import swal from 'sweetalert'
 export default {
     data() {
         return {
-            usuarioId: this.$route.params.usuarioId,
+            administradorId: this.$route.params.administradorId,
             form: {
                 nombre: '',
                 apellidos: '',
@@ -73,7 +73,7 @@ export default {
         onSubmit(evt){
             evt.preventDefault()
 
-            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+            const path = `http://localhost:8000/api/v1.0/administradores/${this.administradorId}/`
 
             axios.put(path, this.form).then((response) =>{
 
@@ -82,7 +82,7 @@ export default {
                 this.form.email = response.data.email
                 this.form.cuentaDeUsuario = response.data.cuentaDeUsuario
 
-                swal("¡Usuario actualizado con éxito!", "", "success")
+                swal("¡Administrador actualizado con éxito!", "", "success")
             })
             .catch((error) => {
                 console.log(error)
@@ -90,8 +90,8 @@ export default {
 
         },
 
-        getUsuario (){
-            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+        getAdministrador (){
+            const path = `http://localhost:8000/api/v1.0/administradores/${this.administradorId}/`
 
             axios.get(path).then((response) =>{
 
@@ -107,7 +107,7 @@ export default {
         }
     },
     created() {
-        this.getUsuario()
+        this.getAdministrador()
     }
 }
 </script>>

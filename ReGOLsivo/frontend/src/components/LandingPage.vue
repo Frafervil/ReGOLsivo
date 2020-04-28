@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="landingPage">
     <h1>{{ msg }}</h1>
     <div class="">
     <h2>Usuarios</h2>
@@ -9,7 +9,7 @@
     <b-button size="sm" :to="{name: 'CreateUsuario'}" variant="primary">
             Iniciar sesión
     </b-button>
-    <b-button size="sm" :to="{name: 'CreateUsuario'}" variant="primary">
+    <b-button size="sm" :to="{name: 'ListPartido'}" variant="primary">
             Pronosticador
     </b-button>
     </div>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'LandingPage',
   data () {
     return {
       msg: '¡Bienvenido a ReGOLsivo!'
