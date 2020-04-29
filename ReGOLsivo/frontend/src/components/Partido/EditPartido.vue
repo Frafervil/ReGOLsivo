@@ -59,7 +59,7 @@
                         <div class="form-group row">
                             <label for="premio" class="col-sm-2 col-form-label">Premio</label>    
                             <div class="col-sm-6">
-                             <input type="number" min="0" placeholder="Premio" name="premio" class="form-control" v-model.trim="form.premio">
+                             <input type="number" min="0" placeholder="0" name="premio" class="form-control" v-model.trim="form.premio">
                             </div>
                         </div>
 

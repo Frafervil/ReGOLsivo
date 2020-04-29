@@ -9,14 +9,21 @@ import DeleteUsuario from '@/components/Usuario/DeleteUsuario'
 
 import ListAdministrador from '@/components/Administrador/ListAdministrador'
 import EditAdministrador from '@/components/Administrador/EditAdministrador'
+import DeleteAdministrador from '@/components/Administrador/DeleteAdministrador'
 
 import ListPartido from '@/components/Partido/ListPartido'
 import EditPartido from '@/components/Partido/EditPartido'
+import DeletePartido from '@/components/Partido/DeletePartido'
 
 import ListPronostico from '@/components/Pronostico/ListPronostico'
+import EditPronostico from '@/components/Pronostico/EditPronostico'
+import DeletePronostico from '@/components/Pronostico/DeletePronostico'
 
 import ListComentario from '@/components/Comentario/ListComentario'
 import EditComentario from '@/components/Comentario/EditComentario'
+import DeleteComentario from '@/components/Comentario/DeleteComentario'
+
+import EditConfiguracion from '@/components/Configuracion/EditConfiguracion'
 
 Vue.use(Router)
 
@@ -58,6 +65,11 @@ export default new Router({
       component: EditAdministrador
     },
     {
+      path: '/administradores/:administradorId/delete',
+      name: 'DeleteAdministrador',
+      component: DeleteAdministrador
+    },
+    {
       path: '/partidos',
       name: 'ListPartido',
       component: ListPartido
@@ -68,9 +80,24 @@ export default new Router({
       component: EditPartido
     },
     {
+      path: '/partidos/:partidoId/delete',
+      name: 'DeletePartido',
+      component: DeletePartido
+    },
+    {
       path: '/pronosticos',
       name: 'ListPronostico',
       component: ListPronostico
+    },
+    {
+      path: '/pronosticos/:pronosticoId/edit',
+      name: 'EditPronostico',
+      component: EditPronostico
+    },
+    {
+      path: '/pronosticos/:pronosticoId/delete',
+      name: 'DeletePronostico',
+      component: DeletePronostico
     },
     {
       path: '/comentarios',
@@ -81,6 +108,16 @@ export default new Router({
       path: '/comentarios/:comentarioId/edit',
       name: 'EditComentario',
       component: EditComentario
+    },
+    {
+      path: '/comentarios/:comentarioId/delete',
+      name: 'DeleteComentario',
+      component: DeleteComentario
+    },
+    {
+      path: '/configuraciones/:configuracionId/edit',
+      name: 'EditConfiguracion',
+      component: EditConfiguracion
     }
   ],
   mode: 'history'
