@@ -10,10 +10,12 @@ import DeleteUsuario from '@/components/Usuario/DeleteUsuario'
 import ListAdministrador from '@/components/Administrador/ListAdministrador'
 import EditAdministrador from '@/components/Administrador/EditAdministrador'
 import DeleteAdministrador from '@/components/Administrador/DeleteAdministrador'
+import CreateAdministrador from '@/components/Administrador/CreateAdministrador'
 
 import ListPartido from '@/components/Partido/ListPartido'
 import EditPartido from '@/components/Partido/EditPartido'
 import DeletePartido from '@/components/Partido/DeletePartido'
+import CreatePartido from '@/components/Partido/CreatePartido'
 
 import ListPronostico from '@/components/Pronostico/ListPronostico'
 import EditPronostico from '@/components/Pronostico/EditPronostico'
@@ -70,6 +72,11 @@ export default new Router({
       component: DeleteAdministrador
     },
     {
+      path: '/administradores/create',
+      name: 'CreateAdministrador',
+      component: CreateAdministrador
+    },
+    {
       path: '/partidos',
       name: 'ListPartido',
       component: ListPartido
@@ -83,6 +90,11 @@ export default new Router({
       path: '/partidos/:partidoId/delete',
       name: 'DeletePartido',
       component: DeletePartido
+    },
+    {
+      path: '/partidos/create',
+      name: 'CreatePartido',
+      component: CreatePartido
     },
     {
       path: '/pronosticos',
