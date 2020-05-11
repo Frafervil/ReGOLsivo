@@ -29,37 +29,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="resultado" class="col-sm-2 col-form-label">Resultado</label>    
-                            <div class="col-sm-6">
-                             <input type="radio" id="1" value="1" v-model.trim="form.resultado">
-                             <label for="1">1</label>
-                             <br>
-                             <input type="radio" id="X" value="X" v-model.trim="form.resultado">
-                             <label for="X">X</label>
-                             <br>
-                             <input type="radio" id="2" value="2" v-model.trim="form.resultado">
-                             <label for="2">2</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="pronosticoSistema" class="col-sm-2 col-form-label">Pronóstico del sistema</label>    
-                            <div class="col-sm-6">
-                             <input type="radio" id="1" value="1" v-model.trim="form.pronosticoSistema">
-                             <label for="1">1</label>
-                             <br>
-                             <input type="radio" id="X" value="X" v-model.trim="form.pronosticoSistema">
-                             <label for="X">X</label>
-                             <br>
-                             <input type="radio" id="2" value="2" v-model.trim="form.pronosticoSistema">
-                             <label for="2">2</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="premio" class="col-sm-2 col-form-label">Premio</label>    
                             <div class="col-sm-6">
-                             <input type="number" min="0" placeholder="0" name="premio" class="form-control" v-model.trim="form.premio">
+                             <input type="number" min="1" placeholder="1" name="premio" class="form-control" v-model.trim="form.premio">
                             </div>
                         </div>
 
@@ -105,8 +77,8 @@ export default {
             form: {
                 nombreLocal: '',
                 nombreVisitante: '',
-                resultado: '',
-                pronosticoSistema: '',
+                resultado: 'Por determinar',
+                pronosticoSistema: 'Por determinar',
                 premio: '',
                 dificultad: ''
             }
@@ -122,8 +94,6 @@ export default {
 
                 this.form.nombreLocal = response.data.nombreLocal
                 this.form.nombreVisitante = response.data.nombreVisitante
-                this.form.resultado = response.data.resultado
-                this.form.pronosticoSistema = response.data.pronosticoSistema
                 this.form.premio = response.data.premio
                 this.form.dificultad = response.data.dificultad
 

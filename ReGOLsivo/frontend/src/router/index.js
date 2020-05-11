@@ -16,10 +16,12 @@ import ListPartido from '@/components/Partido/ListPartido'
 import EditPartido from '@/components/Partido/EditPartido'
 import DeletePartido from '@/components/Partido/DeletePartido'
 import CreatePartido from '@/components/Partido/CreatePartido'
+import ShowPartido from '@/components/Partido/ShowPartido'
 
 import ListPronostico from '@/components/Pronostico/ListPronostico'
 import EditPronostico from '@/components/Pronostico/EditPronostico'
 import DeletePronostico from '@/components/Pronostico/DeletePronostico'
+import CreatePronostico from '@/components/Pronostico/CreatePronostico'
 
 import ListComentario from '@/components/Comentario/ListComentario'
 import EditComentario from '@/components/Comentario/EditComentario'
@@ -97,6 +99,11 @@ export default new Router({
       component: CreatePartido
     },
     {
+      path: '/partidos/:partidoId/show',
+      name: 'ShowPartido',
+      component: ShowPartido
+    },
+    {
       path: '/pronosticos',
       name: 'ListPronostico',
       component: ListPronostico
@@ -110,6 +117,11 @@ export default new Router({
       path: '/pronosticos/:pronosticoId/delete',
       name: 'DeletePronostico',
       component: DeletePronostico
+    },
+    {
+      path: '/pronosticos/:partidoId/create',
+      name: 'CreatePronostico',
+      component: CreatePronostico
     },
     {
       path: '/comentarios',

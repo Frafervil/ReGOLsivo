@@ -13,6 +13,9 @@
           <b-table striped hover :items="partidos" :fields="fields">
 
             <template v-slot:cell(action)="data">
+              <b-button size="sm" variant="primary" :to="{ name:'ShowPartido', params: {partidoId: data.item.id} }">
+                Ver detalles
+              </b-button>
               <b-button size="sm" variant="primary" :to="{ name:'EditPartido', params: {partidoId: data.item.id} }">
                 Editar
               </b-button>
@@ -40,7 +43,7 @@ export default {
         { key: 'nombreLocal', label: 'Local' },
         { key: 'nombreVisitante', label: 'Visitante' },
         { key: 'resultado', label: 'Resultado' },
-        { key: 'pronosticoSistema', label: 'Pronóstico del Sistema' },
+        { key: 'pronosticoSistema', label: 'Pronóstico del sistema' },
         { key: 'premio', label: 'Premio' },
         { key: 'dificultad', label: 'Dificultad' },
         { key: 'action', label: '' }

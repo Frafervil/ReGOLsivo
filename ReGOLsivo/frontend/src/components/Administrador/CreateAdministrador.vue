@@ -2,7 +2,7 @@
     <div class="container">
        <div class="row">
            <div class="col text-left">
-               <h2>Crear usuario</h2>
+               <h2>Crear administrador</h2>
            </div>
        </div>
 
@@ -35,30 +35,10 @@
                             </div>
                         </div>
 
-                        <!--<div class="form-group row">  
-                            <div class="col-sm-6">
-                             <input type="number" name="karma" value= "0" class="form-control" v-model.trim="form.karma">
-                            </div>
-                        </div>-->
-
-                        <!--<div class="form-group row">
-                            <label for="cuentaDeUsuario.nombreDeUsuario" class="col-sm-2 col-form-label">Nombre de usuario</label>    
-                            <div class="col-sm-6">
-                             <input type="text" placeholder="usuario" name="cuentaDeUsuario.nombreDeUsuario" class="form-control" v-model.trim="form.nombreDeUsuario">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="cuentaDeUsuario.contrasena" class="col-sm-2 col-form-label">Contraseña</label>    
-                            <div class="col-sm-6">
-                             <input type="password" name="cuentaDeUsuario.contrasena" class="form-control" v-model.trim="form.contrasena">
-                            </div>
-                        </div>-->
-
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Crear</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListUsuario'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListAdministrador'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -84,9 +64,6 @@ export default {
                 nombre: '',
                 apellidos: '',
                 email: ''
-                //karma: ''
-                //nombreDeUsuario: '',
-                //contrasena: ''
             }
         }
     },
@@ -94,21 +71,18 @@ export default {
         onSubmit(evt){
             evt.preventDefault()
 
-            const path = 'http://localhost:8000/api/v1.0/usuarios/'
+            const path = 'http://localhost:8000/api/v1.0/administradores/'
 
             axios.post(path, this.form).then((response) =>{
 
                 this.form.nombre = response.data.nombre
                 this.form.apellidos = response.data.apellidos
                 this.form.email = response.data.email
-                //this.form.karma = response.data.karma
-                //this.form.nombreDeUsuario = response.data.nombreDeUsuario
-                //this.form.contrasena = response.data.contrasena
 
-                swal("¡Usuario creado con éxito!", "", "success")
+                swal("¡Administrador creado con éxito!", "", "success")
             })
             .catch((error) => {
-                swal("¡El usuario no ha sido creado!", "", "error")
+                swal("¡El Administrador no ha sido creado!", "", "error")
             })
 
         },

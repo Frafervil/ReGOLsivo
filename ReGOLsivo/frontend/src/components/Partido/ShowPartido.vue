@@ -2,7 +2,7 @@
     <div class="container">
        <div class="row">
            <div class="col text-left">
-               <h2>Editar partido</h2>
+               <h2>Detalles del partido</h2>
            </div>
        </div>
 
@@ -17,70 +17,51 @@
                         <div class="form-group row">
                             <label for="nombreLocal" class="col-sm-2 col-form-label">Local</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Local" name="nombreLocal" class="form-control" v-model.trim="form.nombreLocal">
+                             <input type="text" name="nombreLocal" class="form-control" readonly v-model.trim="form.nombreLocal">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="nombreVisitante" class="col-sm-2 col-form-label">Visitante</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Visitante" name="nombreVisitante" class="form-control" v-model.trim="form.nombreVisitante">
+                             <input type="text" name="nombreVisitante" class="form-control" readonly v-model.trim="form.nombreVisitante">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="resultado" class="col-sm-2 col-form-label">Resultado</label>    
                             <div class="col-sm-6">
-                             <input type="radio" id="1" value="1" v-model.trim="form.resultado">
-                             <label for="1">1</label>
-                             <br>
-                             <input type="radio" id="X" value="X" v-model.trim="form.resultado">
-                             <label for="X">X</label>
-                             <br>
-                             <input type="radio" id="2" value="2" v-model.trim="form.resultado">
-                             <label for="2">2</label>
+                             <input type="text" name="resultado" class="form-control" readonly v-model.trim="form.resultado">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="pronosticoSistema" class="col-sm-2 col-form-label">Pronóstico del sistema</label>    
                             <div class="col-sm-6">
-                             <input type="radio" id="1" value="1" v-model.trim="form.pronosticoSistema">
-                             <label for="1">1</label>
-                             <br>
-                             <input type="radio" id="X" value="X" v-model.trim="form.pronosticoSistema">
-                             <label for="X">X</label>
-                             <br>
-                             <input type="radio" id="2" value="2" v-model.trim="form.pronosticoSistema">
-                             <label for="2">2</label>
+                             <input type="text" name="pronosticoSistema" class="form-control" readonly v-model.trim="form.pronosticoSistema">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="premio" class="col-sm-2 col-form-label">Premio</label>    
                             <div class="col-sm-6">
-                             <input type="number" min="0" placeholder="0" name="premio" class="form-control" v-model.trim="form.premio">
+                             <input type="number" name="premio" class="form-control" readonly v-model.trim="form.premio">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="dificultad" class="col-sm-2 col-form-label">Dificultad</label>    
                             <div class="col-sm-6">
-                             <input type="radio" id="facil" value="Fácil" v-model.trim="form.dificultad">
-                             <label for="facil">Fácil</label>
-                             <br>
-                             <input type="radio" id="intermedia" value="Intermedia" v-model.trim="form.dificultad">
-                             <label for="intermedia">Intermedia</label>
-                             <br>
-                             <input type="radio" id="dificil" value="Difícil" v-model.trim="form.dificultad">
-                             <label for="dificil">Difícil</label>
+                             <input type="text" name="dificultad" class="form-control" readonly v-model.trim="form.dificultad">
                             </div>
                         </div>
 
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button type="submit" variant="primary">Editar</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListPartido'}">Cancelar</b-button>
+                            <b-button size="sm" variant="primary" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
+                            Pronosticar
+                            </b-button>    
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListPartido'}">Atrás</b-button>
                             </div>
                         </div>
 

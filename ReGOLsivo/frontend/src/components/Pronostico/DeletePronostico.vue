@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col">
          
-                <h3>¿Seguro que quieres eliminar este pronostico?</h3>
+                <h3>¿Seguro que quieres eliminar este pronóstico?</h3>
                 <p>Resultado : {{ this.element.resultado }}</p>
                 <p>Acertado : {{ this.element.acertado }}</p>
                 <p>Usuario : {{ this.element.usuario }}</p>
