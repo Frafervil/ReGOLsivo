@@ -35,8 +35,15 @@
 
 <script>
 import axios from 'axios';
+import router from "../../router";
 
 export default {
+  name: "Partidos",
+
+  mounted() {
+    this.checkLoggedIn();
+  },
+
   data () {
     return {
       fields: [
@@ -52,6 +59,10 @@ export default {
     }
   },
   methods: {
+
+  checkLoggedIn() {
+        router.push('/auth');
+    },
 
     getPartidos (){
 
