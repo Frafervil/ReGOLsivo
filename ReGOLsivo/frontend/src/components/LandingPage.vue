@@ -6,7 +6,7 @@
     <b-button size="sm" :to="{name: 'RegistrarUsuario'}" variant="primary">
             Registrarse
     </b-button>
-    <b-button size="sm" :to="{name: 'CreateUsuario'}" variant="primary">
+    <b-button size="sm" :to="{name: 'Auth'}" variant="primary">
             Iniciar sesión
     </b-button>
     <b-button size="sm" :to="{name: 'ListPartido'}" variant="primary">
@@ -15,7 +15,7 @@
     </div>
     <br>
     <h2>Administradores</h2>
-    <b-button size="sm" :to="{name: 'CreateUsuario'}" variant="primary">
+    <b-button size="sm" :to="{name: 'Auth'}" variant="primary">
             Iniciar sesión
     </b-button>
   </div>

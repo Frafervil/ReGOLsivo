@@ -4,7 +4,7 @@
         <v-flex xs12 sm8 lg4 md5>
           <v-card class="login-card">
             <v-card-title>
-              <span class="headline">Login to Movies</span>
+              <span class="headline">Iniciar sesión</span>
             </v-card-title>
 
             <v-spacer/>
@@ -32,7 +32,7 @@
                   <v-text-field
                     v-model="credentials.username"
                     :counter="70"
-                    label="username"
+                    label="Nombre de usuario"
                     :rules="rules.username"
                     maxlength="70"
                     required
@@ -42,14 +42,14 @@
                     type="password"
                     v-model="credentials.password"
                     :counter="20"
-                    label="password"
+                    label="Contraseña"
                     :rules="rules.password"
                     maxlength="20"
                     required
                   />
 
                 </v-container>
-                <v-btn class="pink white--text" :disabled="!valid" @click="login">Login</v-btn>
+                <v-btn class="pink white--text" :disabled="!valid" @click="login">Acceder</v-btn>
 
               </v-form>
 
@@ -73,13 +73,13 @@ export default {
         loading:false,
         rules: {
           username: [
-            v => !!v || "Username is required",
-            v => (v && v.length > 3) || "A username must be more than 3 characters long",
-            v => /^[a-z0-9_]+$/.test(v) || "A username can only contain letters and digits"
+            v => !!v || "El nombre de usuario es necesario",
+            v => (v && v.length > 3) || "Un nombre de usuario deber tener más de 3 caracteres de longitud",
+            v => /^[a-z0-9_]+$/.test(v) || "Un nombre de usuario debe tener letras y números"
           ],
           password: [
-            v => !!v || "Password is required",
-            v => (v && v.length > 7) || "The password must be longer than 7 characters"
+            v => !!v || "La contraseña es necesaria",
+            v => (v && v.length > 7) || "La contraseña deber tener más de 7 caracteres de longitud"
           ]
         }
     }),
