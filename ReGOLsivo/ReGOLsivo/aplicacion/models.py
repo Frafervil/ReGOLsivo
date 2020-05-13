@@ -26,6 +26,9 @@ class Usuario(Actor):
     def __str__(self):
         return super().nombre
 
+    def sumarKarma(self, premio):
+        self.karma = self.karma + premio
+
 class Administrador(Actor):
     email = models.EmailField(max_length=35, null=False, blank=False)
 
@@ -41,6 +44,8 @@ class Partido(models.Model):
     nombreLocal = models.CharField(max_length=35, null=False, blank=False)
     nombreVisitante = models.CharField(max_length=35, null=False, blank=False)
     resultado = models.CharField(max_length=35, null=False, blank=False)
+    hora = models.DateTimeField(null=False, blank=False)
+    dia = models.DateTimeField(null=False, blank=False)
     pronosticoSistema = models.CharField(max_length=35, null=False, blank=False)
     premio = models.PositiveIntegerField(null=False, blank=False)
     dificultad = models.CharField(max_length=35, choices=Dificultad.choices, null=False, blank=False)
@@ -49,6 +54,20 @@ class Partido(models.Model):
         cadena = "{0} - {1}"
         return cadena.format(self.nombreLocal, self.nombreVisitante)
 
+    def hora(self):
+        return self.hora.strftime('%H:%M')
+
+    def dia(self):
+        return self.dia.strftime('%d/%m/%Y')
+
+    def obtenerDificultad(self):
+        if(self.premio < 50):
+            self.dificultad = 'Fácil'
+        elif(self.premio >= 50 and self.premio < 100):
+           self.dificultad = 'Intermedia' 
+        elif(self.premio >= 100):
+            self.dificultad = 'Difícil'
+
 class Pronostico(models.Model):
     resultado = models.CharField(max_length=35, null=False, blank=False)
     acertado = models.BooleanField(default=False, null=False, blank=False)
@@ -56,7 +75,15 @@ class Pronostico(models.Model):
     partido = models.ForeignKey(Partido, null=False, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.usuario.cuentaDeUsuario.nombreDeUsuario, self.partido
+        return  '%s --> %s'%(self.usuario.cuentaDeUsuario.nombreDeUsuario, self.partido)
+
+    def comprobarPronosticoUsuario(self):
+        if(self.resultado == self.partido.resultado):
+            self.acertado = 'true'       
+
+    def premiarAcierto(self):
+        if(self.acertado == 'true'):
+            self.usuario.sumarKarma(self.usuario, self.partido.premio)
 
 class Comentario(models.Model):
     momento = models.DateTimeField(auto_now_add=True, null=False, blank=False)
@@ -64,9 +91,17 @@ class Comentario(models.Model):
     meGustas = models.PositiveIntegerField(default=0, null=False, blank=False)
     autor = models.ForeignKey(Usuario, null=False, on_delete=models.CASCADE)
     partido = models.ForeignKey(Partido, null=False, on_delete=models.CASCADE)
+    comentarioRespuesta = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.autor.cuentaDeUsuario.nombreDeUsuario, self.partido
+        return '%s --> %s'%(self.autor.cuentaDeUsuario.nombreDeUsuario, self.partido)
+
+    def darMeGusta(self):
+        self.meGustas = self.meGustas + 1
+
+    def premiarComentariosPositivos(self, Configuracion):
+        if(self.meGustas > Configuracion.valorComentariosPositivos):
+            self.autor.sumarKarma(self.autor, Configuracion.premioComentariosPositivos)
 
 class Configuracion(models.Model):
     mensajeBienvenida = models.TextField(max_length=60, null=False)
