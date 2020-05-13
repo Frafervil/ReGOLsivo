@@ -17,6 +17,7 @@ import EditPartido from '@/components/Partido/EditPartido'
 import DeletePartido from '@/components/Partido/DeletePartido'
 import CreatePartido from '@/components/Partido/CreatePartido'
 import ShowPartido from '@/components/Partido/ShowPartido'
+import Pronosticador from '@/components/Partido/Pronosticador'
 import Auth from '@/components/Partido/Auth'
 
 import ListPronostico from '@/components/Pronostico/ListPronostico'
@@ -103,6 +104,11 @@ export default new Router({
       path: '/partidos/:partidoId/show',
       name: 'ShowPartido',
       component: ShowPartido
+    },
+    {
+      path: '/pronosticador',
+      name: 'Pronosticador',
+      component: Pronosticador
     },
     {
       path: '/auth',

@@ -2,22 +2,16 @@
   <div class="landingPage">
     <h1>{{ msg }}</h1>
     <div class="">
-    <h2>Usuarios</h2>
-    <b-button size="sm" :to="{name: 'RegistrarUsuario'}" variant="primary">
+    <b-button size="sm" :to="{name: 'CreateUsuario'}" variant="primary">
             Registrarse
     </b-button>
     <b-button size="sm" :to="{name: 'Auth'}" variant="primary">
             Iniciar sesión
     </b-button>
     <b-button size="sm" :to="{name: 'ListPartido'}" variant="primary">
-            Pronosticador
+            Partidos
     </b-button>
     </div>
-    <br>
-    <h2>Administradores</h2>
-    <b-button size="sm" :to="{name: 'Auth'}" variant="primary">
-            Iniciar sesión
-    </b-button>
   </div>
 </template>
 

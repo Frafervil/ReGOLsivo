@@ -44,8 +44,8 @@ class Partido(models.Model):
     nombreLocal = models.CharField(max_length=35, null=False, blank=False)
     nombreVisitante = models.CharField(max_length=35, null=False, blank=False)
     resultado = models.CharField(max_length=35, null=False, blank=False)
-    hora = models.DateTimeField(null=False, blank=False)
-    dia = models.DateTimeField(null=False, blank=False)
+    hora = models.TimeField(null=False, blank=False)
+    dia = models.DateField(null=False, blank=False)
     pronosticoSistema = models.CharField(max_length=35, null=False, blank=False)
     premio = models.PositiveIntegerField(null=False, blank=False)
     dificultad = models.CharField(max_length=35, choices=Dificultad.choices, null=False, blank=False)
@@ -53,12 +53,6 @@ class Partido(models.Model):
     def __str__(self):
         cadena = "{0} - {1}"
         return cadena.format(self.nombreLocal, self.nombreVisitante)
-
-    def hora(self):
-        return self.hora.strftime('%H:%M')
-
-    def dia(self):
-        return self.dia.strftime('%d/%m/%Y')
 
     def obtenerDificultad(self):
         if(self.premio < 50):

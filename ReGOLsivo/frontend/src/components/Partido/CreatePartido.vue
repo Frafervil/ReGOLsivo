@@ -29,13 +29,27 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="dia" class="col-sm-2 col-form-label">Día</label>    
+                            <div class="col-sm-6">
+                             <input type="date" name="dia" class="form-control" v-model.trim="form.dia">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="hora" class="col-sm-2 col-form-label">Hora</label>    
+                            <div class="col-sm-6">
+                             <input type="time" name="hora" class="form-control" v-model.trim="form.hora">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="premio" class="col-sm-2 col-form-label">Premio</label>    
                             <div class="col-sm-6">
                              <input type="number" min="1" placeholder="1" name="premio" class="form-control" v-model.trim="form.premio">
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!--<div class="form-group row">
                             <label for="dificultad" class="col-sm-2 col-form-label">Dificultad</label>    
                             <div class="col-sm-6">
                              <input type="radio" id="facil" value="Fácil" v-model.trim="form.dificultad">
@@ -47,7 +61,7 @@
                              <input type="radio" id="dificil" value="Difícil" v-model.trim="form.dificultad">
                              <label for="dificil">Difícil</label>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="rows">
                             <div class="col text-left">
@@ -70,14 +84,22 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
+import router from "../../router";
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data() {
         return {
             form: {
                 nombreLocal: '',
                 nombreVisitante: '',
                 resultado: 'Por determinar',
+                hora: '',
+                dia: '',
                 pronosticoSistema: 'Por determinar',
                 premio: '',
                 dificultad: ''
@@ -85,6 +107,24 @@ export default {
         }
     },
     methods: {
+
+    checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
+
+        obtenerDificultad(){
+            //swal("¡Se ha llegado aquí!", "", "error") 
+            if(this.form.premio < 50)
+                this.form.dificultad = 'Fácil'
+            else if(this.form.premio >= 50 && this.form.premio < 100)
+                this.form.dificultad = 'Intermedia' 
+            else if(this.form.premio >= 100)
+                this.form.dificultad = 'Difícil'   
+        },
+
         onSubmit(evt){
             evt.preventDefault()
 
@@ -94,8 +134,10 @@ export default {
 
                 this.form.nombreLocal = response.data.nombreLocal
                 this.form.nombreVisitante = response.data.nombreVisitante
+                this.form.hora = response.data.hora
+                this.form.dia = response.data.dia
                 this.form.premio = response.data.premio
-                this.form.dificultad = response.data.dificultad
+                this.form.dificultad = this.obtenerDificultad
 
                 swal("¡Partido creado con éxito!", "", "success")
             })
@@ -107,6 +149,7 @@ export default {
         },
     },
     created() {
+        //this.obtenerDificultad()
     }
 }
 </script>>
