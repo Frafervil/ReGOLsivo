@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractBaseUser
 
 # Create your models here.
 
 
-class CuentaDeUsuario(models.Model):
+"""class CuentaDeUsuario(models.Model):
     nombreDeUsuario = models.CharField(max_length=32, null=False, blank=False, unique=True)
     contrasena = models.CharField(max_length=32, blank=False)
 
@@ -31,6 +32,33 @@ class Usuario(Actor):
 
 class Administrador(Actor):
     email = models.EmailField(max_length=35, null=False, blank=False)
+
+    def __str__(self):
+        return super().nombre"""
+
+class Actor(AbstractBaseUser):
+    nombre = models.CharField(max_length=35, null=False, blank=False)
+    apellidos = models.CharField(max_length=35, null=False, blank=False)
+    nombreDeUsuario = models.CharField(max_length=32, null=False, blank=False, unique=True)
+
+    USERNAME_FIELD = 'nombreDeUsuario'
+
+class Usuario(Actor):
+    email = models.EmailField(max_length=35, null=False, blank=False)
+    karma = models.IntegerField(default=0, null=False, blank=False)
+
+    EMAIL_FIELD = 'email'
+
+    def __str__(self):
+        return super().nombre
+
+    def sumarKarma(self, premio):
+        self.karma = self.karma + premio
+
+class Administrador(Actor):
+    email = models.EmailField(max_length=35, null=False, blank=False)
+
+    EMAIL_FIELD = 'email'
 
     def __str__(self):
         return super().nombre
@@ -69,7 +97,7 @@ class Pronostico(models.Model):
     partido = models.ForeignKey(Partido, null=False, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return  '%s --> %s'%(self.usuario.cuentaDeUsuario.nombreDeUsuario, self.partido)
+        return  '%s --> %s'%(self.usuario.nombreDeUsuario, self.partido)
 
     def comprobarPronosticoUsuario(self):
         if(self.resultado == self.partido.resultado):
@@ -88,7 +116,7 @@ class Comentario(models.Model):
     comentarioRespuesta = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s --> %s'%(self.autor.cuentaDeUsuario.nombreDeUsuario, self.partido)
+        return '%s --> %s'%(self.autor.nombreDeUsuario, self.partido)
 
     def darMeGusta(self):
         self.meGustas = self.meGustas + 1

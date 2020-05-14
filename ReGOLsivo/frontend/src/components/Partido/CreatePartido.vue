@@ -66,7 +66,7 @@
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Crear</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListPartido'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'Pronosticador'}">Cancelar</b-button>
                             </div>
                         </div>
 

@@ -3,7 +3,7 @@ from rest_framework import routers
 from.viewsets import *
 
 router = routers.SimpleRouter()
-router.register('cuentasDeUsuario', CuentaDeUsuarioViewSet)
+#router.register('cuentasDeUsuario', CuentaDeUsuarioViewSet)
 router.register('usuarios', UsuarioViewSet)
 router.register('administradores', AdministradorViewSet)
 router.register('partidos', PartidoViewSet)

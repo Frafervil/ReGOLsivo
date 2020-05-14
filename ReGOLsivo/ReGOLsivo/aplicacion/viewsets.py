@@ -1,12 +1,12 @@
 from rest_framework import viewsets
 
-from .models import CuentaDeUsuario, Usuario, Administrador, Partido, Pronostico, Comentario, Configuracion
+from .models import Usuario, Administrador, Partido, Pronostico, Comentario, Configuracion
 from .serializer import *
 
 
-class CuentaDeUsuarioViewSet(viewsets.ModelViewSet):
+"""class CuentaDeUsuarioViewSet(viewsets.ModelViewSet):
     queryset = CuentaDeUsuario.objects.all()
-    serializer_class = CuentaDeUsuarioSerializer
+    serializer_class = CuentaDeUsuarioSerializer"""
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
