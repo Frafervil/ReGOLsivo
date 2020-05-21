@@ -1,22 +1,16 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import User
 #from django.contrib.auth.models import UserManager
 
 # Create your models here.
 
-class Actor(AbstractBaseUser):
+class Actor(User):
     nombre = models.CharField(max_length=35, null=False, blank=False)
     apellidos = models.CharField(max_length=35, null=False, blank=False)
-    nombreDeUsuario = models.CharField(max_length=32, null=False, blank=False, unique=True)
-
-    USERNAME_FIELD = 'nombreDeUsuario'
 
 class Usuario(Actor):
-    email = models.EmailField(max_length=35, null=False, blank=False)
     karma = models.IntegerField(default=0, null=False, blank=False)
-
-    EMAIL_FIELD = 'email'
 
     def __str__(self):
         return super().nombre
@@ -25,9 +19,6 @@ class Usuario(Actor):
         self.karma = self.karma + premio    
 
 class Administrador(Actor):
-    email = models.EmailField(max_length=35, null=False, blank=False)
-
-    EMAIL_FIELD = 'email'
 
     def __str__(self):
         return super().nombre
@@ -50,14 +41,6 @@ class Partido(models.Model):
     def __str__(self):
         cadena = "{0} - {1}"
         return cadena.format(self.nombreLocal, self.nombreVisitante)
-
-    def obtenerDificultad(self):
-        if(self.premio < 50):
-            self.dificultad = 'Fácil'
-        elif(self.premio >= 50 and self.premio < 100):
-           self.dificultad = 'Intermedia' 
-        elif(self.premio >= 100):
-            self.dificultad = 'Difícil'
 
 class Pronostico(models.Model):
     resultado = models.CharField(max_length=35, null=False, blank=False)

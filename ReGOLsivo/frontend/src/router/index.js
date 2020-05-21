@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import LandingPage from '@/components/LandingPage'
 import LandingUsuario from '@/components/LandingUsuario'
+import Auth from '@/components/Auth'
 
 import ListUsuario from '@/components/Usuario/ListUsuario'
 import CreateUsuario from '@/components/Usuario/CreateUsuario'
@@ -22,7 +23,6 @@ import ShowPartido from '@/components/Partido/ShowPartido'
 import Pronosticador from '@/components/Partido/Pronosticador'
 import PronosticadorUsuario from '@/components/Partido/PronosticadorUsuario'
 import Resultados from '@/components/Partido/Resultados'
-import Auth from '@/components/Partido/Auth'
 
 import ListPronostico from '@/components/Pronostico/ListPronostico'
 import EditPronostico from '@/components/Pronostico/EditPronostico'
@@ -48,6 +48,11 @@ export default new Router({
       path: '/landingUsuario',
       name: 'LandingUsuario',
       component: LandingUsuario
+    },
+    {
+      path: '/auth',
+      name: 'Auth',
+      component: Auth
     },
     {
       path: '/usuarios',
@@ -133,11 +138,6 @@ export default new Router({
       path: '/resultados',
       name: 'Resultados',
       component: Resultados
-    },
-    {
-      path: '/auth',
-      name: 'Auth',
-      component: Auth
     },
     {
       path: '/pronosticos',

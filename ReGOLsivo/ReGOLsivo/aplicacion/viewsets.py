@@ -4,11 +4,6 @@ from .models import Usuario, Administrador, Partido, Pronostico, Comentario, Con
 from .serializer import *
 
 
-"""class CuentaDeUsuarioViewSet(viewsets.ModelViewSet):
-    queryset = CuentaDeUsuario.objects.all()
-    serializer_class = CuentaDeUsuarioSerializer"""
-
-
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer

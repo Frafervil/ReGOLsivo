@@ -2,11 +2,6 @@ from rest_framework import serializers
 from .models import Usuario, Administrador, Partido, Pronostico, Comentario, Configuracion
 
 
-"""class CuentaDeUsuarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CuentaDeUsuario
-        fields = '__all__'"""
-
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
