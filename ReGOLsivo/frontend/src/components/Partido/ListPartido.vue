@@ -8,7 +8,6 @@
           </b-table>
           <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingPage'}">Atrás</b-button>
         </div>
-
       </div>
     </div>
   </div>
@@ -24,8 +23,8 @@ export default {
       sortBy: 'dia',
       sortDesc: false,
       fields: [
-        { key: 'nombreLocal', label: 'Local' },
-        { key: 'nombreVisitante', label: 'Visitante' },
+        { key: 'nombreLocal', label: 'Local'},
+        { key: 'nombreVisitante', label: 'Visitante'},
         { key: 'dia', label: 'Día', sortable: true},
         { key: 'hora', label: 'Hora', sortable: true}
       ],

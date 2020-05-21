@@ -9,7 +9,6 @@
           <b-table striped hover :items="usuarios" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :per-page="perPage">
           </b-table>
         </div>
-
       </div>
     </div>
   </div>
@@ -25,7 +24,7 @@ export default {
       sortDesc: true,
       perPage: 10,
       fields: [
-        { key: 'nombreDeUsuario', label: 'Nombre de usuario' },
+        { key: 'nombreDeUsuario', label: 'Nombre de usuario'},
         { key: 'karma', label: 'Karma', sortable: true}
       ],
       usuarios: []

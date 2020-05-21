@@ -49,20 +49,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="dificultad" class="col-sm-2 col-form-label">Dificultad</label>    
-                            <div class="col-sm-6">
-                             <input type="radio" id="facil" value="Fácil" v-model.trim="form.dificultad">
-                             <label for="facil">Fácil</label>
-                             <br>
-                             <input type="radio" id="intermedia" value="Intermedia" v-model.trim="form.dificultad">
-                             <label for="intermedia">Intermedia</label>
-                             <br>
-                             <input type="radio" id="dificil" value="Difícil" v-model.trim="form.dificultad">
-                             <label for="dificil">Difícil</label>
-                            </div>
-                        </div>
-
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Crear</b-button>
@@ -115,15 +101,14 @@ export default {
             }
         },*/
 
-        /*obtenerDificultad(){
-            //swal("¡Se ha llegado aquí!", "", "error") 
+        obtenerDificultad(){
             if(this.form.premio < 50)
                 this.form.dificultad = 'Fácil'
             else if(this.form.premio >= 50 && this.form.premio < 100)
                 this.form.dificultad = 'Intermedia' 
             else if(this.form.premio >= 100)
                 this.form.dificultad = 'Difícil'   
-        },*/
+        },
 
         onSubmit(evt){
             evt.preventDefault()
@@ -140,7 +125,7 @@ export default {
                 this.form.dificultad = response.data.dificultad
 
                 swal("¡Partido creado con éxito!", "", "success")
-            })
+            },this.obtenerDificultad())
             .catch((error) => {
                 console.log(error)
                 swal("¡El partido no ha sido creado!", "", "error")
@@ -149,7 +134,6 @@ export default {
         },
     },
     created() {
-        //this.obtenerDificultad()
     }
 }
 </script>>
