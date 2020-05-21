@@ -4,9 +4,9 @@
       <div class="col text-left">
         <h2>Lista de partidos</h2>
         <div class="col-md-12">
-          <b-table striped hover :items="partidos" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc">
+          <b-table striped hover :items="partidos" :fields="fields">
           </b-table>
-          <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingPage'}">Atrás</b-button>
+          <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingUsuario'}">Atrás</b-button>
         </div>
 
       </div>
@@ -21,13 +21,12 @@ export default {
 
   data () {
     return {
-      sortBy: 'dia',
-      sortDesc: false,
       fields: [
         { key: 'nombreLocal', label: 'Local' },
         { key: 'nombreVisitante', label: 'Visitante' },
-        { key: 'dia', label: 'Día', sortable: true},
-        { key: 'hora', label: 'Hora', sortable: true}
+        { key: 'dia', label: 'Día' },
+        { key: 'hora', label: 'Hora' },
+        { key: 'pronosticoSistema', label: 'Pronóstico del sistema' }
       ],
       partidos: []
     }

@@ -35,6 +35,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="nombreDeUsuario" class="col-sm-2 col-form-label">Nombre de usuario</label>    
+                            <div class="col-sm-6">
+                             <input type="text" placeholder="carlos23" name="nombreDeUsuario" class="form-control" v-model.trim="form.nombreDeUsuario">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-2 col-form-label">Contraseña</label>    
+                            <div class="col-sm-6">
+                             <input type="password" name="password" class="form-control" v-model.trim="form.password">
+                            </div>
+                        </div>
+
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Crear</b-button>
@@ -63,7 +77,9 @@ export default {
             form: {
                 nombre: '',
                 apellidos: '',
-                email: ''
+                email: '',
+                nombreDeUsuario: '',
+                password: ''
             }
         }
     },
@@ -78,6 +94,8 @@ export default {
                 this.form.nombre = response.data.nombre
                 this.form.apellidos = response.data.apellidos
                 this.form.email = response.data.email
+                this.form.nombreDeUsuario = response.data.nombreDeUsuario
+                this.form.password = response.data.password
 
                 swal("¡Administrador creado con éxito!", "", "success")
             })

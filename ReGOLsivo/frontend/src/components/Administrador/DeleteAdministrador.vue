@@ -7,6 +7,8 @@
                 <p>Nombre : {{ this.element.nombre }}</p>
                 <p>Apellidos : {{ this.element.apellidos }}</p>
                 <p>Email : {{ this.element.email }}</p>
+                <p>Nombre de usuario : {{ this.element.nombreDeUsuario }}</p>
+                <p>Contraseña : {{ this.element.password }}</p>
 
             </div> 
         </div> 
@@ -32,7 +34,9 @@ export default {
             element: {
                 nombre: '',
                 apellidos: '',
-                email: ''
+                email: '',
+                nombreDeUsuario: '',
+                password: ''
             }
         }
     },
@@ -45,6 +49,8 @@ export default {
                 this.element.nombre = response.data.nombre
                 this.element.apellidos = response.data.apellidos
                 this.element.email = response.data.email
+                this.element.nombreDeUsuario = response.data.nombreDeUsuario
+                this.element.password = response.data.password
 
             })
             .catch((error) => {

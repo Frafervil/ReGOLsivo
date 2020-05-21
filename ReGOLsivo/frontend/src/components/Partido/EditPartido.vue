@@ -29,6 +29,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="dia" class="col-sm-2 col-form-label">Día</label>    
+                            <div class="col-sm-6">
+                             <input type="date" name="dia" class="form-control" v-model.trim="form.dia">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="hora" class="col-sm-2 col-form-label">Hora</label>    
+                            <div class="col-sm-6">
+                             <input type="time" name="hora" class="form-control" v-model.trim="form.hora">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="resultado" class="col-sm-2 col-form-label">Resultado</label>    
                             <div class="col-sm-6">
                              <input type="radio" id="1" value="1" v-model.trim="form.resultado">
@@ -107,6 +121,8 @@ export default {
                 nombreLocal: '',
                 nombreVisitante: '',
                 resultado: '',
+                hora: '',
+                dia: '',
                 pronosticoSistema: '',
                 premio: '',
                 dificultad: ''
@@ -123,6 +139,8 @@ export default {
 
                 this.form.nombreLocal = response.data.nombreLocal
                 this.form.nombreVisitante = response.data.nombreVisitante
+                this.form.hora = response.data.hora
+                this.form.dia = response.data.dia
                 this.form.resultado = response.data.resultado
                 this.form.pronosticoSistema = response.data.pronosticoSistema
                 this.form.premio = response.data.premio
@@ -143,6 +161,8 @@ export default {
 
                 this.form.nombreLocal = response.data.nombreLocal
                 this.form.nombreVisitante = response.data.nombreVisitante
+                this.form.hora = response.data.hora
+                this.form.dia = response.data.dia
                 this.form.resultado = response.data.resultado
                 this.form.pronosticoSistema = response.data.pronosticoSistema
                 this.form.premio = response.data.premio

@@ -9,21 +9,21 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import Vuetify from 'vuetify'
+/*import Vuetify from 'vuetify'
 import vuetify from '@/plugins/vuetify'
-import VueSession from 'vue-session'
+import VueSession from 'vue-session'*/
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue);
 
-Vue.use(Vuetify)
-Vue.use(VueSession)
+/*Vue.use(Vuetify)
+Vue.use(VueSession)*/
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
-  vuetify,
+  //vuetify,
   template: '<App/>'
-}).$mount('#app')
+})//.$mount('#app')

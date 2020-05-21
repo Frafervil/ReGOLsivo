@@ -2,11 +2,19 @@
   <div class="container">
     <div class="row">
       <div class="col text-left">
-        <h2>Lista de partidos</h2>
+        <div class="">
+          <h2>Lista de partidos</h2>
+        </div>
         <div class="col-md-12">
-          <b-table striped hover :items="partidos" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc">
+          <b-table striped hover :items="partidos" :fields="fields">
+            <template v-slot:cell(action)="data">
+              <b-button size="sm" variant="primary" :to="{ name:'ShowPartido', params: {partidoId: data.item.id} }">
+                Ver detalles
+              </b-button>
+            </template>
+
           </b-table>
-          <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingPage'}">Atrás</b-button>
+
         </div>
 
       </div>
@@ -16,23 +24,33 @@
 
 <script>
 import axios from 'axios';
+//import router from "../../router";
 
 export default {
+  /*mounted() {
+    this.checkLoggedIn();
+  },*/
 
   data () {
     return {
-      sortBy: 'dia',
-      sortDesc: false,
       fields: [
         { key: 'nombreLocal', label: 'Local' },
         { key: 'nombreVisitante', label: 'Visitante' },
-        { key: 'dia', label: 'Día', sortable: true},
-        { key: 'hora', label: 'Hora', sortable: true}
+        { key: 'resultado', label: 'Resultado' },
+        { key: 'pronosticoSistema', label: 'Pronóstico del sistema' },
+        { key: 'action', label: '' }
       ],
       partidos: []
     }
   },
   methods: {
+
+  /*checkLoggedIn() {
+         this.$session.start();
+      if (!this.$session.has("token")) {
+        router.push("/auth");
+      }
+    },*/
 
     getPartidos (){
 

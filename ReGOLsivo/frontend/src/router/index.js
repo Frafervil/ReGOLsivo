@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import LandingPage from '@/components/LandingPage'
+import LandingUsuario from '@/components/LandingUsuario'
 
 import ListUsuario from '@/components/Usuario/ListUsuario'
 import CreateUsuario from '@/components/Usuario/CreateUsuario'
-import EditUsuario from '@/components/Usuario/EditUsuario'
+import PerfilUsuario from '@/components/Usuario/PerfilUsuario'
 import DeleteUsuario from '@/components/Usuario/DeleteUsuario'
+import Clasificacion from '@/components/Usuario/Clasificacion'
 
 import ListAdministrador from '@/components/Administrador/ListAdministrador'
-import EditAdministrador from '@/components/Administrador/EditAdministrador'
+import PerfilAdministrador from '@/components/Administrador/PerfilAdministrador'
 import DeleteAdministrador from '@/components/Administrador/DeleteAdministrador'
 import CreateAdministrador from '@/components/Administrador/CreateAdministrador'
 
@@ -18,6 +20,8 @@ import DeletePartido from '@/components/Partido/DeletePartido'
 import CreatePartido from '@/components/Partido/CreatePartido'
 import ShowPartido from '@/components/Partido/ShowPartido'
 import Pronosticador from '@/components/Partido/Pronosticador'
+import PronosticadorUsuario from '@/components/Partido/PronosticadorUsuario'
+import Resultados from '@/components/Partido/Resultados'
 import Auth from '@/components/Partido/Auth'
 
 import ListPronostico from '@/components/Pronostico/ListPronostico'
@@ -41,6 +45,11 @@ export default new Router({
       component: LandingPage
     },
     {
+      path: '/landingUsuario',
+      name: 'LandingUsuario',
+      component: LandingUsuario
+    },
+    {
       path: '/usuarios',
       name: 'ListUsuario',
       component: ListUsuario
@@ -52,13 +61,18 @@ export default new Router({
     },
     {
       path: '/usuarios/:usuarioId/edit',
-      name: 'EditUsuario',
-      component: EditUsuario
+      name: 'PerfilUsuario',
+      component: PerfilUsuario
     },
     {
       path: '/usuarios/:usuarioId/delete',
       name: 'DeleteUsuario',
       component: DeleteUsuario
+    },
+    {
+      path: '/clasificacion',
+      name: 'Clasificacion',
+      component: Clasificacion
     },
     {
       path: '/administradores',
@@ -67,8 +81,8 @@ export default new Router({
     },
     {
       path: '/administradores/:administradorId/edit',
-      name: 'EditAdministrador',
-      component: EditAdministrador
+      name: 'PerfilAdministrador',
+      component: PerfilAdministrador
     },
     {
       path: '/administradores/:administradorId/delete',
@@ -109,6 +123,16 @@ export default new Router({
       path: '/pronosticador',
       name: 'Pronosticador',
       component: Pronosticador
+    },
+    {
+      path: '/pronosticadorUsuario',
+      name: 'PronosticadorUsuario',
+      component: PronosticadorUsuario
+    },
+    {
+      path: '/resultados',
+      name: 'Resultados',
+      component: Resultados
     },
     {
       path: '/auth',

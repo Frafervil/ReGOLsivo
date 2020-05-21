@@ -49,7 +49,7 @@
                             </div>
                         </div>
 
-                        <!--<div class="form-group row">
+                        <div class="form-group row">
                             <label for="dificultad" class="col-sm-2 col-form-label">Dificultad</label>    
                             <div class="col-sm-6">
                              <input type="radio" id="facil" value="Fácil" v-model.trim="form.dificultad">
@@ -61,7 +61,7 @@
                              <input type="radio" id="dificil" value="Difícil" v-model.trim="form.dificultad">
                              <label for="dificil">Difícil</label>
                             </div>
-                        </div>-->
+                        </div>
 
                         <div class="rows">
                             <div class="col text-left">
@@ -84,13 +84,13 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
-import router from "../../router";
+//import router from "../../router";
 
 export default {
 
-    mounted() {
+    /*mounted() {
         this.checkLoggedIn();
-    },
+    },*/
 
     data() {
         return {
@@ -108,14 +108,14 @@ export default {
     },
     methods: {
 
-    checkLoggedIn() {
+    /*checkLoggedIn() {
          this.$session.start();
         if (!this.$session.has("token")) {
             router.push("/auth");
             }
-        },
+        },*/
 
-        obtenerDificultad(){
+        /*obtenerDificultad(){
             //swal("¡Se ha llegado aquí!", "", "error") 
             if(this.form.premio < 50)
                 this.form.dificultad = 'Fácil'
@@ -123,7 +123,7 @@ export default {
                 this.form.dificultad = 'Intermedia' 
             else if(this.form.premio >= 100)
                 this.form.dificultad = 'Difícil'   
-        },
+        },*/
 
         onSubmit(evt){
             evt.preventDefault()
@@ -137,7 +137,7 @@ export default {
                 this.form.hora = response.data.hora
                 this.form.dia = response.data.dia
                 this.form.premio = response.data.premio
-                this.form.dificultad = this.obtenerDificultad
+                this.form.dificultad = response.data.dificultad
 
                 swal("¡Partido creado con éxito!", "", "success")
             })

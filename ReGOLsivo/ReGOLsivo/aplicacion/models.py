@@ -1,40 +1,9 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser
+#from django.contrib.auth.models import UserManager
 
 # Create your models here.
-
-
-"""class CuentaDeUsuario(models.Model):
-    nombreDeUsuario = models.CharField(max_length=32, null=False, blank=False, unique=True)
-    contrasena = models.CharField(max_length=32, blank=False)
-
-    def __str__(self):
-        return self.nombreDeUsuario
-
-class Actor(models.Model):
-    nombre = models.CharField(max_length=35, null=False, blank=False)
-    apellidos = models.CharField(max_length=35, null=False, blank=False)
-    cuentaDeUsuario = models.ForeignKey(CuentaDeUsuario, null=False, on_delete=models.CASCADE)
-
-    class Meta:
-        abstract = True
-
-class Usuario(Actor):
-    email = models.EmailField(max_length=35, null=False, blank=False)
-    karma = models.IntegerField(default=0, null=False, blank=False)
-
-    def __str__(self):
-        return super().nombre
-
-    def sumarKarma(self, premio):
-        self.karma = self.karma + premio
-
-class Administrador(Actor):
-    email = models.EmailField(max_length=35, null=False, blank=False)
-
-    def __str__(self):
-        return super().nombre"""
 
 class Actor(AbstractBaseUser):
     nombre = models.CharField(max_length=35, null=False, blank=False)
@@ -53,7 +22,7 @@ class Usuario(Actor):
         return super().nombre
 
     def sumarKarma(self, premio):
-        self.karma = self.karma + premio
+        self.karma = self.karma + premio    
 
 class Administrador(Actor):
     email = models.EmailField(max_length=35, null=False, blank=False)

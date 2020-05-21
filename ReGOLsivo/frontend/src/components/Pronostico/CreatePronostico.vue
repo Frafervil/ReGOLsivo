@@ -70,7 +70,7 @@ export default {
             axios.post(path, this.form).then((response) =>{
 
                 this.form.resultado = response.data.resultado
-                //this.form.partido = response.data.partido
+                this.form.partido = response.data.partido
 
                 swal("¡Pronóstico creado con éxito!", "", "success")
             })

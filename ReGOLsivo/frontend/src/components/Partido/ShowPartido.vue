@@ -61,7 +61,7 @@
                             <b-button size="sm" variant="primary" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
                             Pronosticar
                             </b-button>    
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListPartido'}">Atrás</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Atrás</b-button>
                             </div>
                         </div>
 

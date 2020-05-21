@@ -17,43 +17,37 @@
                         <div class="form-group row">
                             <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Nombre" name="nombre" class="form-control" v-model.trim="form.nombre">
+                             <input type="text" placeholder="Javier" name="nombre" class="form-control" v-model.trim="form.nombre">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Apellidos" name="apellidos" class="form-control" v-model.trim="form.apellidos">
+                             <input type="text" placeholder="Sánchez Herrera" name="apellidos" class="form-control" v-model.trim="form.apellidos">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label">Email</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Email" name="email" class="form-control" v-model.trim="form.email">
-                            </div>
-                        </div>
-
-                        <!--<div class="form-group row">  
-                            <div class="col-sm-6">
-                             <input type="number" name="karma" value= "0" class="form-control" v-model.trim="form.karma">
-                            </div>
-                        </div>-->
-
-                        <!--<div class="form-group row">
-                            <label for="cuentaDeUsuario.nombreDeUsuario" class="col-sm-2 col-form-label">Nombre de usuario</label>    
-                            <div class="col-sm-6">
-                             <input type="text" placeholder="usuario" name="cuentaDeUsuario.nombreDeUsuario" class="form-control" v-model.trim="form.nombreDeUsuario">
+                             <input type="text" placeholder="j.s.herrera@gmail.com" name="email" class="form-control" v-model.trim="form.email">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="cuentaDeUsuario.contrasena" class="col-sm-2 col-form-label">Contraseña</label>    
+                            <label for="nombreDeUsuario" class="col-sm-2 col-form-label">Nombre de usuario</label>    
                             <div class="col-sm-6">
-                             <input type="password" name="cuentaDeUsuario.contrasena" class="form-control" v-model.trim="form.contrasena">
+                             <input type="text" placeholder="carlos23" name="nombreDeUsuario" class="form-control" v-model.trim="form.nombreDeUsuario">
                             </div>
-                        </div>-->
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-2 col-form-label">Contraseña</label>    
+                            <div class="col-sm-6">
+                             <input type="password" name="password" class="form-control" v-model.trim="form.password">
+                            </div>
+                        </div>
 
                         <div class="rows">
                             <div class="col text-left">
@@ -83,10 +77,10 @@ export default {
             form: {
                 nombre: '',
                 apellidos: '',
-                email: ''
-                //karma: ''
-                //nombreDeUsuario: '',
-                //contrasena: ''
+                email: '',
+                nombreDeUsuario: '',
+                password: '',
+                karma: 0
             }
         }
     },
@@ -101,9 +95,8 @@ export default {
                 this.form.nombre = response.data.nombre
                 this.form.apellidos = response.data.apellidos
                 this.form.email = response.data.email
-                //this.form.karma = response.data.karma
-                //this.form.nombreDeUsuario = response.data.nombreDeUsuario
-                //this.form.contrasena = response.data.contrasena
+                this.form.nombreDeUsuario = response.data.nombreDeUsuario
+                this.form.password = response.data.password
 
                 swal("¡Usuario creado con éxito!", "", "success")
             })

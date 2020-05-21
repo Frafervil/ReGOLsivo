@@ -35,12 +35,12 @@
 
 <script>
 import axios from 'axios';
-import router from "../../router";
+//import router from "../../router";
 
 export default {
-  mounted() {
+  /*mounted() {
     this.checkLoggedIn();
-  },
+  },*/
 
   data () {
     return {
@@ -56,16 +56,16 @@ export default {
   },
   methods: {
 
-  checkLoggedIn() {
+  /*checkLoggedIn() {
          this.$session.start();
       if (!this.$session.has("token")) {
         router.push("/auth");
       }
-    },
+    },*/
 
     getPartidos (){
 
-      const path = 'http://localhost:8000/api/v1.0/pronosticador/'
+      const path = 'http://localhost:8000/api/v1.0/partidos/'
       axios.get(path).then((response) => {
         this.partidos = response.data
       })

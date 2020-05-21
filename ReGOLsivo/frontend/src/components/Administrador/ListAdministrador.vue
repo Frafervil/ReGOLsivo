@@ -13,7 +13,7 @@
           <b-table striped hover :items="administradores" :fields="fields">
 
             <template v-slot:cell(action)="data">
-              <b-button size="sm" variant="primary" :to="{ name:'EditAdministrador', params: {administradorId: data.item.id} }">
+              <b-button size="sm" variant="primary" :to="{ name:'PerfilAdministrador', params: {administradorId: data.item.id} }">
                 Editar
               </b-button>
               <b-button size="sm" variant="danger" :to="{ name:'DeleteAdministrador', params: {administradorId: data.item.id} }">

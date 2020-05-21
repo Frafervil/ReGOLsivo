@@ -7,6 +7,8 @@
                 <p>Nombre : {{ this.element.nombre }}</p>
                 <p>Apellidos : {{ this.element.apellidos }}</p>
                 <p>Email : {{ this.element.email }}</p>
+                <p>Nombre de usuario : {{ this.element.nombreDeUsuario }}</p>
+                <p>Contraseña : {{ this.element.password }}</p>
                 <p>Karma : {{ this.element.karma }}</p>
 
             </div> 
@@ -34,6 +36,8 @@ export default {
                 nombre: '',
                 apellidos: '',
                 email: '',
+                nombreDeUsuario: '',
+                password: '',
                 karma: ''
             }
         }
@@ -47,6 +51,8 @@ export default {
                 this.element.nombre = response.data.nombre
                 this.element.apellidos = response.data.apellidos
                 this.element.email = response.data.email
+                this.element.nombreDeUsuario = response.data.nombreDeUsuario
+                this.element.password = response.data.password
                 this.element.karma = response.data.karma
 
             })

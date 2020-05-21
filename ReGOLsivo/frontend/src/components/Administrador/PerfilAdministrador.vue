@@ -2,7 +2,7 @@
     <div class="container">
        <div class="row">
            <div class="col text-left">
-               <h2>Editar administrador</h2>
+               <h2>Perfil</h2>
            </div>
        </div>
 
@@ -28,16 +28,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-2 col-form-label">Email</label>    
-                            <div class="col-sm-6">
-                             <input type="text" placeholder="Email" name="email" class="form-control" v-model.trim="form.email">
-                            </div>
-                        </div>
-
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button type="submit" variant="primary">Editar</b-button>
+                            <b-button type="submit" variant="primary">Guardar cambios</b-button>
                             <b-button type="submit" class="btn-large-space" :to="{ name: 'ListAdministrador'}">Cancelar</b-button>
                             </div>
                         </div>
@@ -65,7 +58,8 @@ export default {
                 nombre: '',
                 apellidos: '',
                 email: '',
-                cuentaDeUsuario: ''
+                nombreDeUsuario: '',
+                password: ''
             }
         }
     },
@@ -80,7 +74,8 @@ export default {
                 this.form.nombre = response.data.nombre
                 this.form.apellidos = response.data.apellidos
                 this.form.email = response.data.email
-                this.form.cuentaDeUsuario = response.data.cuentaDeUsuario
+                this.form.nombreDeUsuario = response.data.nombreDeUsuario
+                this.form.password = response.data.password
 
                 swal("¡Administrador actualizado con éxito!", "", "success")
             })
@@ -98,7 +93,8 @@ export default {
                 this.form.nombre = response.data.nombre
                 this.form.apellidos = response.data.apellidos
                 this.form.email = response.data.email
-                this.form.cuentaDeUsuario = response.data.cuentaDeUsuario
+                this.form.nombreDeUsuario = response.data.nombreDeUsuario
+                this.form.password = response.data.password
 
             })
             .catch((error) => {
