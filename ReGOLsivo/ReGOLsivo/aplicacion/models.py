@@ -6,19 +6,14 @@ from django.conf import settings
 
 # Create your models here.
 
-"""class Actor(User):
-    nombre = models.CharField(max_length=35, null=False, blank=False)
-    apellidos = models.CharField(max_length=35, null=False, blank=False)"""
-
 class Usuario(AbstractUser):
-    pass
     karma = models.IntegerField(default=0, null=False, blank=False)
 
     def __str__(self):
         return self.username
 
     def sumarKarma(self, premio):
-        self.karma = self.karma + premio
+        self.karma = self.karma + premio  
 
 class Administrador(models.Model):
 

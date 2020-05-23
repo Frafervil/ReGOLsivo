@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from aplicacion.models import *
 # Register your models here.  
 
-admin.site.register(User, UserAdmin)
+#admin.site.unregister(User)
+#admin.site.register(User, UserAdmin)
 
 admin.site.register(Usuario)
 admin.site.register(Administrador)
