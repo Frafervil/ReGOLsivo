@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-AUTH_USER_MODEL = 'aplicacion.Usuario'
+AUTH_USER_MODEL = 'aplicacion.Actor'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,

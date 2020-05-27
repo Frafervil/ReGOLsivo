@@ -4,11 +4,13 @@ from django.contrib.auth.models import User
 from aplicacion.models import *
 # Register your models here.  
 
-#admin.site.unregister(User)
-#admin.site.register(User, UserAdmin)
+"""admin.site.unregister(User)
+@admin.register(User)
+class CustomUserAdmin(UserAdmin):
+    pass"""
 
-admin.site.register(Usuario)
-admin.site.register(Administrador)
+admin.site.register(Usuario, UserAdmin)
+admin.site.register(Administrador, UserAdmin)
 admin.site.register(Partido)
 admin.site.register(Pronostico)
 admin.site.register(Comentario)

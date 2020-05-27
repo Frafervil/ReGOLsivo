@@ -2,23 +2,25 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-#from django.contrib.auth.models import UserManager
 
 # Create your models here.
 
-class Usuario(AbstractUser):
+class Actor(AbstractUser):
+    pass
+
+class Usuario(Actor):
     karma = models.IntegerField(default=0, null=False, blank=False)
 
     def __str__(self):
-        return self.username
+        return super().username
 
     def sumarKarma(self, premio):
         self.karma = self.karma + premio  
 
-class Administrador(models.Model):
+class Administrador(Actor):
 
     def __str__(self):
-        return super().nombre
+        return super().username
 
 class Dificultad(models.TextChoices):
     Facil = 'Fácil'

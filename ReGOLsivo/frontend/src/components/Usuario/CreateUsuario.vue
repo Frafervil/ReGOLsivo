@@ -15,30 +15,9 @@
                         <form @submit="onSubmit">
 
                         <div class="form-group row">
-                            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>    
+                            <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Javier" name="nombre" class="form-control" v-model.trim="form.nombre">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>    
-                            <div class="col-sm-6">
-                             <input type="text" placeholder="Sánchez Herrera" name="apellidos" class="form-control" v-model.trim="form.apellidos">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-2 col-form-label">Email</label>    
-                            <div class="col-sm-6">
-                             <input type="text" placeholder="j.s.herrera@gmail.com" name="email" class="form-control" v-model.trim="form.email">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="nombreDeUsuario" class="col-sm-2 col-form-label">Nombre de usuario</label>    
-                            <div class="col-sm-6">
-                             <input type="text" placeholder="carlos23" name="nombreDeUsuario" class="form-control" v-model.trim="form.nombreDeUsuario">
+                             <input type="text" placeholder="carlos23" name="username" class="form-control" v-model.trim="form.username">
                             </div>
                         </div>
 
@@ -46,6 +25,27 @@
                             <label for="password" class="col-sm-2 col-form-label">Contraseña</label>    
                             <div class="col-sm-6">
                              <input type="password" name="password" class="form-control" v-model.trim="form.password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">Email</label>    
+                            <div class="col-sm-6">
+                             <input type="email" placeholder="j.s.herrera@gmail.com" name="email" class="form-control" v-model.trim="form.email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="first_name" class="col-sm-2 col-form-label">Nombre</label>    
+                            <div class="col-sm-6">
+                             <input type="text" placeholder="Javier" name="first_name" class="form-control" v-model.trim="form.first_name">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="last_name" class="col-sm-2 col-form-label">Apellidos</label>    
+                            <div class="col-sm-6">
+                             <input type="text" placeholder="Sánchez Herrera" name="last_name" class="form-control" v-model.trim="form.last_name">
                             </div>
                         </div>
 
@@ -70,21 +70,35 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
+import router from "../../router";
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data() {
         return {
             form: {
-                nombre: '',
-                apellidos: '',
-                email: '',
-                nombreDeUsuario: '',
+                username: '',
                 password: '',
+                email: '',
+                first_name: '',
+                last_name: '',
                 karma: 0
             }
         }
     },
     methods: {
+
+        checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
+
         onSubmit(evt){
             evt.preventDefault()
 
@@ -92,11 +106,11 @@ export default {
 
             axios.post(path, this.form).then((response) =>{
 
-                this.form.nombre = response.data.nombre
-                this.form.apellidos = response.data.apellidos
-                this.form.email = response.data.email
-                this.form.nombreDeUsuario = response.data.nombreDeUsuario
+                this.form.username = response.data.username
                 this.form.password = response.data.password
+                this.form.email = response.data.email
+                this.form.first_name = response.data.first_name
+                this.form.last_name = response.data.last_name
 
                 swal("¡Usuario creado con éxito!", "", "success")
             })
