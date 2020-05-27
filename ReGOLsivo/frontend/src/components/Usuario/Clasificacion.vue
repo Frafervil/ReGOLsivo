@@ -24,7 +24,7 @@ export default {
       sortDesc: true,
       perPage: 10,
       fields: [
-        { key: 'nombreDeUsuario', label: 'Nombre de usuario'},
+        { key: 'username', label: 'Nombre de usuario'},
         { key: 'karma', label: 'Karma', sortable: true}
       ],
       usuarios: []
