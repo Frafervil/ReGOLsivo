@@ -73,9 +73,9 @@ import swal from 'sweetalert'
 
 export default {
 
-    mounted() {
+    /*mounted() {
         this.checkLoggedIn();
-    },
+    },*/
 
     data() {
         return {
@@ -91,23 +91,23 @@ export default {
     },
     methods: {
 
-        checkLoggedIn() {
+        /*checkLoggedIn() {
          this.$session.start();
         if (!this.$session.has("token")) {
             router.push("/auth");
             }
-        },
+        },*/
 
         onSubmit(evt){
             evt.preventDefault()
 
             const path = 'http://localhost:8000/api/v1.0/usuarios/'
 
-            const auth = {
+            /*const auth = {
                 headers: {Authorization:'JWT ' + this.$session.get('token')} 
-            }
+            }*/
 
-            axios.post(path, this.form, auth).then((response) =>{
+            axios.post(path, this.form).then((response) =>{ //, auth
 
                 this.form.username = response.data.username
                 this.form.password = response.data.password
