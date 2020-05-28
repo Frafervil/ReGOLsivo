@@ -29,6 +29,13 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">Email</label>    
+                            <div class="col-sm-6">
+                             <input type="email" placeholder="j.s.herrera@gmail.com" name="email" class="form-control" v-model.trim="form.email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="karma" class="col-sm-2 col-form-label">Karma</label>    
                             <div class="col-sm-6">
                              <input type="number" name="karma" class="form-control" readonly v-model.trim="form.karma">
