@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
-#from django.contrib.auth.models import UserManager
 
 # Create your models here.
 
@@ -41,14 +40,6 @@ class Partido(models.Model):
         cadena = "{0} - {1}"
         return cadena.format(self.nombreLocal, self.nombreVisitante)
 
-    def obtenerDificultad(self):
-        if(self.premio < 50):
-            self.dificultad = 'Fácil'
-        elif(self.premio >= 50 and self.premio < 100):
-           self.dificultad = 'Intermedia' 
-        elif(self.premio >= 100):
-            self.dificultad = 'Difícil'
-
 class Pronostico(models.Model):
     resultado = models.CharField(max_length=35, null=False, blank=False)
     acertado = models.BooleanField(default=False, null=False, blank=False)
@@ -56,7 +47,7 @@ class Pronostico(models.Model):
     partido = models.ForeignKey(Partido, null=False, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return  '%s --> %s'%(self.usuario.nombreDeUsuario, self.partido)
+        return  '%s --> %s'%(self.usuario.username, self.partido)
 
     def comprobarPronosticoUsuario(self):
         if(self.resultado == self.partido.resultado):
@@ -75,7 +66,7 @@ class Comentario(models.Model):
     comentarioRespuesta = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s --> %s'%(self.autor.nombreDeUsuario, self.partido)
+        return '%s --> %s'%(self.autor.username, self.partido)
 
     def darMeGusta(self):
         self.meGustas = self.meGustas + 1

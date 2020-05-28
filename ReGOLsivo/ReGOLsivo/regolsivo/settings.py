@@ -45,13 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'aplicacion',
     'rest_framework',
-    #'rest_framework.authtoken',
+    'rest_framework.authtoken',
     'corsheaders',
 ]
 
 AUTH_USER_MODEL = 'aplicacion.Actor'
 
-"""REST_FRAMEWORK = {
+REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
@@ -71,7 +71,7 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=86400),
     'JWT_ALLOW_REFRESH': True,
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
-}"""
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

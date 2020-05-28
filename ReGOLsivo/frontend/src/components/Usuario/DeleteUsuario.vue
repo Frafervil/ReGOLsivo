@@ -29,6 +29,11 @@ import axios from 'axios'
 import swal from 'sweetalert'
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data () {
         return {
             usuarioId: this.$route.params.usuarioId,
@@ -43,6 +48,14 @@ export default {
         }
     },
     methods: {
+
+        checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
+
         getUsuario (){
             const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
 
@@ -63,7 +76,11 @@ export default {
         deleteUsuario () {
             const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
 
-            axios.delete(path).then((response) => {
+            const auth = {
+                headers: {Authorization:'JWT ' + this.$session.get('token')} 
+            }
+
+            axios.delete(path, auth).then((response) => {
                 location.href = '/usuarios'
             })
             .catch((error) => {
