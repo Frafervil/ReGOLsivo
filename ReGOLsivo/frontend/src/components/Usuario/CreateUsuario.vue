@@ -17,7 +17,7 @@
                         <div class="form-group row">
                             <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="carlos23" name="username" class="form-control" v-model.trim="form.username">
+                             <input type="text" placeholder="jsanchez23" name="username" class="form-control" v-model.trim="form.username">
                             </div>
                         </div>
 
@@ -70,7 +70,6 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
-import router from "../../router";
 
 export default {
 
@@ -104,7 +103,11 @@ export default {
 
             const path = 'http://localhost:8000/api/v1.0/usuarios/'
 
-            axios.post(path, this.form).then((response) =>{
+            const auth = {
+                headers: {Authorization:'JWT ' + this.$session.get('token')} 
+            }
+
+            axios.post(path, this.form, auth).then((response) =>{
 
                 this.form.username = response.data.username
                 this.form.password = response.data.password

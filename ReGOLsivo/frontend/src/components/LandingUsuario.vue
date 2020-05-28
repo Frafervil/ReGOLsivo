@@ -11,7 +11,7 @@
     <b-button size="sm" :to="{name: 'Clasificacion'}" variant="primary">
             Clasificación
     </b-button>
-    <b-button size="sm" :to="{name: 'Perfil'}" variant="primary">
+    <b-button size="sm" :to="{name: 'PerfilUsuario'}" variant="primary">
             Perfil
     </b-button>
     <b-button size="sm" :to="{name: 'Logros'}" variant="primary">
@@ -22,12 +22,11 @@
 </template>
 
 <script>
-//import router from "../router";
 
 export default {
   name: 'LandingUsuario',
 
-  /*mounted() {
+  mounted() {
     this.checkLoggedIn();
   },
 
@@ -36,7 +35,7 @@ export default {
       if (!this.$session.has("token")) {
         router.push("/auth");
       }
-    },*/
+    },
 
   data () {
     return {

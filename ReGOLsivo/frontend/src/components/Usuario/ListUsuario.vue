@@ -37,9 +37,7 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'nombre', label: 'Nombre' },
-        { key: 'apellidos', label: 'Apellidos' },
-        { key: 'email', label: 'Email' },
+        { key: 'username', label: 'Nombre de usuario' },
         { key: 'karma', label: 'Karma' },
         { key: 'action', label: '' }
       ],

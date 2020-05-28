@@ -15,16 +15,16 @@
                         <form @submit="onSubmit">
 
                         <div class="form-group row">
-                            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>    
+                            <label for="first_name" class="col-sm-2 col-form-label">Nombre</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Nombre" name="nombre" class="form-control" v-model.trim="form.nombre">
+                             <input type="text" placeholder="Javier" name="first_name" class="form-control" v-model.trim="form.first_name">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>    
+                            <label for="last_name" class="col-sm-2 col-form-label">Apellidos</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Apellidos" name="apellidos" class="form-control" v-model.trim="form.apellidos">
+                             <input type="text" placeholder="Sánchez Herrera" name="last_name" class="form-control" v-model.trim="form.last_name">
                             </div>
                         </div>
 
@@ -58,32 +58,49 @@ import axios from 'axios'
 import swal from 'sweetalert'
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data() {
         return {
             usuarioId: this.$route.params.usuarioId,
             form: {
-                nombre: '',
-                apellidos: '',
-                email: '',
-                nombreDeUsuario: '',
+                username: '',
                 password: '',
+                email: '',
+                first_name: '',
+                last_name: '',
                 karma: ''
             }
         }
     },
     methods: {
+
+        checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
+
         onSubmit(evt){
             evt.preventDefault()
 
             const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
 
-            axios.put(path, this.form).then((response) =>{
+            const auth = {
+                headers: {Authorization:'JWT ' + this.$session.get('token')} 
+            }
 
-                this.form.nombre = response.data.nombre
-                this.form.apellidos = response.data.apellidos
-                this.form.email = response.data.email
-                this.form.nombreDeUsuario = response.data.nombreDeUsuario
+            axios.put(path, this.form, auth).then((response) =>{
+
+                this.form.username = response.data.username
                 this.form.password = response.data.password
+                this.form.email = response.data.email
+                this.form.first_name = response.data.first_name
+                this.form.last_name = response.data.last_name
 
                 swal("¡Usuario actualizado con éxito!", "", "success")
             })
@@ -98,11 +115,11 @@ export default {
 
             axios.get(path).then((response) =>{
 
-                this.form.nombre = response.data.nombre
-                this.form.apellidos = response.data.apellidos
-                this.form.email = response.data.email
-                this.form.nombreDeUsuario = response.data.nombreDeUsuario
+                this.form.username = response.data.username
                 this.form.password = response.data.password
+                this.form.email = response.data.email
+                this.form.first_name = response.data.first_name
+                this.form.last_name = response.data.last_name
                 this.form.karma = response.data.karma
 
             })

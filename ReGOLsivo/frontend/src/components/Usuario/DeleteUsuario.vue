@@ -4,11 +4,11 @@
             <div class="col">
          
                 <h3>¿Seguro que quieres eliminar este usuario?</h3>
-                <p>Nombre : {{ this.element.nombre }}</p>
-                <p>Apellidos : {{ this.element.apellidos }}</p>
-                <p>Email : {{ this.element.email }}</p>
-                <p>Nombre de usuario : {{ this.element.nombreDeUsuario }}</p>
+                <p>Nombre de usuario : {{ this.element.username }}</p>
                 <p>Contraseña : {{ this.element.password }}</p>
+                <p>Email : {{ this.element.email }}</p>
+                <p>Nombre : {{ this.element.first_name }}</p>
+                <p>Apellidos : {{ this.element.last_name }}</p>
                 <p>Karma : {{ this.element.karma }}</p>
 
             </div> 
@@ -29,30 +29,43 @@ import axios from 'axios'
 import swal from 'sweetalert'
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data () {
         return {
             usuarioId: this.$route.params.usuarioId,
             element: {
-                nombre: '',
-                apellidos: '',
-                email: '',
-                nombreDeUsuario: '',
+                username: '',
                 password: '',
+                email: '',
+                first_name: '',
+                last_name: '',
                 karma: ''
             }
         }
     },
     methods: {
+
+        checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
+
         getUsuario (){
             const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
 
             axios.get(path).then((response) =>{
 
-                this.element.nombre = response.data.nombre
-                this.element.apellidos = response.data.apellidos
-                this.element.email = response.data.email
-                this.element.nombreDeUsuario = response.data.nombreDeUsuario
+                this.element.username = response.data.username
                 this.element.password = response.data.password
+                this.element.email = response.data.email
+                this.element.first_name = response.data.first_name
+                this.element.last_name = response.data.last_name
                 this.element.karma = response.data.karma
 
             })
@@ -63,7 +76,11 @@ export default {
         deleteUsuario () {
             const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
 
-            axios.delete(path).then((response) => {
+            const auth = {
+                headers: {Authorization:'JWT ' + this.$session.get('token')} 
+            }
+
+            axios.delete(path, auth).then((response) => {
                 location.href = '/usuarios'
             })
             .catch((error) => {
