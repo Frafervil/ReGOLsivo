@@ -61,7 +61,10 @@
                             <b-button size="sm" variant="primary" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
                             Pronosticar
                             </b-button>    
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Atrás</b-button>
+                            <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {comentarioId: this.comentarioId} }">
+                            Comentar
+                            </b-button>
+                            <b-button size="sm" type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Atrás</b-button>
                             </div>
                         </div>
 
@@ -90,7 +93,13 @@ export default {
                 resultado: '',
                 pronosticoSistema: '',
                 premio: '',
-                dificultad: ''
+                dificultad: '',
+                username: '',
+                password: '',
+                email: '',
+                first_name: '',
+                last_name: '',
+                karma: ''
             }
         }
     },

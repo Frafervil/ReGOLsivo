@@ -11,7 +11,7 @@
     <b-button size="sm" :to="{name: 'Clasificacion'}" variant="primary">
             Clasificación
     </b-button>
-    <b-button size="sm" :to="{name: 'PerfilUsuario', params: {usuarioId: this.$session.get('user_id')}}" variant="primary">
+    <b-button size="sm" :to="{name: 'PerfilUsuario', params: {usuarioToken: this.$session.get('token')}}" variant="primary">
             Perfil
     </b-button>
     <b-button size="sm" :to="{name: 'Logros'}" variant="primary">

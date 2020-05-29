@@ -17,21 +17,21 @@
                         <div class="form-group row">
                             <label for="first_name" class="col-sm-2 col-form-label">Nombre</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Javier" name="first_name" class="form-control" v-model.trim="form.first_name">
+                             <input type="text" name="first_name" class="form-control" v-model.trim="form.first_name">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="last_name" class="col-sm-2 col-form-label">Apellidos</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Sánchez Herrera" name="last_name" class="form-control" v-model.trim="form.last_name">
+                             <input type="text" name="last_name" class="form-control" v-model.trim="form.last_name">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label">Email</label>    
                             <div class="col-sm-6">
-                             <input type="email" placeholder="j.s.herrera@gmail.com" name="email" class="form-control" v-model.trim="form.email">
+                             <input type="email" name="email" class="form-control" v-model.trim="form.email">
                             </div>
                         </div>
 
@@ -45,7 +45,8 @@
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Guardar cambios</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListUsuario'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingUsuario'}">Cancelar</b-button>
+                            <b-button variant="danger" @click="logout" :to="{name: 'LandingPage'}">Cerrar sesión</b-button>
                             </div>
                         </div>
 
@@ -72,7 +73,7 @@ export default {
 
     data() {
         return {
-            usuarioId: this.$route.params.usuarioId,
+            usuarioToken: this.$route.params.usuarioToken,
             form: {
                 username: '',
                 password: '',
@@ -92,19 +93,25 @@ export default {
             }
         },
 
+        getUsuarioId(){
+            var decodedPayload = atob(this.usuarioToken.split('.')[1]);
+            var payloadSplittedByComa = decodedPayload.split(',')[0];
+            return payloadSplittedByComa.split(':')[1];
+        },
+
         onSubmit(evt){
             evt.preventDefault()
 
-            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+            const usuarioId = this.getUsuarioId();
+
+            const path = `http://localhost:8000/api/v1.0/usuarios/${usuarioId}/`
 
             const auth = {
-                headers: {Authorization:'JWT ' + this.$session.get('token')} 
+                headers: {Authorization:'JWT ' + this.usuarioToken} 
             }
 
             axios.put(path, this.form, auth).then((response) =>{
 
-                this.form.username = response.data.username
-                this.form.password = response.data.password
                 this.form.email = response.data.email
                 this.form.first_name = response.data.first_name
                 this.form.last_name = response.data.last_name
@@ -117,8 +124,14 @@ export default {
 
         },
 
+        logout(){
+            this.$session.stop();
+        },
+
         getUsuario (){
-            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+            const usuarioId = this.getUsuarioId();
+
+            const path = `http://localhost:8000/api/v1.0/usuarios/${usuarioId}/`
 
             axios.get(path).then((response) =>{
 
@@ -135,6 +148,7 @@ export default {
             })
         }
     },
+
     created() {
         this.getUsuario()
     }

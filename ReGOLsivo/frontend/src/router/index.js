@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import LandingPage from '@/components/LandingPage'
 import LandingUsuario from '@/components/LandingUsuario'
+import LandingAdministrador from '@/components/LandingAdministrador'
 import Auth from '@/components/Auth'
 
 import ListUsuario from '@/components/Usuario/ListUsuario'
@@ -50,6 +51,11 @@ export default new Router({
       component: LandingUsuario
     },
     {
+      path: '/landingAdministrador',
+      name: 'LandingAdministrador',
+      component: LandingAdministrador
+    },
+    {
       path: '/auth',
       name: 'Auth',
       component: Auth
@@ -65,7 +71,7 @@ export default new Router({
       component: CreateUsuario
     },
     {
-      path: '/usuarios/:usuarioId/edit',
+      path: '/usuarios/edit',
       name: 'PerfilUsuario',
       component: PerfilUsuario
     },

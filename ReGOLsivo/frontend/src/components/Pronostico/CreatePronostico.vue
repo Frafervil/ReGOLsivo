@@ -31,7 +31,7 @@
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Crear</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListPronostico'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -51,17 +51,41 @@ import axios from 'axios'
 import swal from 'sweetalert'
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data() {
         return {
             partidoId: this.$route.params.partidoId,
             form: {
                 resultado: '',
                 acertado: 'Por determinar',
-                partido: ''
+                nombreLocal: '',
+                nombreVisitante: '',
+                resultado: '',
+                pronosticoSistema: '',
+                premio: '',
+                dificultad: '',
+                username: '',
+                password: '',
+                email: '',
+                first_name: '',
+                last_name: '',
+                karma: ''
             }
         }
     },
     methods: {
+
+        checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
+
         onSubmit(evt){
             evt.preventDefault()
 
@@ -71,6 +95,7 @@ export default {
 
                 this.form.resultado = response.data.resultado
                 this.form.partido = response.data.partido
+                this.form.usuario = response.data.usuario
 
                 swal("¡Pronóstico creado con éxito!", "", "success")
             })
@@ -82,10 +107,18 @@ export default {
         },
         
     getPartido (){
+        
+      const path = `http://localhost:8000/api/v1.0/partidos/${this.partidoId}/`
 
-      const path = 'http://localhost:8000/api/v1.0/partidos/${this.partidoId}/'
       axios.get(path).then((response) => {
-        this.form.partido = response.data.partido
+
+                this.form.nombreLocal = response.data.nombreLocal
+                this.form.nombreVisitante = response.data.nombreVisitante
+                this.form.resultado = response.data.resultado
+                this.form.pronosticoSistema = response.data.pronosticoSistema
+                this.form.premio = response.data.premio
+                this.form.dificultad = response.data.dificultad
+
       })
       .catch((error) => {
         console.log(error)
@@ -94,7 +127,36 @@ export default {
     }
 
     },
+
+    getUsuarioId(){
+            var decodedPayload = atob(this.$session.get('token').split('.')[1]);
+            var payloadSplittedByComa = decodedPayload.split(',')[0];
+            return payloadSplittedByComa.split(':')[1];
+        },
+
+    getUsuario (){
+            const usuarioId = this.getUsuarioId();
+
+            const path = `http://localhost:8000/api/v1.0/usuarios/${usuarioId}/`
+
+            axios.get(path).then((response) =>{
+
+                this.form.username = response.data.username
+                this.form.password = response.data.password
+                this.form.email = response.data.email
+                this.form.first_name = response.data.first_name
+                this.form.last_name = response.data.last_name
+                this.form.karma = response.data.karma
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        },
+
     created() {
+        this.getPartido(),
+        this.getUsuario()
     }
 }
 </script>>

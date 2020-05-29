@@ -8,6 +8,7 @@
         <div class="col-md-12">
           <b-table striped hover :items="usuarios" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :per-page="perPage">
           </b-table>
+          <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingUsuario'}">Atrás</b-button>
         </div>
       </div>
     </div>

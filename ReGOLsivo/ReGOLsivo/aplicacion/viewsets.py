@@ -9,7 +9,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     permission_classes_by_action = {'create': [AllowAny],
-                                    'list': [IsAdminUser],
+                                    'list': [AllowAny],
                                     'edit': [IsAuthenticated]}
 
     def create(self, request, *args, **kwargs):
@@ -19,7 +19,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         return super(UsuarioViewSet, self).list(request, *args, **kwargs)
 
     def edit(self, request, *args, **kwargs):
-        return super(UsuarioViewSet, self).create(request, *args, **kwargs)    
+        return super(UsuarioViewSet, self).edit(request, *args, **kwargs)    
 
     def get_permissions(self):
         try:

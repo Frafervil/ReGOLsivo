@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col text-left">
         <div class="">
-          <h2>Lista de partidos</h2>
+          <h2>Pronosticador</h2>
         </div>
         <div class="col-md-12">
           <b-table striped hover :items="partidos" :fields="fields">
@@ -12,9 +12,10 @@
                 Ver detalles
               </b-button>
             </template>
-
           </b-table>
-
+          <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" first-text="Primera jornada" prev-text="Jornada anterior" next-text="Siguiente jornada" last-text="Última jornada">
+          </b-pagination>
+          <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingUsuario'}">Atrás</b-button>
         </div>
 
       </div>
@@ -24,7 +25,6 @@
 
 <script>
 import axios from 'axios';
-import router from "../../router";
 
 export default {
   mounted() {
@@ -33,6 +33,10 @@ export default {
 
   data () {
     return {
+      rows: 100,
+      perPage: 10,
+      currentPage: 1,
+
       fields: [
         { key: 'nombreLocal', label: 'Local' },
         { key: 'nombreVisitante', label: 'Visitante' },

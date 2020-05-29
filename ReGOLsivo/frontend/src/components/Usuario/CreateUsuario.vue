@@ -52,7 +52,7 @@
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Crear</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListUsuario'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingPage'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -73,10 +73,6 @@ import swal from 'sweetalert'
 
 export default {
 
-    /*mounted() {
-        this.checkLoggedIn();
-    },*/
-
     data() {
         return {
             form: {
@@ -91,23 +87,12 @@ export default {
     },
     methods: {
 
-        /*checkLoggedIn() {
-         this.$session.start();
-        if (!this.$session.has("token")) {
-            router.push("/auth");
-            }
-        },*/
-
         onSubmit(evt){
             evt.preventDefault()
 
             const path = 'http://localhost:8000/api/v1.0/usuarios/'
 
-            /*const auth = {
-                headers: {Authorization:'JWT ' + this.$session.get('token')} 
-            }*/
-
-            axios.post(path, this.form).then((response) =>{ //, auth
+            axios.post(path, this.form).then((response) =>{
 
                 this.form.username = response.data.username
                 this.form.password = response.data.password
