@@ -5,6 +5,7 @@ from aplicacion.models import *
 
 admin.site.register(Usuario, UserAdmin)
 admin.site.register(Administrador, UserAdmin)
+admin.site.register(Logro)
 admin.site.register(Partido)
 admin.site.register(Pronostico)
 admin.site.register(Comentario)

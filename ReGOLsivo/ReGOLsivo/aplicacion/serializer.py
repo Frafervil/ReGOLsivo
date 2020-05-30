@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Usuario, Administrador, Partido, Pronostico, Comentario, Configuracion
+from .models import Usuario, Administrador, Partido, Pronostico, Comentario, Configuracion, Logro
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
@@ -29,6 +29,11 @@ class AdministradorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Administrador
         fields = '__all__'
+
+class LogroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Logro
+        fields = '__all__'        
 
 class PartidoSerializer(serializers.ModelSerializer):
     class Meta:

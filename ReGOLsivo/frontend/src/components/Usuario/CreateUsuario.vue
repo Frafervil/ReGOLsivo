@@ -2,7 +2,7 @@
     <div class="container">
        <div class="row">
            <div class="col text-left">
-               <h2>Crear usuario</h2>
+               <h2>Registro de usuario</h2>
            </div>
        </div>
 
@@ -51,7 +51,7 @@
 
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button type="submit" variant="primary">Crear</b-button>
+                            <b-button type="submit" variant="primary">Registrarse</b-button>
                             <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingPage'}">Cancelar</b-button>
                             </div>
                         </div>
@@ -80,8 +80,7 @@ export default {
                 password: '',
                 email: '',
                 first_name: '',
-                last_name: '',
-                karma: 0
+                last_name: ''
             }
         }
     },
@@ -100,10 +99,16 @@ export default {
                 this.form.first_name = response.data.first_name
                 this.form.last_name = response.data.last_name
 
-                swal("¡Usuario creado con éxito!", "", "success")
+                swal({
+                    title: "¡Felicidades!",
+                    text: "¡Te has registrado correctamente!",
+                    icon: "success",
+                    button: "¡Vamos!"}).then(function() {
+                    window.location = "/bienvenido";
+                    });
             })
             .catch((error) => {
-                swal("¡El usuario no ha sido creado!", "", "error")
+                swal("¡No te has registrado correctamente!", "", "error")
             })
 
         },

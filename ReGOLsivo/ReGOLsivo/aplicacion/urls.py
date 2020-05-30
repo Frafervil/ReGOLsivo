@@ -5,6 +5,7 @@ from.viewsets import *
 router = routers.SimpleRouter()
 router.register('usuarios', UsuarioViewSet)
 router.register('administradores', AdministradorViewSet)
+router.register('logros', LogroViewSet)
 router.register('partidos', PartidoViewSet)
 router.register('pronosticos', PronosticoViewSet)
 router.register('comentarios', ComentarioViewSet)

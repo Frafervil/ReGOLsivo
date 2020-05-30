@@ -8,7 +8,7 @@ class Actor(AbstractUser):
     pass
 
 class Usuario(Actor):
-    karma = models.IntegerField(default=0, null=False, blank=False)
+    karma = models.IntegerField(default=20, null=False, blank=False)
 
     def __str__(self):
         return super().username
@@ -20,6 +20,13 @@ class Administrador(Actor):
 
     def __str__(self):
         return super().username
+
+class Logro(models.Model):
+    nombre = models.CharField(max_length=100, null=False, blank=False)
+    usuarios = models.ManyToManyField(Usuario)
+
+    def __str__(self):
+        return self.nombre
 
 class Dificultad(models.TextChoices):
     Facil = 'Fácil'

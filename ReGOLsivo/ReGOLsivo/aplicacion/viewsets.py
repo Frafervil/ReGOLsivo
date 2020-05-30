@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from .models import Usuario, Administrador, Partido, Pronostico, Comentario, Configuracion
+from .models import Usuario, Administrador, Partido, Pronostico, Comentario, Configuracion, Logro
 from .serializer import *
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 
@@ -33,6 +33,9 @@ class AdministradorViewSet(viewsets.ModelViewSet):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
 
+class LogroViewSet(viewsets.ModelViewSet):
+    queryset = Logro.objects.all()
+    serializer_class = LogroSerializer
 
 class PartidoViewSet(viewsets.ModelViewSet):
     queryset = Partido.objects.all()

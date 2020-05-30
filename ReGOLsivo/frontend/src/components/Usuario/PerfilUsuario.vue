@@ -46,7 +46,7 @@
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Guardar cambios</b-button>
                             <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingUsuario'}">Cancelar</b-button>
-                            <b-button variant="danger" @click="logout" :to="{name: 'LandingPage'}">Cerrar sesión</b-button>
+                            <b-button variant="danger" @click="logout">Cerrar sesión</b-button>
                             </div>
                         </div>
 
@@ -126,6 +126,7 @@ export default {
 
         logout(){
             this.$session.stop();
+            router.push('/');
         },
 
         getUsuario (){

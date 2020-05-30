@@ -4,6 +4,7 @@ import LandingPage from '@/components/LandingPage'
 import LandingUsuario from '@/components/LandingUsuario'
 import LandingAdministrador from '@/components/LandingAdministrador'
 import Auth from '@/components/Auth'
+import Bienvenido from '@/components/Bienvenido'
 
 import ListUsuario from '@/components/Usuario/ListUsuario'
 import CreateUsuario from '@/components/Usuario/CreateUsuario'
@@ -33,6 +34,7 @@ import CreatePronostico from '@/components/Pronostico/CreatePronostico'
 import ListComentario from '@/components/Comentario/ListComentario'
 import EditComentario from '@/components/Comentario/EditComentario'
 import DeleteComentario from '@/components/Comentario/DeleteComentario'
+import CreateComentario from '@/components/Comentario/CreateComentario'
 
 import EditConfiguracion from '@/components/Configuracion/EditConfiguracion'
 
@@ -59,6 +61,11 @@ export default new Router({
       path: '/auth',
       name: 'Auth',
       component: Auth
+    },
+    {
+      path: '/bienvenido',
+      name: 'Bienvenido',
+      component: Bienvenido
     },
     {
       path: '/usuarios',
@@ -179,6 +186,11 @@ export default new Router({
       path: '/comentarios/:comentarioId/delete',
       name: 'DeleteComentario',
       component: DeleteComentario
+    },
+    {
+      path: '/comentarios/:partidoId/create',
+      name: 'CreateComentario',
+      component: CreateComentario
     },
     {
       path: '/configuraciones/:configuracionId/edit',

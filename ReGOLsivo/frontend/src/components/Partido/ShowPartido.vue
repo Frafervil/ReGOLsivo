@@ -93,13 +93,7 @@ export default {
                 resultado: '',
                 pronosticoSistema: '',
                 premio: '',
-                dificultad: '',
-                username: '',
-                password: '',
-                email: '',
-                first_name: '',
-                last_name: '',
-                karma: ''
+                dificultad: ''
             }
         }
     },

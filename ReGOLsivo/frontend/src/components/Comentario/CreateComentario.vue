@@ -2,7 +2,7 @@
     <div class="container">
        <div class="row">
            <div class="col text-left">
-               <h2>Crear pronóstico</h2>
+               <h2>Crear comentario</h2>
            </div>
        </div>
 
@@ -15,16 +15,9 @@
                         <form @submit="onSubmit">
 
                         <div class="form-group row">
-                            <label for="resultado" class="col-sm-2 col-form-label">Resultado</label>    
+                            <label for="texto" class="col-sm-2 col-form-label">Texto</label>    
                             <div class="col-sm-6">
-                             <input type="radio" id="1" value="1" v-model.trim="form.resultado">
-                             <label for="1">1</label>
-                             <br>
-                             <input type="radio" id="X" value="X" v-model.trim="form.resultado">
-                             <label for="X">X</label>
-                             <br>
-                             <input type="radio" id="2" value="2" v-model.trim="form.resultado">
-                             <label for="2">2</label>
+                             <input type="text" placeholder="Texto" name="texto" class="form-control" v-model.trim="form.texto">
                             </div>
                         </div>
 
@@ -59,8 +52,8 @@ export default {
     data() {
         return {
             form: {
-                resultado: '',
-                usuario: this.getUsuarioId(),
+                texto: '',
+                autor: this.getUsuarioId(),
                 partido: this.$route.params.partidoId
             }
         }
@@ -77,7 +70,7 @@ export default {
         onSubmit(evt){
             evt.preventDefault()
 
-            const path = `http://localhost:8000/api/v1.0/pronosticos/`
+            const path = `http://localhost:8000/api/v1.0/comentarios/`
 
             const auth = {
                 headers: {Authorization:'JWT ' + this.$session.get('token')} 
@@ -85,19 +78,13 @@ export default {
 
             axios.post(path, this.form, auth).then((response) =>{
 
-                this.form.resultado = response.data.resultado
+                this.form.texto = response.data.texto
 
-                 swal({
-                    title: "¡Pronóstico creado con éxito!",
-                    text: "¡Mucha suerte!",
-                    icon: "success",
-                    }).then(function() {
-                    window.location = "/pronosticadorUsuario";
-                    });
+                swal("Comentario creado con éxito!", "", "success")
             })
             .catch((error) => {
                 console.log(error)
-                swal("¡El pronóstico no ha sido creado!", "", "error")
+                swal("¡El comentario no ha sido creado!", "", "error")
             })
 
         },
