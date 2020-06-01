@@ -2,7 +2,7 @@
     <div class="container">
        <div class="row">
            <div class="col text-left">
-               <h2>Editar comentario</h2>
+               <h2>¿Dar "me gusta"?</h2>
            </div>
        </div>
 
@@ -14,17 +14,10 @@
                        <form>
                         <form @submit="onSubmit">
 
-                        <div class="form-group row">
-                            <label for="texto" class="col-sm-2 col-form-label">Texto</label>    
-                            <div class="col-sm-6">
-                             <textarea name="texto" class="form-control" placeholder="Texto" rows="3" v-model.trim="form.texto"></textarea>
-                            </div>
-                        </div>
-
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button type="submit" variant="primary">Editar</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListComentario'}">Cancelar</b-button>
+                            <b-button type="submit" variant="primary">Si</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -48,11 +41,7 @@ export default {
         return {
             comentarioId: this.$route.params.comentarioId,
             form: {
-                momento: '',
-                texto: '',
-                meGustas: '',
-                autor: '',
-                partido: ''
+                meGustas: ''
             }
         }
     },
@@ -64,9 +53,15 @@ export default {
 
             axios.put(path, this.form).then((response) =>{
 
-                this.form.texto = response.data.texto
+                this.form.meGustas = this.form.meGustas + 1
 
-                swal("¡Comentario actualizado con éxito!", "", "success")
+            }).then(() => {
+                 axios.put(path, this.form).then((response) =>{
+
+                this.form.meGustas = this.form.meGustas + 1
+
+                swal("¡Gracias por apoyar el comentario!", "", "success")
+                })
             })
             .catch((error) => {
                 console.log(error)

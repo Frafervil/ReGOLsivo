@@ -35,6 +35,8 @@ import ListComentario from '@/components/Comentario/ListComentario'
 import EditComentario from '@/components/Comentario/EditComentario'
 import DeleteComentario from '@/components/Comentario/DeleteComentario'
 import CreateComentario from '@/components/Comentario/CreateComentario'
+import CreateComentarioRespuesta from '@/components/Comentario/CreateComentarioRespuesta'
+import DarMeGusta from '@/components/Comentario/DarMeGusta'
 
 import EditConfiguracion from '@/components/Configuracion/EditConfiguracion'
 
@@ -188,9 +190,19 @@ export default new Router({
       component: DeleteComentario
     },
     {
-      path: '/comentarios/:partidoId/create',
+      path: '/comentarios/create',
       name: 'CreateComentario',
       component: CreateComentario
+    },
+    {
+      path: '/comentarios/:partidoId/:comentarioId/createComentarioRespuesta',
+      name: 'CreateComentarioRespuesta',
+      component: CreateComentarioRespuesta
+    },
+    {
+      path: '/comentarios/:comentarioId/darMeGusta',
+      name: 'DarMeGusta',
+      component: DarMeGusta
     },
     {
       path: '/configuraciones/:configuracionId/edit',

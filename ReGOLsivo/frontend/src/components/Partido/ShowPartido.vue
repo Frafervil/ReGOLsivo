@@ -61,14 +61,39 @@
                             <b-button size="sm" variant="primary" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
                             Pronosticar
                             </b-button>    
-                            <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {comentarioId: this.comentarioId} }">
+                            <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {partidoId: this.partidoId}}">
                             Comentar
                             </b-button>
                             <b-button size="sm" type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Atrás</b-button>
                             </div>
                         </div>
 
-                       </form>  
+                        </form>
+                        <br>
+                        <h2>Comentarios</h2>
+                        <br>
+                        <div class="comentarios">
+                            <b-table striped hover 
+                                :items="comentarios" 
+                                :fields="fields"
+                                :sort-by.sync="sortBy" 
+                                :sort-desc.sync="sortDesc">
+                                <template v-slot:cell(action)="data">
+                                    <b-button size="sm" variant="primary" :to="{ name:'CreateComentarioRespuesta', params: {comentarioId: data.item.id} }">
+                                        Responder
+                                    </b-button>
+                                    <b-button size="sm" variant="primary" :to="{ name:'DarMeGusta', params: {comentarioId: data.item.id} }">
+                                        Me gusta
+                                    </b-button>
+                                    <b-button size="sm" variant="primary" :to="{ name:'EditComentario', params: {comentarioId: data.item.id} }">
+                                        Editar
+                                    </b-button>
+                                    <b-button size="sm" variant="danger" :to="{ name:'DeleteComentario', params: {comentarioId: data.item.id} }">
+                                        Eliminar
+                                    </b-button>
+                                </template>
+                            </b-table>
+                        </div>  
 
 
                        </form> 
@@ -86,6 +111,8 @@ import swal from 'sweetalert'
 export default {
     data() {
         return {
+            sortBy: 'momento',
+            sortDesc: false,
             partidoId: this.$route.params.partidoId,
             form: {
                 nombreLocal: '',
@@ -94,7 +121,18 @@ export default {
                 pronosticoSistema: '',
                 premio: '',
                 dificultad: ''
-            }
+            },
+        
+            fields: [
+                { key: 'id', label: 'Número de comentario' },
+                { key: 'momento', label: 'Momento', sortable: true},
+                { key: 'texto', label: 'Texto' },
+                { key: 'meGustas', label: 'Número de "me gustas"', sortable: true},
+                { key: 'autor', label: 'Autor' },
+                { key: 'comentarioRespuesta', label: 'Responde a' },
+                { key: 'action', label: '' }
+            ],
+            comentarios: []
         }
     },
     methods: {
@@ -103,7 +141,7 @@ export default {
 
             const path = `http://localhost:8000/api/v1.0/partidos/${this.partidoId}/`
 
-            axios.put(path, this.form).then((response) =>{
+            axios.get(path, this.form).then((response) =>{
 
                 this.form.nombreLocal = response.data.nombreLocal
                 this.form.nombreVisitante = response.data.nombreVisitante
@@ -112,7 +150,6 @@ export default {
                 this.form.premio = response.data.premio
                 this.form.dificultad = response.data.dificultad
 
-                swal("¡Partido actualizado con éxito!", "", "success")
             })
             .catch((error) => {
                 console.log(error)
@@ -136,10 +173,24 @@ export default {
             .catch((error) => {
                 console.log(error)
             })
-        }
+        },
+
+    getComentarios (){
+
+      const path = 'http://localhost:8000/api/v1.0/comentarios/'
+      axios.get(path).then((response) => {
+        this.comentarios = response.data
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     },
+
+},
+
     created() {
-        this.getPartido()
+        this.getPartido(),
+        this.getComentarios()
     }
 }
 </script>>

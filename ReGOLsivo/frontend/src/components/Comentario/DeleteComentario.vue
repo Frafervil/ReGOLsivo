@@ -61,7 +61,7 @@ export default {
             const path = `http://localhost:8000/api/v1.0/comentarios/${this.comentarioId}/`
 
             axios.delete(path).then((response) => {
-                location.href = '/comentarios'
+                location.href = '/pronosticadorUsuario'
             })
             .catch((error) => {
                 swal("No es posible eliminar el comentario", "", "error")
