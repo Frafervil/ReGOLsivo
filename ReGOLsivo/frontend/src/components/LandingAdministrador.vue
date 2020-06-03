@@ -14,12 +14,14 @@
     <b-button size="sm" :to="{name: 'Pronosticador', params: {usuarioToken: this.$session.get('token')}}" variant="primary">
             Pronosticador
     </b-button>
-    <b-button size="sm" variant="danger" @click="logout" :to="{name: 'LandingPage'}">Cerrar sesión</b-button>
+    <b-button size="sm" v-on:click="logout" variant="danger">Cerrar sesión</b-button>
     </div>
   </div>
 </template>
 
 <script>
+
+import router from "../router";
 
 export default {
   name: 'LandingAdministrador',
@@ -28,22 +30,27 @@ export default {
     this.checkLoggedIn();
   },
 
-  checkLoggedIn() {
+  data () {
+    return {
+      msg: '¡Bienvenido!'
+    }
+  },
+
+  methods: {
+
+    checkLoggedIn() {
          this.$session.start();
       if (!this.$session.has("token")) {
         router.push("/auth");
       }
     },
 
-  logout(){
-            this.$session.stop();
-        },
-
-  data () {
-    return {
-      msg: '¡Bienvenido!'
-    }
+    logout(){
+      this.$session.destroy();
+      location.href = '/'
+    },
   }
+
 }
 </script>
 

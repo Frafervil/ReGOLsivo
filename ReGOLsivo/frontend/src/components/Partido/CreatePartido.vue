@@ -70,12 +70,13 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
+import router from "../../router";
 
 export default {
 
-    /*mounted() {
+    mounted() {
         this.checkLoggedIn();
-    },*/
+    },
 
     data() {
         return {
@@ -93,12 +94,12 @@ export default {
     },
     methods: {
 
-    /*checkLoggedIn() {
+    checkLoggedIn() {
          this.$session.start();
         if (!this.$session.has("token")) {
             router.push("/auth");
             }
-        },*/
+        },
 
         obtenerDificultad(){
             if(this.form.premio < 50)

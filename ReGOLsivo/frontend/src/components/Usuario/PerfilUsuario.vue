@@ -46,7 +46,7 @@
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Guardar cambios</b-button>
                             <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingUsuario'}">Cancelar</b-button>
-                            <b-button variant="danger" @click="logout">Cerrar sesión</b-button>
+                            <b-button v-on:click="logout" variant="danger">Cerrar sesión</b-button>
                             </div>
                         </div>
 
@@ -64,6 +64,7 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
+import router from "../../router";
 
 export default {
 
@@ -125,8 +126,8 @@ export default {
         },
 
         logout(){
-            this.$session.stop();
-            router.push('/');
+            this.$session.destroy();
+            location.href = '/'
         },
 
         getUsuario (){

@@ -29,6 +29,20 @@
             next-text="Siguiente jornada" 
             last-text="Última jornada">
           </b-pagination>
+        </div>
+
+        <br>
+        <h2>Mis pronósticos</h2>
+        <br>
+        <div class="misPronosticos">
+          <b-table striped hover :items="misPronosticos" :fields="camposPronosticos" v-slot:cell(action)="data">
+              <b-button size="sm" variant="primary" :to="{ name:'EditPronostico', params: {pronosticoId: data.item.id} }">
+                Editar
+              </b-button>
+              <b-button size="sm" variant="danger" :to="{ name:'DeletePronostico', params: {pronosticoId: data.item.id} }">
+                Eliminar
+              </b-button>
+          </b-table>
           <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingUsuario'}">Atrás</b-button>
         </div>
 
@@ -39,8 +53,10 @@
 
 <script>
 import axios from 'axios';
+import router from "../../router";
 
 export default {
+  
   mounted() {
     this.checkLoggedIn();
   },
@@ -55,7 +71,16 @@ export default {
         { key: 'nombreVisitante', label: 'Visitante' },
         { key: 'action', label: '' }
       ],
-      partidos: []
+      partidos: [],
+
+      camposPronosticos: [
+        { key: 'resultado', label: 'Resultado' },
+        { key: 'acertado', label: '¿Acertado?' },
+        { key: 'partido', label: 'Partido' },
+        { key: 'action', label: '' }
+      ],
+      pronosticos: [],
+      misPronosticos: []
     }
   },
   methods: {
@@ -76,9 +101,34 @@ export default {
       .catch((error) => {
         console.log(error)
       })
-    }
-  },
+    },
+  
+    getPronosticos (){
 
+      const path = 'http://localhost:8000/api/v1.0/pronosticos/'
+      
+      axios.get(path).then((response) => {
+        this.pronosticos = response.data
+      }, this.misPronosticos.push(this.getMisPronosticos(this.pronosticos)))
+      .catch((error) => {
+        console.log(error)
+      })
+    },
+
+    getMisPronosticos(pronosticos){
+      var pronosticosDeUsuarioActual = pronosticos.filter(function(pronostico){
+        return pronostico.usuario === this.getUsuarioId();
+      })
+      return pronosticosDeUsuarioActual;
+    },
+
+    getUsuarioId(){
+            var decodedPayload = atob(this.$session.get('token').split('.')[1]);
+            var payloadSplittedByComa = decodedPayload.split(',')[0];
+            return payloadSplittedByComa.split(':')[1];
+    }
+
+  },
   computed: {
       rows() {
         return this.partidos.length
@@ -87,6 +137,7 @@ export default {
 
   created(){
     this.getPartidos()
+    this.getPronosticos()
   }
 }
 </script>

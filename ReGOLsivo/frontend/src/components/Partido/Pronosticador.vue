@@ -35,12 +35,13 @@
 
 <script>
 import axios from 'axios';
-//import router from "../../router";
+import router from "../../router";
 
 export default {
-  /*mounted() {
+
+  mounted() {
     this.checkLoggedIn();
-  },*/
+  },
 
   data () {
     return {
@@ -56,12 +57,12 @@ export default {
   },
   methods: {
 
-  /*checkLoggedIn() {
+  checkLoggedIn() {
          this.$session.start();
       if (!this.$session.has("token")) {
         router.push("/auth");
       }
-    },*/
+    },
 
     getPartidos (){
 

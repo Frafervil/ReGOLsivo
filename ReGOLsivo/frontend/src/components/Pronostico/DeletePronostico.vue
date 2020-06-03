@@ -25,8 +25,14 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
+import router from "../../router";
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data () {
         return {
             pronosticoId: this.$route.params.pronosticoId,
@@ -39,6 +45,14 @@ export default {
         }
     },
     methods: {
+
+        checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
+
         getPronostico (){
             const path = `http://localhost:8000/api/v1.0/pronosticos/${this.pronosticoId}/`
 

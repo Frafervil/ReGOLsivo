@@ -55,7 +55,7 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
@@ -69,7 +69,7 @@ JWT_AUTH = {
     'JWT_VERIFY_EXPIRATION': False,
     'JWT_LEEWAY': 0,
     #'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=86400),
-    'JWT_ALLOW_REFRESH': True,
+    'JWT_ALLOW_REFRESH': False,
     #'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
 

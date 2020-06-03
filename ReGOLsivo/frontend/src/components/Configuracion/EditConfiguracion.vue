@@ -63,8 +63,14 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
+import router from "../../router";
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data() {
         return {
             configuracionId: this.$route.params.configuracionId,
@@ -77,6 +83,14 @@ export default {
         }
     },
     methods: {
+
+        checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
+
         onSubmit(evt){
             evt.preventDefault()
 

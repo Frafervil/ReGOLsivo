@@ -35,8 +35,14 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
+import router from "../../router";
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data() {
         return {
             comentarioId: this.$route.params.comentarioId,
@@ -46,6 +52,14 @@ export default {
         }
     },
     methods: {
+
+        checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
+
         onSubmit(evt){
             evt.preventDefault()
 

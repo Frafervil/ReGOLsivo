@@ -98,8 +98,14 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
+import router from "../../router";
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data() {
         return {
             partidoId: this.$route.params.partidoId,
@@ -116,6 +122,13 @@ export default {
         }
     },
     methods: {
+
+        checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
 
         obtenerDificultad(){
             if(this.form.premio < 50)

@@ -32,8 +32,14 @@
 
 <script>
 import axios from 'axios';
+import router from "../../router";
 
 export default {
+
+  mounted() {
+        this.checkLoggedIn();
+    },
+
   data () {
     return {
       fields: [
@@ -48,6 +54,13 @@ export default {
     }
   },
   methods: {
+
+    checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
 
     getComentarios (){
 

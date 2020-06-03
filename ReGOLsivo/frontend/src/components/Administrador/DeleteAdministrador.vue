@@ -26,8 +26,14 @@
 <script>
 import axios from 'axios'
 import swal from 'sweetalert'
+import router from "../../router";
 
 export default {
+
+    mounted() {
+        this.checkLoggedIn();
+    },
+
     data () {
         return {
             administradorId: this.$route.params.administradorId,
@@ -41,6 +47,14 @@ export default {
         }
     },
     methods: {
+
+        checkLoggedIn() {
+         this.$session.start();
+        if (!this.$session.has("token")) {
+            router.push("/auth");
+            }
+        },
+
         getAdministrador (){
             const path = `http://localhost:8000/api/v1.0/administradores/${this.administradorId}/`
 
