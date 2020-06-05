@@ -62,27 +62,6 @@ class AdministradorViewSet(viewsets.ModelViewSet):
             # action is not set return default permission_classes
             return [permission() for permission in self.permission_classes]"""
 
-class LogroViewSet(viewsets.ModelViewSet):
-    queryset = Logro.objects.all()
-    serializer_class = LogroSerializer
-
-    """permission_classes_by_action = {'list': [IsAuthenticated],
-                                    'edit': [IsAdminUser]}
-
-    def list(self, request, *args, **kwargs):
-        return super(LogroViewSet, self).list(request, *args, **kwargs)
-
-    def edit(self, request, *args, **kwargs):
-        return super(LogroViewSet, self).edit(request, *args, **kwargs)      
-
-    def get_permissions(self):
-        try:
-            # return permission_classes depending on `action` 
-            return [permission() for permission in self.permission_classes_by_action[self.action]]
-        except KeyError: 
-            # action is not set return default permission_classes
-            return [permission() for permission in self.permission_classes]"""
-
 class PartidoViewSet(viewsets.ModelViewSet):
     queryset = Partido.objects.all()
     serializer_class = PartidoSerializer
@@ -186,3 +165,24 @@ class ConfiguracionViewSet(viewsets.ModelViewSet):
         except KeyError: 
             # action is not set return default permission_classes
             return [permission() for permission in self.permission_classes]"""
+
+class LogroViewSet(viewsets.ModelViewSet):
+    queryset = Logro.objects.all()
+    serializer_class = LogroSerializer
+
+    """permission_classes_by_action = {'list': [IsAuthenticated],
+                                    'edit': [IsAdminUser]}
+
+    def list(self, request, *args, **kwargs):
+        return super(LogroViewSet, self).list(request, *args, **kwargs)
+
+    def edit(self, request, *args, **kwargs):
+        return super(LogroViewSet, self).edit(request, *args, **kwargs)      
+
+    def get_permissions(self):
+        try:
+            # return permission_classes depending on `action` 
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
+        except KeyError: 
+            # action is not set return default permission_classes
+            return [permission() for permission in self.permission_classes]"""            

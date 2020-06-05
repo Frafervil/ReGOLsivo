@@ -40,6 +40,8 @@ import DarMeGusta from '@/components/Comentario/DarMeGusta'
 
 import EditConfiguracion from '@/components/Configuracion/EditConfiguracion'
 
+import ListLogro from '@/components/Logro/ListLogro'
+
 Vue.use(Router)
 
 export default new Router({
@@ -208,6 +210,11 @@ export default new Router({
       path: '/configuraciones/:configuracionId/edit',
       name: 'EditConfiguracion',
       component: EditConfiguracion
+    },
+    {
+      path: '/logros',
+      name: 'ListLogro',
+      component: ListLogro
     }
   ],
   mode: 'history'

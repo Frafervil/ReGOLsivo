@@ -79,8 +79,7 @@ export default {
         { key: 'partido', label: 'Partido' },
         { key: 'action', label: '' }
       ],
-      pronosticos: [],
-      misPronosticos: []
+      pronosticos: []
     }
   },
   methods: {
@@ -109,17 +108,10 @@ export default {
       
       axios.get(path).then((response) => {
         this.pronosticos = response.data
-      }, this.misPronosticos.push(this.getMisPronosticos(this.pronosticos)))
+      })
       .catch((error) => {
         console.log(error)
       })
-    },
-
-    getMisPronosticos(pronosticos){
-      var pronosticosDeUsuarioActual = pronosticos.filter(function(pronostico){
-        return pronostico.usuario === this.getUsuarioId();
-      })
-      return pronosticosDeUsuarioActual;
     },
 
     getUsuarioId(){
@@ -132,7 +124,12 @@ export default {
   computed: {
       rows() {
         return this.partidos.length
+      },
+
+      misPronosticos: function (){
+        return this.pronosticos.filter((pronostico) => pronostico.usuario == this.getUsuarioId());
       }
+
     },
 
   created(){

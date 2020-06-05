@@ -14,7 +14,7 @@
     <b-button size="sm" :to="{name: 'PerfilUsuario', params: {usuarioToken: this.$session.get('token')}}" variant="primary">
             Perfil
     </b-button>
-    <b-button size="sm" :to="{name: 'Logros'}" variant="primary">
+    <b-button size="sm" :to="{name: 'ListLogro'}" variant="primary">
             Logros
     </b-button>
     </div>

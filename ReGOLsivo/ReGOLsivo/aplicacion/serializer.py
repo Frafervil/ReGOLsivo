@@ -47,12 +47,7 @@ class AdministradorSerializer(serializers.ModelSerializer):
             else:
                 setattr(instance, attr, value)
         instance.save()
-        return instance    
-
-class LogroSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Logro
-        fields = '__all__'        
+        return instance      
 
 class PartidoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -73,3 +68,8 @@ class ConfiguracionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Configuracion
         fields = '__all__'
+
+class LogroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Logro
+        fields = '__all__'          
