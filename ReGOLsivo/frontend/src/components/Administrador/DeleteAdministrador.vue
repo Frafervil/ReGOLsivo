@@ -4,11 +4,10 @@
             <div class="col">
          
                 <h3>¿Seguro que quieres eliminar este administrador?</h3>
-                <p>Nombre : {{ this.element.nombre }}</p>
-                <p>Apellidos : {{ this.element.apellidos }}</p>
+                <p>Nombre : {{ this.element.first_name }}</p>
+                <p>Apellidos : {{ this.element.last_name }}</p>
                 <p>Email : {{ this.element.email }}</p>
-                <p>Nombre de usuario : {{ this.element.nombreDeUsuario }}</p>
-                <p>Contraseña : {{ this.element.password }}</p>
+                <p>Nombre de usuario : {{ this.element.username }}</p>
 
             </div> 
         </div> 
@@ -38,11 +37,10 @@ export default {
         return {
             administradorId: this.$route.params.administradorId,
             element: {
-                nombre: '',
-                apellidos: '',
+                first_name: '',
+                last_name: '',
                 email: '',
-                nombreDeUsuario: '',
-                password: ''
+                username: ''
             }
         }
     },
@@ -60,11 +58,10 @@ export default {
 
             axios.get(path).then((response) =>{
 
-                this.element.nombre = response.data.nombre
-                this.element.apellidos = response.data.apellidos
+                this.element.first_name = response.data.first_name
+                this.element.last_name = response.data.last_name
                 this.element.email = response.data.email
-                this.element.nombreDeUsuario = response.data.nombreDeUsuario
-                this.element.password = response.data.password
+                this.element.username = response.data.username
 
             })
             .catch((error) => {

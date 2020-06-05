@@ -13,16 +13,13 @@
           <b-table striped hover :items="administradores" :fields="fields">
 
             <template v-slot:cell(action)="data">
-              <b-button size="sm" variant="primary" :to="{ name:'PerfilAdministrador', params: {administradorId: data.item.id} }">
-                Editar
-              </b-button>
               <b-button size="sm" variant="danger" :to="{ name:'DeleteAdministrador', params: {administradorId: data.item.id} }">
                 Eliminar
               </b-button>
             </template>
 
           </b-table>
-
+          <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingAdministrador'}">Atrás</b-button>
         </div>
 
       </div>
@@ -43,8 +40,9 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'nombre', label: 'Nombre' },
-        { key: 'apellidos', label: 'Apellidos' },
+        { key: 'username', label: 'Nombre de usuario'},
+        { key: 'first_name', label: 'Nombre'},
+        { key: 'last_name', label: 'Apellidos'},
         { key: 'email', label: 'Email' },
         { key: 'action', label: '' }
       ],

@@ -15,30 +15,9 @@
                         <form @submit="onSubmit">
 
                         <div class="form-group row">
-                            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>    
+                            <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label>    
                             <div class="col-sm-6">
-                             <input type="text" placeholder="Nombre" name="nombre" class="form-control" v-model.trim="form.nombre">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>    
-                            <div class="col-sm-6">
-                             <input type="text" placeholder="Apellidos" name="apellidos" class="form-control" v-model.trim="form.apellidos">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-2 col-form-label">Email</label>    
-                            <div class="col-sm-6">
-                             <input type="text" placeholder="Email" name="email" class="form-control" v-model.trim="form.email">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="nombreDeUsuario" class="col-sm-2 col-form-label">Nombre de usuario</label>    
-                            <div class="col-sm-6">
-                             <input type="text" placeholder="carlos23" name="nombreDeUsuario" class="form-control" v-model.trim="form.nombreDeUsuario">
+                             <input type="text" placeholder="jsanchez23" name="username" class="form-control" v-model.trim="form.username">
                             </div>
                         </div>
 
@@ -49,16 +28,35 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">Email</label>    
+                            <div class="col-sm-6">
+                             <input type="email" placeholder="j.s.herrera@gmail.com" name="email" class="form-control" v-model.trim="form.email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="first_name" class="col-sm-2 col-form-label">Nombre</label>    
+                            <div class="col-sm-6">
+                             <input type="text" placeholder="Javier" name="first_name" class="form-control" v-model.trim="form.first_name">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="last_name" class="col-sm-2 col-form-label">Apellidos</label>    
+                            <div class="col-sm-6">
+                             <input type="text" placeholder="Sánchez Herrera" name="last_name" class="form-control" v-model.trim="form.last_name">
+                            </div>
+                        </div>
+
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Crear</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListAdministrador'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingAdministrador'}">Cancelar</b-button>
                             </div>
                         </div>
 
                        </form>  
-
-
                        </form> 
                     </div>   
                 </div>
@@ -81,11 +79,11 @@ export default {
     data() {
         return {
             form: {
-                nombre: '',
-                apellidos: '',
+                username: '',
+                password: '',
                 email: '',
-                nombreDeUsuario: '',
-                password: ''
+                first_name: '',
+                last_name: ''
             }
         }
     },
@@ -105,13 +103,18 @@ export default {
 
             axios.post(path, this.form).then((response) =>{
 
-                this.form.nombre = response.data.nombre
-                this.form.apellidos = response.data.apellidos
-                this.form.email = response.data.email
-                this.form.nombreDeUsuario = response.data.nombreDeUsuario
+                this.form.username = response.data.username
                 this.form.password = response.data.password
+                this.form.email = response.data.email
+                this.form.first_name = response.data.first_name
+                this.form.last_name = response.data.last_name
 
-                swal("¡Administrador creado con éxito!", "", "success")
+                swal({
+                    title: "¡El administrador se ha creado correctamente!",
+                    icon: "success",
+                    button: "¡Continuar!"}).then(function() {
+                    window.location = "/administradores";
+                    });
             })
             .catch((error) => {
                 swal("¡El Administrador no ha sido creado!", "", "error")
