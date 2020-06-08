@@ -8,7 +8,6 @@
             Crear administrador
           </b-button>
         </div>
-        <br>
         <div class="col-md-12">
           <b-table striped hover :items="administradores" :fields="fields">
 

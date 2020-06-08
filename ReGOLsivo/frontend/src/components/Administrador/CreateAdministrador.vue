@@ -112,7 +112,7 @@ export default {
                 swal({
                     title: "¡El administrador se ha creado correctamente!",
                     icon: "success",
-                    button: "¡Continuar!"}).then(function() {
+                    button: "Continuar"}).then(function() {
                     window.location = "/administradores";
                     });
             })
