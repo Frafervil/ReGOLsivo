@@ -74,7 +74,6 @@ export default {
 
     data() {
         return {
-            usuarioToken: this.$route.params.usuarioToken,
             form: {
                 username: '',
                 password: '',
@@ -95,7 +94,7 @@ export default {
         },
 
         getUsuarioId(){
-            var decodedPayload = atob(this.usuarioToken.split('.')[1]);
+            var decodedPayload = atob(this.$session.get('token').split('.')[1]);
             var payloadSplittedByComa = decodedPayload.split(',')[0];
             return payloadSplittedByComa.split(':')[1];
         },
@@ -108,7 +107,7 @@ export default {
             const path = `http://localhost:8000/api/v1.0/usuarios/${usuarioId}/`
 
             const auth = {
-                headers: {Authorization:'JWT ' + this.usuarioToken} 
+                headers: {Authorization:'JWT ' + this.$session.get('token')} 
             }
 
             axios.put(path, this.form, auth).then((response) =>{
@@ -117,7 +116,12 @@ export default {
                 this.form.first_name = response.data.first_name
                 this.form.last_name = response.data.last_name
 
-                swal("¡Usuario actualizado con éxito!", "", "success")
+                swal({
+                    title: "¡Usuario actualizado con éxito!",
+                    icon: "success",
+                    button: "¡Genial!"}).then(function() {
+                    window.location = "/landingUsuario";
+                    });
             })
             .catch((error) => {
                 console.log(error)

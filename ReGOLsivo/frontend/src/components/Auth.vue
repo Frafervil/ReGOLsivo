@@ -84,7 +84,7 @@ export default {
         },
 
         administradores: [],
-        newArr: []
+        token: ""
 
     }),
     methods: {
@@ -107,6 +107,7 @@ export default {
         },
 
         redirect(array){
+          this.$session.set('token', this.token);
           if(array.length == 0){
             router.push('/landingUsuario');
           } else {
@@ -121,6 +122,7 @@ export default {
               axios.post('http://localhost:8000/auth/', this.credentials).then(res => {
                 this.$session.start();
                 this.$session.set('token', res.data.token);
+                this.token = res.data.token
               }, this.redirect(this.getAdministrador()),
               ).catch(e => {
                 this.loading = false;
