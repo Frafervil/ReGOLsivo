@@ -84,7 +84,7 @@ export default {
         },
 
         administradores: [],
-        token: ""
+        token: ''
 
     }),
     methods: {
