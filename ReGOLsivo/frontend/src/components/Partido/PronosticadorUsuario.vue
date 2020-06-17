@@ -35,17 +35,22 @@
         <h2>Mis pronósticos</h2>
         <br>
         <div class="misPronosticos">
-          <b-table striped hover :items="misPronosticos" :fields="camposPronosticos" v-slot:cell(action)="data">
+          <b-table striped hover :items="misPronosticos" :fields="camposPronosticos">
+            <template v-slot:cell(action)="data">
               <b-button size="sm" variant="primary" :to="{ name:'EditPronostico', params: {pronosticoId: data.item.id} }">
                 Editar
               </b-button>
               <b-button size="sm" variant="danger" :to="{ name:'DeletePronostico', params: {pronosticoId: data.item.id} }">
                 Eliminar
               </b-button>
+            </template>
+            <template v-slot:cell(acertado)="row">
+              <b-badge v-if="row.item.acertado" variant="success">Si</b-badge>
+              <b-badge v-else variant="danger">No</b-badge>
+            </template>
           </b-table>
           <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingUsuario'}">Atrás</b-button>
         </div>
-
       </div>
     </div>
   </div>
