@@ -108,6 +108,7 @@
 import axios from 'axios'
 import swal from 'sweetalert'
 import router from "../../router";
+import { DateTime } from "luxon";
 
 export default {
 
@@ -131,7 +132,7 @@ export default {
         
             fields: [
                 { key: 'id', label: 'Número de comentario' },
-                { key: 'momento', label: 'Momento', sortable: true},
+                { key: 'momento', formatter: "formatMomento", label: 'Momento', sortable: true},
                 { key: 'texto', label: 'Texto' },
                 { key: 'meGustas', label: 'Número de "me gustas"', sortable: true},
                 { key: 'autor', label: 'Autor' },
@@ -142,6 +143,11 @@ export default {
         }
     },
     methods: {
+
+        formatMomento(value) {
+            const formattedDate = DateTime.fromISO(value).toLocaleString(DateTime.DATETIME_SHORT);
+            return formattedDate;
+        },
 
         checkLoggedIn() {
          this.$session.start();
@@ -200,7 +206,7 @@ export default {
       })
     },
 
-},
+    },
 
     created() {
         this.getPartido(),

@@ -138,7 +138,7 @@ export default {
     },
 
   created(){
-    this.getPartidos()
+    this.getPartidos(),
     this.getPronosticos()
   }
 }
