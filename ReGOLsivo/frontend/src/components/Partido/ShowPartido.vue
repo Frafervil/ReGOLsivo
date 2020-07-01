@@ -36,6 +36,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="dia" class="col-sm-2 col-form-label">Día</label>    
+                            <div class="col-sm-6">
+                             <input type="date" name="dia" class="form-control" readonly v-model.trim="form.dia">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="hora" class="col-sm-2 col-form-label">Hora</label>    
+                            <div class="col-sm-6">
+                             <input type="time" name="hora" class="form-control" readonly v-model.trim="form.hora">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="pronosticoSistema" class="col-sm-2 col-form-label">Pronóstico del sistema</label>    
                             <div class="col-sm-6">
                              <input type="text" name="pronosticoSistema" class="form-control" readonly v-model.trim="form.pronosticoSistema">
@@ -58,7 +72,7 @@
 
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button size="sm" variant="primary" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
+                            <b-button size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
                             Pronosticar
                             </b-button>    
                             <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {partidoId: this.partidoId}}">
@@ -72,9 +86,9 @@
                         <br>
                         <h2>Comentarios</h2>
                         <br>
-                        <div class="comentarios">
+                        <div class="comentariosDelPartido">
                             <b-table striped hover 
-                                :items="comentarios" 
+                                :items="comentariosDelPartido" 
                                 :fields="fields"
                                 :sort-by.sync="sortBy" 
                                 :sort-desc.sync="sortDesc">
@@ -82,7 +96,7 @@
                                     <b-button size="sm" variant="primary" :to="{ name:'CreateComentarioRespuesta', params: {comentarioId: data.item.id} }">
                                         Responder
                                     </b-button>
-                                    <b-button size="sm" variant="primary" :to="{ name:'DarMeGusta', params: {comentarioId: data.item.id} }">
+                                    <b-button size="sm" variant="success" :to="{ name:'DarMeGusta', params: {comentarioId: data.item.id} }">
                                         Me gusta
                                     </b-button>
                                     <b-button size="sm" variant="primary" :to="{ name:'EditComentario', params: {comentarioId: data.item.id} }">
@@ -125,6 +139,8 @@ export default {
                 nombreLocal: '',
                 nombreVisitante: '',
                 resultado: '',
+                dia: '',
+                hora: '',
                 pronosticoSistema: '',
                 premio: '',
                 dificultad: ''
@@ -135,11 +151,12 @@ export default {
                 { key: 'momento', formatter: "formatMomento", label: 'Momento', sortable: true},
                 { key: 'texto', label: 'Texto' },
                 { key: 'meGustas', label: 'Número de "me gustas"', sortable: true},
-                { key: 'autor', label: 'Autor' },
-                { key: 'comentarioRespuesta', label: 'Responde a' },
+                { key: 'autor', formatter: "nombreDeUsuario", label: 'Autor' },
+                { key: 'comentarioRespuesta', label: 'Responde al comentario:' },
                 { key: 'action', label: '' }
             ],
-            comentarios: []
+            comentarios: [],
+            usuarios: []
         }
     },
     methods: {
@@ -147,6 +164,26 @@ export default {
         formatMomento(value) {
             const formattedDate = DateTime.fromISO(value).toLocaleString(DateTime.DATETIME_SHORT);
             return formattedDate;
+        },
+
+        getUsuarios(){
+            const path = 'http://localhost:8000/api/v1.0/usuarios/'
+
+            axios.get(path).then((response) => {
+
+                this.usuarios = response.data
+
+             })
+            .catch((error) => {
+                console.log(error)
+            })
+        },
+
+        nombreDeUsuario(usuarioId){
+
+            const usuario = this.usuarios.find(u => u.id === usuarioId);
+            return usuario ? `${usuario.username}` : 'Cargando...';
+
         },
 
         checkLoggedIn() {
@@ -161,11 +198,13 @@ export default {
 
             const path = `http://localhost:8000/api/v1.0/partidos/${this.partidoId}/`
 
-            axios.get(path, this.form).then((response) =>{
+            axios.get(path).then((response) =>{
 
                 this.form.nombreLocal = response.data.nombreLocal
                 this.form.nombreVisitante = response.data.nombreVisitante
                 this.form.resultado = response.data.resultado
+                this.form.dia = response.data.dia
+                this.form.hora = response.data.hora
                 this.form.pronosticoSistema = response.data.pronosticoSistema
                 this.form.premio = response.data.premio
                 this.form.dificultad = response.data.dificultad
@@ -185,6 +224,8 @@ export default {
                 this.form.nombreLocal = response.data.nombreLocal
                 this.form.nombreVisitante = response.data.nombreVisitante
                 this.form.resultado = response.data.resultado
+                this.form.dia = response.data.dia
+                this.form.hora = response.data.hora
                 this.form.pronosticoSistema = response.data.pronosticoSistema
                 this.form.premio = response.data.premio
                 this.form.dificultad = response.data.dificultad
@@ -204,13 +245,20 @@ export default {
       .catch((error) => {
         console.log(error)
       })
+     },
     },
+
+    computed: {
+      comentariosDelPartido: function (){
+        return this.comentarios.filter((comentario) => comentario.partido == this.partidoId);
+      }
 
     },
 
     created() {
         this.getPartido(),
-        this.getComentarios()
+        this.getComentarios(),
+        this.getUsuarios()
     }
 }
 </script>>
