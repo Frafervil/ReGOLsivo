@@ -14,6 +14,13 @@
                        <form>
                         <form @submit="onSubmit">
 
+                        <p v-if="errors.length">
+                            <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+                            <ul>
+                                <li v-for="error in errors">{{ error }}</li>
+                            </ul>
+                        </p>
+
                         <div class="form-group row">
                             <label for="nombreLocal" class="col-sm-2 col-form-label">Local</label>    
                             <div class="col-sm-6">
@@ -80,7 +87,7 @@
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Editar</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListPartido'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'Pronosticador'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -113,12 +120,13 @@ export default {
                 nombreLocal: '',
                 nombreVisitante: '',
                 resultado: '',
-                hora: '',
                 dia: '',
+                hora: '',
                 pronosticoSistema: '',
                 premio: '',
                 dificultad: ''
-            }
+            },
+            errors: []
         }
     },
     methods: {
@@ -148,17 +156,45 @@ export default {
 
                 this.form.nombreLocal = response.data.nombreLocal
                 this.form.nombreVisitante = response.data.nombreVisitante
-                this.form.hora = response.data.hora
                 this.form.dia = response.data.dia
+                this.form.hora = response.data.hora
                 this.form.resultado = response.data.resultado
                 this.form.pronosticoSistema = response.data.pronosticoSistema
                 this.form.premio = response.data.premio
                 this.form.dificultad = response.data.dificultad
 
-                swal("¡Partido actualizado con éxito!", "", "success")
+                swal({
+                    title: "¡Partido actualizado con éxito!",
+                    icon: "success",
+                    button: "Ok"}).then(function() {
+                    window.location = "/pronosticador";
+                    });
             },this.obtenerDificultad())
             .catch((error) => {
+                this.errors = [];
+                if(this.form.nombreLocal == ''){
+                    this.errors.push('El nombre del equipo local es obligatorio');
+                }
+                if(this.form.nombreVisitante == ''){
+                    this.errors.push('El nombre del equipo visitante es obligatorio');
+                }
+                if(this.form.dia == ''){
+                    this.errors.push('El día es obligatorio');
+                }
+                if(this.form.hora == ''){
+                    this.errors.push('La hora es obligatoria');
+                }
+                if(this.form.resultado == ''){
+                    this.errors.push('El resultado es obligatorio');
+                }
+                if(this.form.pronosticoSistema == ''){
+                    this.errors.push('El pronóstico del sistema es obligatorio');
+                }
+                if(this.form.premio == ''){
+                    this.errors.push('El premio es obligatorio');
+                }
                 console.log(error)
+                swal("¡El partido no ha sido editado!", "", "error")
             })
 
         },
@@ -170,8 +206,8 @@ export default {
 
                 this.form.nombreLocal = response.data.nombreLocal
                 this.form.nombreVisitante = response.data.nombreVisitante
-                this.form.hora = response.data.hora
                 this.form.dia = response.data.dia
+                this.form.hora = response.data.hora
                 this.form.resultado = response.data.resultado
                 this.form.pronosticoSistema = response.data.pronosticoSistema
                 this.form.premio = response.data.premio

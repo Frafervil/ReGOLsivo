@@ -14,6 +14,13 @@
                        <form>
                         <form @submit="onSubmit">
 
+                        <p v-if="errors.length">
+                            <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+                            <ul>
+                                <li v-for="error in errors">{{ error }}</li>
+                            </ul>
+                        </p>
+
                         <div class="form-group row">
                             <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label>    
                             <div class="col-sm-6">
@@ -84,7 +91,8 @@ export default {
                 email: '',
                 first_name: '',
                 last_name: ''
-            }
+            },
+            errors: []
         }
     },
     methods: {
@@ -117,6 +125,28 @@ export default {
                     });
             })
             .catch((error) => {
+                this.errors = [];
+                if(this.form.username == ''){
+                    this.errors.push('El nombre de usuario es obligatorio');
+                }
+                if(this.form.username.length <= 3){
+                    this.errors.push('El nombre de usuario debe tener más de 3 caracteres de longitud');
+                }
+                if(this.form.password == ''){
+                    this.errors.push('La contraseña es obligatoria');
+                }
+                if(this.form.password.length <= 7){
+                    this.errors.push('La contraseña debe tener más de 7 caracteres de longitud');
+                }
+                if(this.form.email == ''){
+                    this.errors.push('El email es obligatorio');
+                }
+                if(this.form.first_name == ''){
+                    this.errors.push('El nombre es obligatorio');
+                }
+                if(this.form.last_name == ''){
+                    this.errors.push('Los apellidos son obligatorios');
+                }
                 swal("¡El Administrador no ha sido creado!", "", "error")
             })
 

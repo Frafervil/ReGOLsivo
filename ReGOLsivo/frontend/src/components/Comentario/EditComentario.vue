@@ -14,6 +14,13 @@
                        <form>
                         <form @submit="onSubmit">
 
+                        <p v-if="errors.length">
+                            <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+                            <ul>
+                                <li v-for="error in errors">{{ error }}</li>
+                            </ul>
+                        </p>
+
                         <div class="form-group row">
                             <label for="texto" class="col-sm-2 col-form-label">Texto</label>    
                             <div class="col-sm-6">
@@ -24,7 +31,7 @@
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Editar</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListComentario'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -59,7 +66,8 @@ export default {
                 meGustas: '',
                 autor: '',
                 partido: ''
-            }
+            },
+            errors: []
         }
     },
     methods: {
@@ -80,10 +88,20 @@ export default {
 
                 this.form.texto = response.data.texto
 
-                swal("¡Comentario actualizado con éxito!", "", "success")
+                swal({
+                    title: "¡Comentario actualizado con éxito!",
+                    icon: "success",
+                    button: "Ok"}).then(function() {
+                    window.location = "/pronosticadorUsuario";
+                    });
             })
             .catch((error) => {
+                this.errors = [];
+                if(this.form.texto == ''){
+                    this.errors.push('El texto es obligatorio');
+                }
                 console.log(error)
+                swal("¡El comentario no ha sido creado!", "", "error")
             })
 
         },

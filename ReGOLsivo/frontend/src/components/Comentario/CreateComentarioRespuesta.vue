@@ -14,6 +14,13 @@
                        <form>
                         <form @submit="onSubmit">
 
+                        <p v-if="errors.length">
+                            <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+                            <ul>
+                                <li v-for="error in errors">{{ error }}</li>
+                            </ul>
+                        </p>
+
                         <div class="form-group row">
                             <label for="texto" class="col-sm-2 col-form-label">Texto</label>    
                             <div class="col-sm-6">
@@ -57,7 +64,8 @@ export default {
                 autor: this.getUsuarioId(),
                 partido: this.$route.params.partidoId,
                 comentarioRespuesta: this.$route.params.comentarioId
-            }
+            },
+            errors: []
         }
     },
     methods: {
@@ -82,9 +90,18 @@ export default {
 
                 this.form.texto = response.data.texto
 
-                swal("Comentario creado con éxito!", "", "success")
+                swal({
+                    title: "¡Comentario creado con éxito!",
+                    icon: "success",
+                    button: "Ok"}).then(function() {
+                    window.location = "/pronosticadorUsuario";
+                    });
             })
             .catch((error) => {
+                this.errors = [];
+                if(this.form.texto == ''){
+                    this.errors.push('El texto es obligatorio');
+                }
                 console.log(error)
                 swal("¡El comentario no ha sido creado!", "", "error")
             })

@@ -14,6 +14,13 @@
                        <form>
                         <form @submit="onSubmit">
 
+                        <p v-if="errors.length">
+                            <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+                            <ul>
+                                <li v-for="error in errors">{{ error }}</li>
+                            </ul>
+                        </p>    
+
                         <div class="form-group row">
                             <label for="resultado" class="col-sm-2 col-form-label">Resultado</label>    
                             <div class="col-sm-6">
@@ -63,7 +70,8 @@ export default {
                 resultado: '',
                 usuario: this.getUsuarioId(),
                 partido: this.$route.params.partidoId
-            }
+            },
+            errors: []
         }
     },
     methods: {
@@ -97,6 +105,10 @@ export default {
                     });
             })
             .catch((error) => {
+                this.errors = [];
+                if(this.form.resultado == ''){
+                    this.errors.push('El resultado es obligatorio');
+                }
                 console.log(error)
                 swal("¡El pronóstico no ha sido creado!", "", "error")
             })

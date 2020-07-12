@@ -4,7 +4,7 @@
       <div class="col text-left">
         <div class="">
           <h2>Lista de partidos</h2>
-          <b-button size="sm" :to="{name: 'CreatePartido'}" variant="primary">
+          <b-button :to="{name: 'CreatePartido'}" variant="primary">
             Crear partido
           </b-button>
         </div>
@@ -13,7 +13,7 @@
           <b-table striped hover :items="partidos" :fields="fields">
 
             <template v-slot:cell(action)="data">
-              <b-button size="sm" variant="primary" :to="{ name:'ShowPartido', params: {partidoId: data.item.id} }">
+              <b-button size="sm" variant="info" :to="{ name:'ShowPartidoAdministrador', params: {partidoId: data.item.id} }">
                 Ver detalles
               </b-button>
               <b-button size="sm" variant="primary" :to="{ name:'EditPartido', params: {partidoId: data.item.id} }">
@@ -25,9 +25,8 @@
             </template>
 
           </b-table>
-
+          <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingAdministrador'}">Atrás</b-button>
         </div>
-
       </div>
     </div>
   </div>

@@ -14,7 +14,7 @@
             :per-page="perPage" 
             :current-page="currentPage">
             <template v-slot:cell(action)="data">
-              <b-button size="sm" variant="primary" :to="{ name:'ShowPartido', params: {partidoId: data.item.id} }">
+              <b-button size="sm" variant="info" :to="{ name:'ShowPartido', params: {partidoId: data.item.id} }">
                 Ver detalles
               </b-button>
             </template>
@@ -81,7 +81,7 @@ export default {
       camposPronosticos: [
         { key: 'resultado', label: 'Resultado' },
         { key: 'acertado', label: '¿Acertado?' },
-        { key: 'partido', label: 'Partido' },
+        { key: 'partido', formatter: "localYVisitante", label: 'Partido' },
         { key: 'action', label: '' }
       ],
       pronosticos: []
@@ -95,6 +95,13 @@ export default {
         router.push("/auth");
       }
     },
+
+    localYVisitante(partidoId){
+
+            const partido = this.partidos.find(p => p.id === partidoId);
+            return partido ? `${partido.nombreLocal} - ` + `${partido.nombreVisitante}` : 'Cargando...';
+
+        },
 
     getPartidos (){
 

@@ -70,18 +70,6 @@
                             </div>
                         </div>
 
-                        <div class="rows">
-                            <div class="col text-left">
-                            <b-button size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
-                            Pronosticar
-                            </b-button>    
-                            <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {partidoId: this.partidoId}}">
-                            Comentar
-                            </b-button>
-                            <b-button size="sm" type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Atrás</b-button>
-                            </div>
-                        </div>
-
                         </form>
                         <br>
                         <h2>Comentarios</h2>
@@ -93,15 +81,6 @@
                                 :sort-by.sync="sortBy" 
                                 :sort-desc.sync="sortDesc">
                                 <template v-slot:cell(action)="data">
-                                    <b-button size="sm" variant="primary" :to="{ name:'CreateComentarioRespuesta', params: {comentarioId: data.item.id} }">
-                                        Responder
-                                    </b-button>
-                                    <b-button size="sm" variant="success" :to="{ name:'DarMeGusta', params: {comentarioId: data.item.id} }">
-                                        Me gusta
-                                    </b-button>
-                                    <b-button size="sm" variant="primary" :to="{ name:'EditComentario', params: {comentarioId: data.item.id} }"> <!--"data.item.autor !== usuario"         :disabled="!isOwner(data.item.autor)"-->
-                                        Editar
-                                    </b-button>
                                     <b-button size="sm" variant="danger" :to="{ name:'DeleteComentario', params: {comentarioId: data.item.id} }">
                                         Eliminar
                                     </b-button>
@@ -109,6 +88,11 @@
                             </b-table>
                         </div>  
 
+                        <div class="rows">
+                            <div class="col text-left">   
+                            <b-button size="sm" type="submit" class="btn-large-space" :to="{ name: 'Pronosticador'}">Atrás</b-button>
+                            </div>
+                        </div>
 
                        </form> 
                     </div>   

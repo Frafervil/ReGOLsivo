@@ -15,6 +15,7 @@
 
 <script>
 import axios from 'axios';
+import moment from 'moment'
 
 export default {
 
@@ -25,13 +26,18 @@ export default {
       fields: [
         { key: 'nombreLocal', label: 'Local'},
         { key: 'nombreVisitante', label: 'Visitante'},
-        { key: 'dia', label: 'Día', sortable: true},
+        { key: 'dia', formatter: "formatDia", label: 'Día', sortable: true},
         { key: 'hora', label: 'Hora', sortable: true}
       ],
       partidos: []
     }
   },
   methods: {
+
+    formatDia(value) {
+            const formattedDate = moment(value).format('DD/MM/YYYY')
+            return formattedDate;
+        },
 
     getPartidos (){
 

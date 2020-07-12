@@ -14,6 +14,13 @@
                        <form>
                         <form @submit="onSubmit">
 
+                        <p v-if="errors.length">
+                            <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+                            <ul>
+                                <li v-for="error in errors">{{ error }}</li>
+                            </ul>
+                        </p>  
+
                         <div class="form-group row">
                             <label for="resultado" class="col-sm-2 col-form-label">Resultado</label>    
                             <div class="col-sm-6">
@@ -31,7 +38,7 @@
                        <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Editar</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListPronostico'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -65,7 +72,8 @@ export default {
                 acertado: '',
                 usuario: '',
                 partido: ''
-            }
+            },
+            errors: []
         }
     },
     methods: {
@@ -89,10 +97,20 @@ export default {
                 this.form.usuario = response.data.usuario
                 this.form.partido = response.data.partido
 
-                swal("¡Pronóstico actualizado con éxito!", "", "success")
+                swal({
+                    title: "¡Pronóstico actualizado con éxito!",
+                    icon: "success",
+                    }).then(function() {
+                    window.location = "/pronosticadorUsuario";
+                    });
             })
             .catch((error) => {
+                this.errors = [];
+                if(this.form.resultado == ''){
+                    this.errors.push('El resultado es obligatorio');
+                }
                 console.log(error)
+                swal("¡El pronóstico no ha sido actualizado!", "", "error")
             })
 
         },

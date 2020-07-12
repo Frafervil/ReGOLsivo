@@ -22,6 +22,7 @@ import EditPartido from '@/components/Partido/EditPartido'
 import DeletePartido from '@/components/Partido/DeletePartido'
 import CreatePartido from '@/components/Partido/CreatePartido'
 import ShowPartido from '@/components/Partido/ShowPartido'
+import ShowPartidoAdministrador from '@/components/Partido/ShowPartidoAdministrador'
 import Pronosticador from '@/components/Partido/Pronosticador'
 import PronosticadorUsuario from '@/components/Partido/PronosticadorUsuario'
 import Resultados from '@/components/Partido/Resultados'
@@ -140,6 +141,11 @@ export default new Router({
       path: '/partidos/:partidoId/show',
       name: 'ShowPartido',
       component: ShowPartido
+    },
+    {
+      path: '/partidos/:partidoId/showPartidoAdministrador',
+      name: 'ShowPartidoAdministrador',
+      component: ShowPartidoAdministrador
     },
     {
       path: '/pronosticador',
