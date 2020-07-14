@@ -72,7 +72,7 @@
 
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
+                            <b-button :disabled="anterior" size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
                             Pronosticar
                             </b-button>    
                             <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {partidoId: this.partidoId}}">
@@ -99,10 +99,10 @@
                                     <b-button size="sm" variant="success" :to="{ name:'DarMeGusta', params: {comentarioId: data.item.id} }">
                                         Me gusta
                                     </b-button>
-                                    <b-button size="sm" variant="primary" :to="{ name:'EditComentario', params: {comentarioId: data.item.id} }"> <!--"data.item.autor !== usuario"         :disabled="!isOwner(data.item.autor)"-->
+                                    <b-button v-if="data.item.autor == usuario" size="sm" variant="primary" :to="{ name:'EditComentario', params: {comentarioId: data.item.id} }">
                                         Editar
                                     </b-button>
-                                    <b-button size="sm" variant="danger" :to="{ name:'DeleteComentario', params: {comentarioId: data.item.id} }">
+                                    <b-button v-if="data.item.autor == usuario" size="sm" variant="danger" :to="{ name:'DeleteComentario', params: {comentarioId: data.item.id} }">
                                         Eliminar
                                     </b-button>
                                 </template>
@@ -156,7 +156,11 @@ export default {
                 { key: 'action', label: '' }
             ],
             comentarios: [],
-            usuarios: []
+            usuarios: [],
+            usuario: this.getUsuarioId(),
+            diaActual: this.getDiaActual(),
+            horaActual: this.getHoraActual(),
+            //anterior: this.getAnterior()
         }
     },
     methods: {
@@ -199,9 +203,28 @@ export default {
             return payloadSplittedByComa.split(':')[1];
         },
 
-        isOwner(item){
-            return item === this.getUsuarioId();
+        getDiaActual(){
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+
+            return dd + '/' + mm + '/' + yyyy;
         },
+
+        getHoraActual(){
+            var today = new Date();
+            return today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+        },
+
+        /*getAnterior(){
+            fechaPartido = moment(this.form.dia, "DD-MM-YYYY");
+            horaPartido = moment(this.form.hora, "HH:mm:ss");
+            if (fechaPartido.diff(this.getDiaActual) < 0){
+                return true;
+            }
+        },*/
 
         onSubmit(evt){
             evt.preventDefault()
