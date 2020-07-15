@@ -15,7 +15,7 @@
 
         <div class="row">
          <div class="col">
-            <b-button v-on:click="deleteComentario" variant="danger">Eliminar</b-button>
+            <b-button v-if="element.autor == usuario" v-on:click="deleteComentario" variant="danger">Eliminar</b-button>
          </div>  
         </div> 
 
@@ -43,7 +43,8 @@ export default {
                 meGustas: '',
                 autor: '',
                 partido: ''
-            }
+            },
+            usuario: this.getUsuarioId()
         }
     },
     methods: {
@@ -53,6 +54,12 @@ export default {
         if (!this.$session.has("token")) {
             router.push("/auth");
             }
+        },
+
+        getUsuarioId(){
+            var decodedPayload = atob(this.$session.get('token').split('.')[1]);
+            var payloadSplittedByComa = decodedPayload.split(',')[0];
+            return payloadSplittedByComa.split(':')[1];
         },
 
         getComentario (){

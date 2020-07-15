@@ -72,7 +72,7 @@
 
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button :disabled="anterior" size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
+                            <b-button :disabled="anterior" size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }"> <!--  && form.hora < horaActual -->
                             Pronosticar
                             </b-button>    
                             <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {partidoId: this.partidoId}}">
@@ -160,7 +160,7 @@ export default {
             usuario: this.getUsuarioId(),
             diaActual: this.getDiaActual(),
             horaActual: this.getHoraActual(),
-            //anterior: this.getAnterior()
+            anterior: false
         }
     },
     methods: {
@@ -218,13 +218,25 @@ export default {
 
         },
 
-        /*getAnterior(){
-            fechaPartido = moment(this.form.dia, "DD-MM-YYYY");
-            horaPartido = moment(this.form.hora, "HH:mm:ss");
-            if (fechaPartido.diff(this.getDiaActual) < 0){
-                return true;
+        getAnterior(){
+            var dia = this.form.dia
+            var diaSeparado = dia.split('/')[0];
+            var mesSeparado = dia.split('/')[1];
+            var anyoSeparado = dia.split('/')[2];
+
+            var diaActualSeparado = this.getDiaActual().split('/')[0];
+            var mesActualSeparado = this.getDiaActual().split('/')[1];
+            var anyoActualSeparado = this.getDiaActual().split('/')[2];
+
+            if(anyoSeparado < anyoActualSeparado){
+                this.anterior = true;
+            } else if(mesSeparado < mesActualSeparado){
+                this.anterior = true;
+            } else if(diaSeparado < diaActualSeparado){
+                this.anterior = false;
             }
-        },*/
+
+        },
 
         onSubmit(evt){
             evt.preventDefault()
@@ -291,7 +303,8 @@ export default {
     created() {
         this.getPartido(),
         this.getComentarios(),
-        this.getUsuarios()
+        this.getUsuarios(),
+        this.getAnterior()
     }
 }
 </script>>
