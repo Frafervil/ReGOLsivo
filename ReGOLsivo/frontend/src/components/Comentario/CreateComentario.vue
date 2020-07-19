@@ -64,7 +64,12 @@ export default {
                 autor: this.getUsuarioId(),
                 partido: this.$route.params.partidoId
             },
-            errors: []
+            logro: {
+                nombre: '',
+                usuarios: []
+            },
+            errors: [],
+            comentarios: []
         }
     },
     methods: {
@@ -89,13 +94,14 @@ export default {
 
                 this.form.texto = response.data.texto
 
-                swal({
+            swal({
                     title: "¡Comentario creado con éxito!",
                     icon: "success",
                     button: "Ok"}).then(function() {
                     window.location = "/pronosticadorUsuario";
                     });
-            })
+            },this.esElPrimero())
+
             .catch((error) => {
                 this.errors = [];
                 if(this.form.texto == ''){
@@ -113,10 +119,61 @@ export default {
             return payloadSplittedByComa.split(':')[1];
         },
 
+    getComentarios (){
+
+      const path = 'http://localhost:8000/api/v1.0/comentarios/'
+      axios.get(path).then((response) => {
+        this.comentarios = response.data
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+     },
+
+    getLogro(){
+        const path = `http://localhost:8000/api/v1.0/logros/2/`
+
+        axios.get(path).then((response) =>{
+
+                this.logro.nombre = response.data.nombre
+                this.logro.usuarios = response.data.usuarios
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+    },
+
+    esElPrimero(){
+        if(this.comentariosDelUsuario.length === 0){
+            this.logro.usuarios.push(this.getUsuarioId());
+            this.asignarLogroAUsuario();
+        }
+    },
+
+    asignarLogroAUsuario(){
+        const path = `http://localhost:8000/api/v1.0/logros/2/`
+
+        axios.put(path, this.logro)
+
+        .catch((error) => {
+            console.log(error)
+            swal("¡Fallo al asignar!", "", "error")
+        })
+    }
+
+    },
+
+    computed: {
+      comentariosDelUsuario: function (){
+        return this.comentarios.filter((comentario) => comentario.autor == this.getUsuarioId());
+      },
+
     },
 
     created() {
-        
+        this.getLogro()
     }
 }
 </script>>

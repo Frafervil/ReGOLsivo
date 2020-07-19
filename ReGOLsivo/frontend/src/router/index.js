@@ -4,6 +4,7 @@ import LandingPage from '@/components/LandingPage'
 import LandingUsuario from '@/components/LandingUsuario'
 import LandingAdministrador from '@/components/LandingAdministrador'
 import Auth from '@/components/Auth'
+import AuthDeRegistro from '@/components/AuthDeRegistro'
 import Bienvenido from '@/components/Bienvenido'
 
 import ListUsuario from '@/components/Usuario/ListUsuario'
@@ -66,6 +67,11 @@ export default new Router({
       path: '/auth',
       name: 'Auth',
       component: Auth
+    },
+    {
+      path: '/authDeRegistro',
+      name: 'AuthDeRegistro',
+      component: AuthDeRegistro
     },
     {
       path: '/bienvenido',

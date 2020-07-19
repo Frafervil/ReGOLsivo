@@ -63,7 +63,7 @@ export default {
 
   computed: {
       misLogros: function (){
-        return this.logros.filter((logro) => logro.usuarios == this.getUsuarioId());
+        return this.logros.filter((logro) => logro.usuarios.includes(parseInt(this.getUsuarioId())));
       }
 
     },
