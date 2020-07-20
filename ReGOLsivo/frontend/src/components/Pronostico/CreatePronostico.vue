@@ -75,6 +75,10 @@ export default {
                 nombre: '',
                 usuarios: []
             },
+            logroDe50Pronosticos: {
+                nombre: '',
+                usuarios: []
+            },
             errors: [],
             pronosticos: []
         }
@@ -108,7 +112,8 @@ export default {
                     }).then(function() {
                     window.location = "/pronosticadorUsuario";
                     });
-            },this.esElPrimero())
+            },this.esElPrimero(),
+            this.esEl50())
 
             .catch((error) => {
                 this.errors = [];
@@ -153,6 +158,21 @@ export default {
 
     },
 
+    getLogroDe50Pronosticos(){
+        const path = `http://localhost:8000/api/v1.0/logros/5/`
+
+        axios.get(path).then((response) =>{
+
+                this.logroDe50Pronosticos.nombre = response.data.nombre
+                this.logroDe50Pronosticos.usuarios = response.data.usuarios
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+    },
+
     esElPrimero(){
         if(this.pronosticosDelUsuario.length === 0){
             this.logro.usuarios.push(this.getUsuarioId());
@@ -160,10 +180,28 @@ export default {
         }
     },
 
+    esEl50(){
+        if(this.pronosticosDelUsuario.length === 49){
+            this.logroDe50Pronosticos.usuarios.push(this.getUsuarioId());
+            this.asignarLogroDe50PronosticosAUsuario();
+        }
+    },
+
     asignarLogroAUsuario(){
         const path = `http://localhost:8000/api/v1.0/logros/3/`
 
         axios.put(path, this.logro)
+
+        .catch((error) => {
+            console.log(error)
+            swal("¡Fallo al asignar!", "", "error")
+        })
+    },
+
+    asignarLogroDe50PronosticosAUsuario(){
+        const path = `http://localhost:8000/api/v1.0/logros/5/`
+
+        axios.put(path, this.logroDe50Pronosticos)
 
         .catch((error) => {
             console.log(error)
@@ -181,7 +219,8 @@ export default {
     },
     created() {
         this.getPronosticos(),
-        this.getLogro()
+        this.getLogro(),
+        this.getLogroDe50Pronosticos()
     }
 }
 </script>>

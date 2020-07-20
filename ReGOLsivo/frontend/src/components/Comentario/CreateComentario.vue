@@ -68,6 +68,10 @@ export default {
                 nombre: '',
                 usuarios: []
             },
+            logroDe50Comentarios: {
+                nombre: '',
+                usuarios: []
+            },
             errors: [],
             comentarios: []
         }
@@ -100,7 +104,8 @@ export default {
                     button: "Ok"}).then(function() {
                     window.location = "/pronosticadorUsuario";
                     });
-            },this.esElPrimero())
+            },this.esElPrimero(),
+            this.esEl50())
 
             .catch((error) => {
                 this.errors = [];
@@ -145,6 +150,21 @@ export default {
 
     },
 
+    getLogroDe50Comentarios(){
+        const path = `http://localhost:8000/api/v1.0/logros/4/`
+
+        axios.get(path).then((response) =>{
+
+                this.logroDe50Comentarios.nombre = response.data.nombre
+                this.logroDe50Comentarios.usuarios = response.data.usuarios
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+    },
+
     esElPrimero(){
         if(this.comentariosDelUsuario.length === 0){
             this.logro.usuarios.push(this.getUsuarioId());
@@ -152,10 +172,28 @@ export default {
         }
     },
 
+    esEl50(){
+        if(this.comentariosDelUsuario.length === 49){
+            this.logroDe50Comentarios.usuarios.push(this.getUsuarioId());
+            this.asignarLogroDe50ComentariosAUsuario();
+        }
+    },
+
     asignarLogroAUsuario(){
         const path = `http://localhost:8000/api/v1.0/logros/2/`
 
         axios.put(path, this.logro)
+
+        .catch((error) => {
+            console.log(error)
+            swal("¡Fallo al asignar!", "", "error")
+        })
+    },
+
+    asignarLogroDe50ComentariosAUsuario(){
+        const path = `http://localhost:8000/api/v1.0/logros/4/`
+
+        axios.put(path, this.logroDe50Comentarios)
 
         .catch((error) => {
             console.log(error)
@@ -174,7 +212,8 @@ export default {
 
     created() {
         this.getComentarios(),
-        this.getLogro()
+        this.getLogro(),
+        this.getLogroDe50Comentarios()
     }
 }
 </script>>
