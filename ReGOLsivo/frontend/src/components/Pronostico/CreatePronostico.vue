@@ -71,7 +71,12 @@ export default {
                 usuario: this.getUsuarioId(),
                 partido: this.$route.params.partidoId
             },
-            errors: []
+            logro: {
+                nombre: '',
+                usuarios: []
+            },
+            errors: [],
+            pronosticos: []
         }
     },
     methods: {
@@ -103,7 +108,8 @@ export default {
                     }).then(function() {
                     window.location = "/pronosticadorUsuario";
                     });
-            })
+            },this.esElPrimero())
+
             .catch((error) => {
                 this.errors = [];
                 if(this.form.resultado == ''){
@@ -121,10 +127,61 @@ export default {
             return payloadSplittedByComa.split(':')[1];
         },
 
+    getPronosticos(){
+
+      const path = 'http://localhost:8000/api/v1.0/pronosticos/'
+      axios.get(path).then((response) => {
+        this.pronosticos = response.data
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+     },
+
+    getLogro(){
+        const path = `http://localhost:8000/api/v1.0/logros/3/`
+
+        axios.get(path).then((response) =>{
+
+                this.logro.nombre = response.data.nombre
+                this.logro.usuarios = response.data.usuarios
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
     },
 
+    esElPrimero(){
+        if(this.pronosticosDelUsuario.length === 0){
+            this.logro.usuarios.push(this.getUsuarioId());
+            this.asignarLogroAUsuario();
+        }
+    },
+
+    asignarLogroAUsuario(){
+        const path = `http://localhost:8000/api/v1.0/logros/3/`
+
+        axios.put(path, this.logro)
+
+        .catch((error) => {
+            console.log(error)
+            swal("¡Fallo al asignar!", "", "error")
+        })
+    }
+
+    },
+
+    computed: {
+      pronosticosDelUsuario: function (){
+        return this.pronosticos.filter((pronostico) => pronostico.usuario == this.getUsuarioId());
+      },
+
+    },
     created() {
-        
+        this.getPronosticos(),
+        this.getLogro()
     }
 }
 </script>>

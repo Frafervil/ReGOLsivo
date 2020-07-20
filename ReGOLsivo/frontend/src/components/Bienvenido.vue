@@ -3,14 +3,12 @@
     <h1>{{ msg }}</h1>
     <h2>{{ msg2 }}</h2>
     <div class="">
-    <b-button type="submit" class="btn-large-space" :to="{ name: 'AuthDeRegistro'}">Continuar</b-button>
+    <b-button type="submit" class="btn-large-space" :to="{ name: 'Auth'}">Continuar</b-button>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import swal from 'sweetalert'
 
 export default {
   name: 'LandingUsuario',
