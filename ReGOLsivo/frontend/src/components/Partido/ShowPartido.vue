@@ -78,9 +78,12 @@
                             <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {partidoId: this.partidoId}}">
                             Comentar
                             </b-button>
+                            <b-button size="sm" @click="comprobarPronostico" variant="primary">Comprobar pronóstico</b-button>
                             <b-button size="sm" type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Atrás</b-button>
                             </div>
                         </div>
+
+
 
                         </form>
                         <br>
@@ -157,10 +160,25 @@ export default {
             ],
             comentarios: [],
             usuarios: [],
-            usuario: this.getUsuarioId(),
+            usuarioId: this.getUsuarioId(),
             diaActual: this.getDiaActual(),
             horaActual: this.getHoraActual(),
-            anterior: false
+            anterior: false,
+            usuario: {
+                username: '',
+                password: '',
+                email: '',
+                first_name: '',
+                last_name: '',
+                karma: ''
+            },
+            pronosticos: [],
+            pronostico: {
+                resultado: '',
+                acertado: '',
+                usuario: '',
+                partido: ''
+            }
         }
     },
     methods: {
@@ -261,6 +279,72 @@ export default {
 
         },
 
+        getUsuario (){
+            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+
+            axios.get(path).then((response) =>{
+
+                this.usuario.username = response.data.username
+                this.usuario.password = response.data.password
+                this.usuario.email = response.data.email
+                this.usuario.first_name = response.data.first_name
+                this.usuario.last_name = response.data.last_name
+                this.usuario.karma = response.data.karma
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        },
+
+        getPronostico(pronosticoId){
+            const path = `http://localhost:8000/api/v1.0/pronosticos/${pronosticoId}/`
+
+            axios.get(path).then((response) =>{
+
+                this.pronostico.resultado = response.data.resultado
+                this.pronostico.acertado = response.data.acertado
+                this.pronostico.usuario = response.data.usuario
+                this.pronostico.partido = response.data.partido
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        },
+
+        comprobarPronostico(){
+            if(this.pronosticoDelPartido[0].resultado == this.form.resultado){
+                this.usuario.karma = parseInt(this.usuario.karma) + parseInt(this.form.premio);
+                this.sumarKarma();
+                this.getPronostico(this.pronosticoDelPartido[0].id);
+                this.pronostico.acertado = true;
+                this.acertarPronostico(this.pronosticoDelPartido[0].id);
+            }
+        },
+
+        sumarKarma(){
+            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+
+            axios.put(path, this.usuario)
+
+            .catch((error) => {
+                console.log(error)
+                swal("¡Fallo al sumar karma!", "", "error")
+            })
+        },
+
+        acertarPronostico(pronosticoId){
+            const path = `http://localhost:8000/api/v1.0/pronosticos/${pronosticoId}/`
+
+            axios.put(path, this.pronostico)
+
+            .catch((error) => {
+                console.log(error)
+                swal("¡Fallo al acertar pronóstico!", "", "error")
+            })
+        },
+
         getPartido (){
             const path = `http://localhost:8000/api/v1.0/partidos/${this.partidoId}/`
 
@@ -291,11 +375,31 @@ export default {
         console.log(error)
       })
      },
+
+    getPronosticos(){
+
+      const path = 'http://localhost:8000/api/v1.0/pronosticos/'
+      axios.get(path).then((response) => {
+        this.pronosticos = response.data
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+     },
+
     },
 
     computed: {
       comentariosDelPartido: function (){
         return this.comentarios.filter((comentario) => comentario.partido == this.partidoId);
+      },
+
+      pronosticoDelUsuario: function (){
+        return this.pronosticos.filter((pronostico) => pronostico.usuario == this.usuarioId);
+      },
+
+      pronosticoDelPartido: function (){
+        return this.pronosticoDelUsuario.filter((pronostico) => pronostico.partido == this.partidoId);
       },
 
     },
@@ -304,7 +408,10 @@ export default {
         this.getPartido(),
         this.getComentarios(),
         this.getUsuarios(),
-        this.getAnterior()
+        this.getAnterior(),
+        this.getPronosticos(),
+        this.getUsuario()
+        //this.getPronostico(this.pronosticoDelPartido[0].id)
     }
 }
 </script>>
