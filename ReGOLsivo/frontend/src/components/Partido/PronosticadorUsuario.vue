@@ -37,6 +37,9 @@
         <div class="misPronosticos">
           <b-table striped hover :items="misPronosticos" :fields="camposPronosticos">
             <template v-slot:cell(action)="data">
+              <b-button size="sm" variant="success" :to="{ name:'ShowPronostico', params: {pronosticoId: data.item.id, partidoId: data.item.partido}  }">
+                Comprobar
+              </b-button>
               <b-button size="sm" variant="primary" :to="{ name:'EditPronostico', params: {pronosticoId: data.item.id} }">
                 Editar
               </b-button>

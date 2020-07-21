@@ -78,12 +78,9 @@
                             <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {partidoId: this.partidoId}}">
                             Comentar
                             </b-button>
-                            <b-button size="sm" @click="comprobarPronostico" variant="primary">Comprobar pronóstico</b-button>
                             <b-button size="sm" type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Atrás</b-button>
                             </div>
                         </div>
-
-
 
                         </form>
                         <br>
@@ -172,13 +169,6 @@ export default {
                 last_name: '',
                 karma: ''
             },
-            pronosticos: [],
-            pronostico: {
-                resultado: '',
-                acertado: '',
-                usuario: '',
-                partido: ''
-            }
         }
     },
     methods: {
@@ -279,7 +269,7 @@ export default {
 
         },
 
-        getUsuario (){
+        getUsuario(){
             const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
 
             axios.get(path).then((response) =>{
@@ -294,54 +284,7 @@ export default {
             })
             .catch((error) => {
                 console.log(error)
-            })
-        },
-
-        getPronostico(pronosticoId){
-            const path = `http://localhost:8000/api/v1.0/pronosticos/${pronosticoId}/`
-
-            axios.get(path).then((response) =>{
-
-                this.pronostico.resultado = response.data.resultado
-                this.pronostico.acertado = response.data.acertado
-                this.pronostico.usuario = response.data.usuario
-                this.pronostico.partido = response.data.partido
-
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        },
-
-        comprobarPronostico(){
-            if(this.pronosticoDelPartido[0].resultado == this.form.resultado){
-                this.usuario.karma = parseInt(this.usuario.karma) + parseInt(this.form.premio);
-                this.sumarKarma();
-                this.getPronostico(this.pronosticoDelPartido[0].id);
-                this.pronostico.acertado = true;
-                this.acertarPronostico(this.pronosticoDelPartido[0].id);
-            }
-        },
-
-        sumarKarma(){
-            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
-
-            axios.put(path, this.usuario)
-
-            .catch((error) => {
-                console.log(error)
-                swal("¡Fallo al sumar karma!", "", "error")
-            })
-        },
-
-        acertarPronostico(pronosticoId){
-            const path = `http://localhost:8000/api/v1.0/pronosticos/${pronosticoId}/`
-
-            axios.put(path, this.pronostico)
-
-            .catch((error) => {
-                console.log(error)
-                swal("¡Fallo al acertar pronóstico!", "", "error")
+                swal("¡Fallo al obtener usuario!", "", "error")
             })
         },
 
@@ -376,30 +319,11 @@ export default {
       })
      },
 
-    getPronosticos(){
-
-      const path = 'http://localhost:8000/api/v1.0/pronosticos/'
-      axios.get(path).then((response) => {
-        this.pronosticos = response.data
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-     },
-
     },
 
     computed: {
       comentariosDelPartido: function (){
         return this.comentarios.filter((comentario) => comentario.partido == this.partidoId);
-      },
-
-      pronosticoDelUsuario: function (){
-        return this.pronosticos.filter((pronostico) => pronostico.usuario == this.usuarioId);
-      },
-
-      pronosticoDelPartido: function (){
-        return this.pronosticoDelUsuario.filter((pronostico) => pronostico.partido == this.partidoId);
       },
 
     },
@@ -409,9 +333,7 @@ export default {
         this.getComentarios(),
         this.getUsuarios(),
         this.getAnterior(),
-        this.getPronosticos(),
         this.getUsuario()
-        //this.getPronostico(this.pronosticoDelPartido[0].id)
     }
 }
 </script>>

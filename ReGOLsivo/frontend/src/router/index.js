@@ -31,6 +31,7 @@ import ListPronostico from '@/components/Pronostico/ListPronostico'
 import EditPronostico from '@/components/Pronostico/EditPronostico'
 import DeletePronostico from '@/components/Pronostico/DeletePronostico'
 import CreatePronostico from '@/components/Pronostico/CreatePronostico'
+import ShowPronostico from '@/components/Pronostico/ShowPronostico'
 
 import ListComentario from '@/components/Comentario/ListComentario'
 import EditComentario from '@/components/Comentario/EditComentario'
@@ -181,6 +182,11 @@ export default new Router({
       path: '/pronosticos/:partidoId/create',
       name: 'CreatePronostico',
       component: CreatePronostico
+    },
+    {
+      path: '/pronosticos/:pronosticoId/:partidoId/show',
+      name: 'ShowPronostico',
+      component: ShowPronostico
     },
     {
       path: '/comentarios',

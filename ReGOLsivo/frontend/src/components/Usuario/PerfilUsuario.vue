@@ -15,6 +15,13 @@
                         <form @submit="onSubmit">
 
                         <div class="form-group row">
+                            <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label>    
+                            <div class="col-sm-6">
+                             <input type="text" name="username" class="form-control" readonly v-model.trim="form.username">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="first_name" class="col-sm-2 col-form-label">Nombre</label>    
                             <div class="col-sm-6">
                              <input type="text" name="first_name" class="form-control" v-model.trim="form.first_name">
