@@ -48,7 +48,20 @@ export default {
             comentarioId: this.$route.params.comentarioId,
             form: {
                 meGustas: ''
-            }
+            },
+            configuracion: {
+                valorComentariosPositivos: '',
+                premioComentariosPositivos: ''
+            },
+            usuarioId: this.getUsuarioId(),
+            usuario: {
+                username: '',
+                password: '',
+                email: '',
+                first_name: '',
+                last_name: '',
+                karma: ''
+            },
         }
     },
     methods: {
@@ -60,12 +73,18 @@ export default {
             }
         },
 
+        getUsuarioId(){
+            var decodedPayload = atob(this.$session.get('token').split('.')[1]);
+            var payloadSplittedByComa = decodedPayload.split(',')[0];
+            return payloadSplittedByComa.split(':')[1];
+        },
+
         onSubmit(evt){
             evt.preventDefault()
 
             const path = `http://localhost:8000/api/v1.0/comentarios/${this.comentarioId}/`
 
-            axios.put(path, this.form).then((response) =>{
+            axios.get(path).then((response) =>{
 
                 this.form.meGustas = this.form.meGustas + 1
 
@@ -74,16 +93,72 @@ export default {
 
                 this.form.meGustas = this.form.meGustas + 1
 
-                swal("¡Gracias por apoyar el comentario!", "", "success")
+                swal({
+                    title: "¡Gracias por apoyar el comentario!",
+                    icon: "success",
+                    button: "Continuar"}).then(function() {
+                    window.location = "/pronosticadorUsuario";
+                    });
                 })
-            })
+            }, this.esPositivo())
             .catch((error) => {
                 console.log(error)
             })
 
         },
 
-        getComentario (){
+        esPositivo(){
+            if(this.form.meGustas == this.configuracion.valorComentariosPositivos - 1){
+                this.usuario.karma = parseInt(this.usuario.karma) + parseInt(this.configuracion.premioComentariosPositivos);
+                this.sumarKarma();
+            }
+        },
+
+        sumarKarma(){
+            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+
+            axios.put(path, this.usuario)
+
+            .catch((error) => {
+                console.log(error)
+                swal("¡Fallo al sumar karma!", "", "error")
+            })
+        },
+
+        getUsuario(){
+            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+
+            axios.get(path).then((response) =>{
+
+                this.usuario.username = response.data.username
+                this.usuario.password = response.data.password
+                this.usuario.email = response.data.email
+                this.usuario.first_name = response.data.first_name
+                this.usuario.last_name = response.data.last_name
+                this.usuario.karma = response.data.karma
+
+            })
+            .catch((error) => {
+                console.log(error)
+                swal("¡Fallo al obtener usuario!", "", "error")
+            })
+        },
+
+        getConfiguracion (){
+            const path = `http://localhost:8000/api/v1.0/configuraciones/1/`
+
+            axios.get(path).then((response) =>{
+
+                this.configuracion.valorComentariosPositivos = response.data.valorComentariosPositivos
+                this.configuracion.premioComentariosPositivos = response.data.premioComentariosPositivos
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        },
+
+        getComentario(){
             const path = `http://localhost:8000/api/v1.0/comentarios/${this.comentarioId}/`
 
             axios.get(path).then((response) =>{
@@ -101,7 +176,9 @@ export default {
         }
     },
     created() {
-        this.getComentario()
+        this.getComentario(),
+        this.getConfiguracion(),
+        this.getUsuario()
     }
 }
 </script>>

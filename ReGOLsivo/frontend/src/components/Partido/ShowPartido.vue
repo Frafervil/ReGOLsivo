@@ -72,7 +72,7 @@
 
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button :disabled="form.dia < diaActual || (form.dia == diaActual && form.hora < horaActual)" size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }"> <!--  && form.hora < horaActual -->
+                            <b-button :disabled="form.dia < diaActual || (form.dia == diaActual && form.hora < horaActual) || noEsElUnico" size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }"> <!--  && form.hora < horaActual -->
                             Pronosticar
                             </b-button>    
                             <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {partidoId: this.partidoId}}">
@@ -168,6 +168,8 @@ export default {
                 last_name: '',
                 karma: ''
             },
+            pronosticos: [],
+            noEsElUnico: this.noEsElUnico()
         }
     },
     methods: {
@@ -223,6 +225,14 @@ export default {
             var today = new Date();
             return today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
+        },
+
+        noEsElUnico(){
+            if(this.pronosticosDelUsuarioYDelPartido.length === 0){
+                return false;
+            } else {
+                return true;
+            }
         },
 
         onSubmit(evt){
@@ -287,9 +297,9 @@ export default {
             })
         },
 
-    getComentarios (){
-
+    getComentarios(){
       const path = 'http://localhost:8000/api/v1.0/comentarios/'
+
       axios.get(path).then((response) => {
         this.comentarios = response.data
       })
@@ -298,6 +308,17 @@ export default {
       })
      },
 
+     getPronosticos(){
+      const path = 'http://localhost:8000/api/v1.0/pronosticos/'
+      
+      axios.get(path).then((response) => {
+        this.pronosticos = response.data
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    },
+
     },
 
     computed: {
@@ -305,13 +326,18 @@ export default {
         return this.comentarios.filter((comentario) => comentario.partido == this.partidoId);
       },
 
+      pronosticosDelUsuarioYDelPartido: function (){
+        return this.pronosticos.filter((pronostico) => pronostico.usuario == this.usuarioId && pronostico.partido == this.partidoId);
+      }
+
     },
 
     created() {
         this.getPartido(),
         this.getComentarios(),
         this.getUsuarios(),
-        this.getUsuario()
+        this.getUsuario(),
+        this.getPronosticos()
     }
 }
 </script>>
