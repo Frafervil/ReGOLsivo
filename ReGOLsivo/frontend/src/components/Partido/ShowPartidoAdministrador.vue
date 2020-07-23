@@ -80,11 +80,6 @@
                                 :fields="fields"
                                 :sort-by.sync="sortBy" 
                                 :sort-desc.sync="sortDesc">
-                                <template v-slot:cell(action)="data">
-                                    <b-button size="sm" variant="danger" :to="{ name:'DeleteComentario', params: {comentarioId: data.item.id} }">
-                                        Eliminar
-                                    </b-button>
-                                </template>
                             </b-table>
                         </div>  
 
@@ -136,8 +131,7 @@ export default {
                 { key: 'texto', label: 'Texto' },
                 { key: 'meGustas', label: 'Número de "me gustas"', sortable: true},
                 { key: 'autor', formatter: "nombreDeUsuario", label: 'Autor' },
-                { key: 'comentarioRespuesta', label: 'Responde al comentario:' },
-                { key: 'action', label: '' }
+                { key: 'comentarioRespuesta', label: 'Responde al comentario:' }
             ],
             comentarios: [],
             usuarios: []

@@ -45,7 +45,7 @@
                         <div class="rows">
                             <div class="col text-left">
                             <b-button type="submit" variant="primary">Editar</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'ListConfiguracion'}">Cancelar</b-button>
+                            <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingAdministrador'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -73,7 +73,6 @@ export default {
 
     data() {
         return {
-            configuracionId: this.$route.params.configuracionId,
             form: {
                 mensajeBienvenida: '',
                 linkLogo: '',
@@ -94,7 +93,7 @@ export default {
         onSubmit(evt){
             evt.preventDefault()
 
-            const path = `http://localhost:8000/api/v1.0/configuraciones/${this.configuracionId}/`
+            const path = `http://localhost:8000/api/v1.0/configuraciones/1/`
 
             axios.put(path, this.form).then((response) =>{
 
@@ -103,7 +102,7 @@ export default {
                 this.form.valorComentariosPositivos = response.data.valorComentariosPositivos
                 this.form.premioComentariosPositivos = response.data.premioComentariosPositivos
 
-                swal("¡Configuración actualizado con éxito!", "", "success")
+                swal("¡Configuración actualizada con éxito!", "", "success")
             })
             .catch((error) => {
                 console.log(error)
@@ -112,7 +111,7 @@ export default {
         },
 
         getConfiguracion (){
-            const path = `http://localhost:8000/api/v1.0/configuraciones/${this.configuracionId}/`
+            const path = `http://localhost:8000/api/v1.0/configuraciones/1/`
 
             axios.get(path).then((response) =>{
 

@@ -15,7 +15,7 @@
                        <form @submit="onSubmit">
                        <div class="rows">
                             <div class="col text-left">
-                            <b-button @click="comprobarPronostico" type="submit" variant="primary">Comprobar</b-button>
+                            <b-button v-if="form.usuario == usuarioId" @click="comprobarPronostico" type="submit" variant="primary">Comprobar</b-button>
                             <b-button type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Cancelar</b-button>
                             </div>
                         </div>

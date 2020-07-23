@@ -5,7 +5,10 @@
     <b-button size="sm" :to="{name: 'CreateAdministrador'}" variant="primary">
             Crear cuenta
     </b-button>
-    <b-button size="sm" :to="{name: 'Configuracion'}" variant="primary">
+    <b-button size="sm" :to="{name: 'ListUsuario'}" variant="primary">
+            Usuarios
+    </b-button>
+    <b-button size="sm" :to="{name: 'EditConfiguracion'}" variant="primary">
             Configuración
     </b-button>
     <b-button size="sm" :to="{name: 'Estadisticas'}" variant="primary">

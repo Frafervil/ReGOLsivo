@@ -14,7 +14,7 @@
 
         <div class="row">
          <div class="col">
-            <b-button v-on:click="deletePronostico" variant="danger">Eliminar</b-button>
+            <b-button v-if="element.usuario == usuario" v-on:click="deletePronostico" variant="danger">Eliminar</b-button>
          </div>  
         </div> 
 
@@ -41,7 +41,8 @@ export default {
                 acertado: '',
                 usuario: '',
                 partido: ''
-            }
+            },
+            usuario: this.getUsuarioId()
         }
     },
     methods: {
@@ -51,6 +52,12 @@ export default {
         if (!this.$session.has("token")) {
             router.push("/auth");
             }
+        },
+
+        getUsuarioId(){
+            var decodedPayload = atob(this.$session.get('token').split('.')[1]);
+            var payloadSplittedByComa = decodedPayload.split(',')[0];
+            return payloadSplittedByComa.split(':')[1];
         },
 
         getPronostico (){

@@ -18,6 +18,9 @@
             Logros
     </b-button>
     </div>
+    <br>
+    <h3>Contacto</h3>
+    <h4>Correo electrónico: primodepapadecho@gmail.com</h4>
   </div>
 </template>
 

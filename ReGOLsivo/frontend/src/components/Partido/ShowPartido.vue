@@ -99,10 +99,10 @@
                                     <b-button size="sm" variant="success" :to="{ name:'DarMeGusta', params: {comentarioId: data.item.id} }">
                                         Me gusta
                                     </b-button>
-                                    <b-button v-if="data.item.autor == usuario" size="sm" variant="primary" :to="{ name:'EditComentario', params: {comentarioId: data.item.id} }">
+                                    <b-button v-if="data.item.autor == usuarioId" size="sm" variant="primary" :to="{ name:'EditComentario', params: {comentarioId: data.item.id} }">
                                         Editar
                                     </b-button>
-                                    <b-button v-if="data.item.autor == usuario" size="sm" variant="danger" :to="{ name:'DeleteComentario', params: {comentarioId: data.item.id} }">
+                                    <b-button v-if="data.item.autor == usuarioId" size="sm" variant="danger" :to="{ name:'DeleteComentario', params: {comentarioId: data.item.id} }">
                                         Eliminar
                                     </b-button>
                                 </template>
@@ -158,9 +158,9 @@ export default {
             comentarios: [],
             usuarios: [],
             usuarioId: this.getUsuarioId(),
-            diaActual: this.getDiaActual(),
+            //diaActual: this.getDiaActual(),
             horaActual: this.getHoraActual(),
-            anterior: false,
+            anterior: '',
             usuario: {
                 username: '',
                 password: '',
@@ -211,14 +211,15 @@ export default {
             return payloadSplittedByComa.split(':')[1];
         },
 
-        getDiaActual(){
+        /*getDiaActual(){
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0');
             var yyyy = today.getFullYear();
 
             return dd + '/' + mm + '/' + yyyy;
-        },
+
+        },*/
 
         getHoraActual(){
             var today = new Date();
@@ -227,20 +228,24 @@ export default {
         },
 
         getAnterior(){
-            var dia = this.form.dia
-            var diaSeparado = dia.split('/')[0];
-            var mesSeparado = dia.split('/')[1];
-            var anyoSeparado = dia.split('/')[2];
+            var dia = this.form.dia;
+            var diaDelPartido = dia.split('/')[0];
+            var mesDelPartido = dia.split('/')[1];
+            var anyoDelPartido = dia.split('/')[2];
 
-            var diaActualSeparado = this.getDiaActual().split('/')[0];
-            var mesActualSeparado = this.getDiaActual().split('/')[1];
-            var anyoActualSeparado = this.getDiaActual().split('/')[2];
+            var today = new Date();
 
-            if(anyoSeparado < anyoActualSeparado){
+            var diaActual = String(today.getDate()).padStart(2, '0');
+            var mesActual = String(today.getMonth() + 1).padStart(2, '0');
+            var anyoActual = today.getFullYear();
+
+            today = diaActual + '/' + mesActual + '/' + anyoActual;
+
+            if(anyoDelPartido < today.split('/')[2]){
                 this.anterior = true;
-            } else if(mesSeparado < mesActualSeparado){
+            } else if(mesDelPartido < today.split('/')[1]){
                 this.anterior = true;
-            } else if(diaSeparado < diaActualSeparado){
+            } else if(diaDelPartido < today.split('/')[0]){
                 this.anterior = false;
             }
 
@@ -288,7 +293,7 @@ export default {
             })
         },
 
-        getPartido (){
+        getPartido(){
             const path = `http://localhost:8000/api/v1.0/partidos/${this.partidoId}/`
 
             axios.get(path).then((response) =>{

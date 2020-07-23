@@ -4,25 +4,18 @@
       <div class="col text-left">
         <div class="">
           <h2>Lista de usuarios</h2>
-          <b-button size="sm" :to="{name: 'CreateUsuario'}" variant="primary">
-            Crear usuario
-          </b-button>
         </div>
-        <br>
         <div class="col-md-12">
           <b-table striped hover :items="usuarios" :fields="fields">
 
             <template v-slot:cell(action)="data">
-              <b-button size="sm" variant="primary" :to="{ name:'PerfilUsuario', params: {usuarioId: data.item.id} }">
-                Editar
-              </b-button>
               <b-button size="sm" variant="danger" :to="{ name:'DeleteUsuario', params: {usuarioId: data.item.id} }">
                 Eliminar
               </b-button>
             </template>
 
           </b-table>
-
+         <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingAdministrador'}">Atrás</b-button>
         </div>
 
       </div>
@@ -43,8 +36,8 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'username', label: 'Nombre de usuario' },
-        { key: 'karma', label: 'Karma' },
+        { key: 'username', label: 'Nombre de usuario', sortable: true},
+        { key: 'karma', label: 'Karma', sortable: true},
         { key: 'action', label: '' }
       ],
       usuarios: []
