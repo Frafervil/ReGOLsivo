@@ -72,7 +72,7 @@
 
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button :disabled="anterior" size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }"> <!--  && form.hora < horaActual -->
+                            <b-button :disabled="form.dia < diaActual || (form.dia == diaActual && form.hora < horaActual)" size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }"> <!--  && form.hora < horaActual -->
                             Pronosticar
                             </b-button>    
                             <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {partidoId: this.partidoId}}">
@@ -158,9 +158,8 @@ export default {
             comentarios: [],
             usuarios: [],
             usuarioId: this.getUsuarioId(),
-            //diaActual: this.getDiaActual(),
+            diaActual: this.getDiaActual(),
             horaActual: this.getHoraActual(),
-            anterior: '',
             usuario: {
                 username: '',
                 password: '',
@@ -211,43 +210,18 @@ export default {
             return payloadSplittedByComa.split(':')[1];
         },
 
-        /*getDiaActual(){
+        getDiaActual(){
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0');
             var yyyy = today.getFullYear();
 
-            return dd + '/' + mm + '/' + yyyy;
-
-        },*/
+            return yyyy + '-' + mm + '-' + dd;
+        },
 
         getHoraActual(){
             var today = new Date();
             return today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
-        },
-
-        getAnterior(){
-            var dia = this.form.dia;
-            var diaDelPartido = dia.split('/')[0];
-            var mesDelPartido = dia.split('/')[1];
-            var anyoDelPartido = dia.split('/')[2];
-
-            var today = new Date();
-
-            var diaActual = String(today.getDate()).padStart(2, '0');
-            var mesActual = String(today.getMonth() + 1).padStart(2, '0');
-            var anyoActual = today.getFullYear();
-
-            today = diaActual + '/' + mesActual + '/' + anyoActual;
-
-            if(anyoDelPartido < today.split('/')[2]){
-                this.anterior = true;
-            } else if(mesDelPartido < today.split('/')[1]){
-                this.anterior = true;
-            } else if(diaDelPartido < today.split('/')[0]){
-                this.anterior = false;
-            }
 
         },
 
@@ -337,7 +311,6 @@ export default {
         this.getPartido(),
         this.getComentarios(),
         this.getUsuarios(),
-        this.getAnterior(),
         this.getUsuario()
     }
 }
