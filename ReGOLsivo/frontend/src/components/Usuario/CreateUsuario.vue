@@ -56,10 +56,17 @@
                             </div>
                         </div>
 
+                        <div class="form-group form-check">
+                            <b-button type="button" class="btn btn-link" variant="link" :to="{ name: 'TerminosYCondiciones'}">Términos y condiciones</b-button>
+                            <br>
+                            <input type="checkbox" class="form-check-input" id="checkTerminosYCondiciones" @click="validar">
+                            <label class="form-check-label" for="checkTerminosYCondiciones">Aceptar</label>
+                        </div>
+
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button type="submit" variant="primary">Registrarse</b-button>
-                            <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingPage'}">Cancelar</b-button>
+                                <b-button :disabled="!valid" type="submit" variant="primary">Registrarse</b-button>
+                                <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingPage'}">Cancelar</b-button>
                             </div>
                         </div>
 
@@ -89,10 +96,19 @@ export default {
                 first_name: '',
                 last_name: '',
             },
-            errors: []
+            errors: [],
+            valid: false
         }
     },
     methods: {
+
+        validar(){
+            if(this.valid == false){
+                this.valid = true;
+            } else {
+                this.valid = false;
+            }
+        },
 
         onSubmit(evt){
 

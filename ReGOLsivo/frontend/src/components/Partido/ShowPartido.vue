@@ -168,8 +168,7 @@ export default {
                 last_name: '',
                 karma: ''
             },
-            pronosticos: [],
-            noEsElUnico: this.noEsElUnico()
+            pronosticos: []
         }
     },
     methods: {
@@ -225,14 +224,6 @@ export default {
             var today = new Date();
             return today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-        },
-
-        noEsElUnico(){
-            if(this.pronosticosDelUsuarioYDelPartido.length === 0){
-                return false;
-            } else {
-                return true;
-            }
         },
 
         onSubmit(evt){
@@ -328,6 +319,14 @@ export default {
 
       pronosticosDelUsuarioYDelPartido: function (){
         return this.pronosticos.filter((pronostico) => pronostico.usuario == this.usuarioId && pronostico.partido == this.partidoId);
+      },
+
+      noEsElUnico: function (){
+        if(this.pronosticosDelUsuarioYDelPartido.length == 0){
+            return false;
+        } else {
+            return true;
+        }
       }
 
     },
