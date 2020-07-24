@@ -79,7 +79,12 @@ export default {
             const path = `http://localhost:8000/api/v1.0/pronosticos/${this.pronosticoId}/`
 
             axios.delete(path).then((response) => {
-                location.href = '/pronosticadorUsuario'
+                swal({
+                    title: "¡Pronóstico eliminado con éxito!",
+                    icon: "success",
+                    button: "Ok"}).then(function() {
+                    window.location = "/pronosticadorUsuario";
+                    });
             })
             .catch((error) => {
                 swal("No es posible eliminar el pronostico", "", "error")

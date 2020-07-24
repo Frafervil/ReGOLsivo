@@ -82,7 +82,12 @@ export default {
             }
 
             axios.delete(path, auth).then((response) => {
-                location.href = '/usuarios'
+                swal({
+                    title: "¡Usuario eliminado con éxito!",
+                    icon: "success",
+                    button: "Ok"}).then(function() {
+                    window.location = "/usuarios";
+                    });
             })
             .catch((error) => {
                 swal("No es posible eliminar el usuario", "", "error")

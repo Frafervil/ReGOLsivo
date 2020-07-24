@@ -78,7 +78,12 @@ export default {
             const path = `http://localhost:8000/api/v1.0/partidos/${this.partidoId}/`
 
             axios.delete(path).then((response) => {
-                location.href = '/pronosticador'
+                swal({
+                    title: "¡Partido eliminado con éxito!",
+                    icon: "success",
+                    button: "Ok"}).then(function() {
+                    window.location = "/pronosticador";
+                    });
             })
             .catch((error) => {
                 swal("No es posible eliminar el partido", "", "error")

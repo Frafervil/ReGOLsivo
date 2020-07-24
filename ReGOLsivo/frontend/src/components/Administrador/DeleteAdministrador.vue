@@ -72,7 +72,12 @@ export default {
             const path = `http://localhost:8000/api/v1.0/administradores/${this.administradorId}/`
 
             axios.delete(path).then((response) => {
-                location.href = '/administradores'
+                swal({
+                    title: "¡Administrador eliminado con éxito!",
+                    icon: "success",
+                    button: "Ok"}).then(function() {
+                    window.location = "/administradores";
+                    });
             })
             .catch((error) => {
                 swal("No es posible eliminar el administrador", "", "error")

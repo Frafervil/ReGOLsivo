@@ -28,15 +28,14 @@ import Pronosticador from '@/components/Partido/Pronosticador'
 import PronosticadorUsuario from '@/components/Partido/PronosticadorUsuario'
 import Resultados from '@/components/Partido/Resultados'
 
-import ListPronostico from '@/components/Pronostico/ListPronostico'
 import EditPronostico from '@/components/Pronostico/EditPronostico'
 import DeletePronostico from '@/components/Pronostico/DeletePronostico'
 import CreatePronostico from '@/components/Pronostico/CreatePronostico'
 import ShowPronostico from '@/components/Pronostico/ShowPronostico'
 
-import ListComentario from '@/components/Comentario/ListComentario'
 import EditComentario from '@/components/Comentario/EditComentario'
 import DeleteComentario from '@/components/Comentario/DeleteComentario'
+import DeleteComentarioAdministrador from '@/components/Comentario/DeleteComentarioAdministrador'
 import CreateComentario from '@/components/Comentario/CreateComentario'
 import CreateComentarioRespuesta from '@/components/Comentario/CreateComentarioRespuesta'
 import DarMeGusta from '@/components/Comentario/DarMeGusta'
@@ -170,11 +169,6 @@ export default new Router({
       component: Resultados
     },
     {
-      path: '/pronosticos',
-      name: 'ListPronostico',
-      component: ListPronostico
-    },
-    {
       path: '/pronosticos/:pronosticoId/edit',
       name: 'EditPronostico',
       component: EditPronostico
@@ -195,11 +189,6 @@ export default new Router({
       component: ShowPronostico
     },
     {
-      path: '/comentarios',
-      name: 'ListComentario',
-      component: ListComentario
-    },
-    {
       path: '/comentarios/:comentarioId/edit',
       name: 'EditComentario',
       component: EditComentario
@@ -208,6 +197,11 @@ export default new Router({
       path: '/comentarios/:comentarioId/delete',
       name: 'DeleteComentario',
       component: DeleteComentario
+    },
+    {
+      path: '/comentarios/:comentarioId/delete',
+      name: 'DeleteComentarioAdministrador',
+      component: DeleteComentarioAdministrador
     },
     {
       path: '/comentarios/create',

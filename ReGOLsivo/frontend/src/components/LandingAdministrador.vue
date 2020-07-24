@@ -2,22 +2,24 @@
   <div class="LandingAdministrador">
     <h1>{{ msg }}</h1>
     <div class="">
-    <b-button size="sm" :to="{name: 'CreateAdministrador'}" variant="primary">
-            Crear cuenta
-    </b-button>
     <b-button size="sm" :to="{name: 'ListUsuario'}" variant="primary">
             Usuarios
     </b-button>
-    <b-button size="sm" :to="{name: 'EditConfiguracion'}" variant="primary">
-            Configuración
+    <b-button size="sm" :to="{name: 'ListAdministrador'}" variant="primary">
+            Administradores
+    </b-button>
+    <b-button size="sm" :to="{name: 'Pronosticador'}" variant="primary">
+            Pronosticador
     </b-button>
     <b-button size="sm" :to="{name: 'Estadisticas'}" variant="primary">
             Estadísticas
     </b-button>
-    <b-button size="sm" :to="{name: 'Pronosticador', params: {usuarioToken: this.$session.get('token')}}" variant="primary">
-            Pronosticador
+    <b-button size="sm" :to="{name: 'EditConfiguracion'}" variant="primary">
+            Configuración
     </b-button>
-    <b-button size="sm" v-on:click="logout" variant="danger">Cerrar sesión</b-button>
+    <b-button size="sm" :to="{name: 'PerfilAdministrador'}" variant="primary">
+            Perfil
+    </b-button>
     </div>
   </div>
 </template>
@@ -35,7 +37,7 @@ export default {
 
   data () {
     return {
-      msg: '¡Bienvenido!'
+      msg: '¡Bienvenido a la zona de administradores!'
     }
   },
 
@@ -46,11 +48,6 @@ export default {
       if (!this.$session.has("token")) {
         router.push("/auth");
       }
-    },
-
-    logout(){
-      this.$session.destroy();
-      location.href = '/'
     },
   }
 
