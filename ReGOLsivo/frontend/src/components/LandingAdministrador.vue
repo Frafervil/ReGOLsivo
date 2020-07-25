@@ -11,9 +11,6 @@
     <b-button size="sm" :to="{name: 'Pronosticador'}" variant="primary">
             Pronosticador
     </b-button>
-    <b-button size="sm" :to="{name: 'Estadisticas'}" variant="primary">
-            Estadísticas
-    </b-button>
     <b-button size="sm" :to="{name: 'EditConfiguracion'}" variant="primary">
             Configuración
     </b-button>
