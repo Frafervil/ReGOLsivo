@@ -13,9 +13,6 @@ class Usuario(Actor):
     def __str__(self):
         return super().username
 
-    def sumarKarma(self, premio):
-        self.karma = self.karma + premio  
-
 class Administrador(Actor):
 
     def __str__(self):
@@ -56,14 +53,6 @@ class Pronostico(models.Model):
     def __str__(self):
         return  '%s --> %s'%(self.usuario.username, self.partido)
 
-    def comprobarPronosticoUsuario(self):
-        if(self.resultado == self.partido.resultado):
-            self.acertado = 'true'       
-
-    def premiarAcierto(self):
-        if(self.acertado == 'true'):
-            self.usuario.sumarKarma(self.usuario, self.partido.premio)
-
 class Comentario(models.Model):
     momento = models.DateTimeField(auto_now_add=True, null=False, blank=False)
     texto = models.TextField(null=False, blank=False)
@@ -75,15 +64,6 @@ class Comentario(models.Model):
     def __str__(self):
         return '%s --> %s'%(self.autor.username, self.partido)
 
-    def darMeGusta(self):
-        self.meGustas = self.meGustas + 1
-
-    def premiarComentariosPositivos(self, Configuracion):
-        if(self.meGustas > Configuracion.valorComentariosPositivos):
-            self.autor.sumarKarma(self.autor, Configuracion.premioComentariosPositivos)
-
 class Configuracion(models.Model):
-    mensajeBienvenida = models.TextField(max_length=60, null=False)
-    linkLogo = models.URLField(max_length=200, null=False)
     valorComentariosPositivos = models.PositiveIntegerField(default=50, null=False, blank=False)
     premioComentariosPositivos = models.PositiveIntegerField(default=100, null=False, blank=False)

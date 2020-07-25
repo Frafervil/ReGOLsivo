@@ -15,20 +15,6 @@
                         <form @submit="onSubmit">
 
                         <div class="form-group row">
-                            <label for="mensajeBienvenida" class="col-sm-2 col-form-label">Mensaje de bienvenida</label>    
-                            <div class="col-sm-6">
-                             <input type="text" placeholder="Mensaje de bienvenida" name="mensajeBienvenida" class="form-control" v-model.trim="form.mensajeBienvenida">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="linkLogo" class="col-sm-2 col-form-label">Enlace del logo</label>    
-                            <div class="col-sm-6">
-                             <input type="url" placeholder="Enlace del logo" name="linkLogo" class="form-control" v-model.trim="form.linkLogo">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="valorComentariosPositivos" class="col-sm-2 col-form-label">Valor de los comentarios positivos</label>    
                             <div class="col-sm-6">
                              <input type="number" min="0" placeholder="0" name="valorComentariosPositivos" class="form-control" v-model.trim="form.valorComentariosPositivos">
@@ -74,8 +60,6 @@ export default {
     data() {
         return {
             form: {
-                mensajeBienvenida: '',
-                linkLogo: '',
                 valorComentariosPositivos: '',
                 premioComentariosPositivos: ''
             }
@@ -97,12 +81,15 @@ export default {
 
             axios.put(path, this.form).then((response) =>{
 
-                this.form.mensajeBienvenida = response.data.mensajeBienvenida
-                this.form.linkLogo = response.data.linkLogo
                 this.form.valorComentariosPositivos = response.data.valorComentariosPositivos
                 this.form.premioComentariosPositivos = response.data.premioComentariosPositivos
 
-                swal("¡Configuración actualizada con éxito!", "", "success")
+                swal({
+                    title: "¡Configuración actualizada con éxito!",
+                    icon: "success",
+                    button: "¡Genial!"}).then(function() {
+                    window.location = "/landingAdministrador";
+                });
             })
             .catch((error) => {
                 console.log(error)
@@ -115,8 +102,6 @@ export default {
 
             axios.get(path).then((response) =>{
 
-                this.form.mensajeBienvenida = response.data.mensajeBienvenida
-                this.form.linkLogo = response.data.linkLogo
                 this.form.valorComentariosPositivos = response.data.valorComentariosPositivos
                 this.form.premioComentariosPositivos = response.data.premioComentariosPositivos
 
