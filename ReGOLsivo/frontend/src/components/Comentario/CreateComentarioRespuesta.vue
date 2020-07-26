@@ -82,10 +82,6 @@ export default {
 
             const path = `http://localhost:8000/api/v1.0/comentarios/`
 
-            const auth = {
-                headers: {Authorization:'JWT ' + this.$session.get('token')} 
-            }
-
             axios.post(path, this.form, auth).then((response) =>{
 
                 this.form.texto = response.data.texto

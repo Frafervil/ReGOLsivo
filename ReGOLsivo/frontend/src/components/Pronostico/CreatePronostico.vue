@@ -75,7 +75,15 @@ export default {
                 nombre: '',
                 usuarios: []
             },
+            logroDe25Pronosticos: {
+                nombre: '',
+                usuarios: []
+            },
             logroDe50Pronosticos: {
+                nombre: '',
+                usuarios: []
+            },
+            logroDe100Pronosticos: {
                 nombre: '',
                 usuarios: []
             },
@@ -97,10 +105,6 @@ export default {
 
             const path = `http://localhost:8000/api/v1.0/pronosticos/`
 
-            const auth = {
-                headers: {Authorization:'JWT ' + this.$session.get('token')} 
-            }
-
             axios.post(path, this.form, auth).then((response) =>{
 
                 this.form.resultado = response.data.resultado
@@ -113,7 +117,9 @@ export default {
                     window.location = "/pronosticadorUsuario";
                     });
             },this.esElPrimero(),
-            this.esEl50())
+            this.esEl25(),
+            this.esEl50(),
+            this.esEl100())
 
             .catch((error) => {
                 this.errors = [];
@@ -158,6 +164,21 @@ export default {
 
     },
 
+    getLogroDe25Pronosticos(){
+        const path = `http://localhost:8000/api/v1.0/logros/8/`
+
+        axios.get(path).then((response) =>{
+
+                this.logroDe25Pronosticos.nombre = response.data.nombre
+                this.logroDe25Pronosticos.usuarios = response.data.usuarios
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+    },
+
     getLogroDe50Pronosticos(){
         const path = `http://localhost:8000/api/v1.0/logros/5/`
 
@@ -173,10 +194,32 @@ export default {
 
     },
 
+    getLogroDe100Pronosticos(){
+        const path = `http://localhost:8000/api/v1.0/logros/9/`
+
+        axios.get(path).then((response) =>{
+
+                this.logroDe100Pronosticos.nombre = response.data.nombre
+                this.logroDe100Pronosticos.usuarios = response.data.usuarios
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+    },
+
     esElPrimero(){
         if(this.pronosticosDelUsuario.length === 0){
             this.logro.usuarios.push(this.getUsuarioId());
             this.asignarLogroAUsuario();
+        }
+    },
+
+    esEl25(){
+        if(this.pronosticosDelUsuario.length === 24){
+            this.logroDe25Pronosticos.usuarios.push(this.getUsuarioId());
+            this.asignarLogroDe25PronosticosAUsuario();
         }
     },
 
@@ -187,10 +230,30 @@ export default {
         }
     },
 
+    esEl100(){
+        if(this.pronosticosDelUsuario.length === 99){
+            this.logroDe100Pronosticos.usuarios.push(this.getUsuarioId());
+            this.asignarLogroDe100PronosticosAUsuario();
+        }
+    },
+
     asignarLogroAUsuario(){
         const path = `http://localhost:8000/api/v1.0/logros/3/`
 
         axios.put(path, this.logro)
+        swal("¡Has conseguido un logro!", "", "success")
+
+        .catch((error) => {
+            console.log(error)
+            swal("¡Fallo al asignar!", "", "error")
+        })
+    },
+
+    asignarLogroDe25PronosticosAUsuario(){
+        const path = `http://localhost:8000/api/v1.0/logros/8/`
+
+        axios.put(path, this.logroDe25Pronosticos)
+        swal("¡Has conseguido un logro!", "", "success")
 
         .catch((error) => {
             console.log(error)
@@ -202,6 +265,19 @@ export default {
         const path = `http://localhost:8000/api/v1.0/logros/5/`
 
         axios.put(path, this.logroDe50Pronosticos)
+        swal("¡Has conseguido un logro!", "", "success")
+
+        .catch((error) => {
+            console.log(error)
+            swal("¡Fallo al asignar!", "", "error")
+        })
+    },
+
+    asignarLogroDe100PronosticosAUsuario(){
+        const path = `http://localhost:8000/api/v1.0/logros/9/`
+
+        axios.put(path, this.logroDe100Pronosticos)
+        swal("¡Has conseguido un logro!", "", "success")
 
         .catch((error) => {
             console.log(error)
@@ -220,7 +296,9 @@ export default {
     created() {
         this.getPronosticos(),
         this.getLogro(),
-        this.getLogroDe50Pronosticos()
+        this.getLogroDe25Pronosticos(),
+        this.getLogroDe50Pronosticos(),
+        this.getLogroDe100Pronosticos()
     }
 }
 </script>>

@@ -68,7 +68,15 @@ export default {
                 nombre: '',
                 usuarios: []
             },
+            logroDe25Comentarios: {
+                nombre: '',
+                usuarios: []
+            },
             logroDe50Comentarios: {
+                nombre: '',
+                usuarios: []
+            },
+            logroDe100Comentarios: {
                 nombre: '',
                 usuarios: []
             },
@@ -90,10 +98,6 @@ export default {
 
             const path = `http://localhost:8000/api/v1.0/comentarios/`
 
-            const auth = {
-                headers: {Authorization:'JWT ' + this.$session.get('token')} 
-            }
-
             axios.post(path, this.form, auth).then((response) =>{
 
                 this.form.texto = response.data.texto
@@ -105,7 +109,9 @@ export default {
                     window.location = "/pronosticadorUsuario";
                     });
             },this.esElPrimero(),
-            this.esEl50())
+            this.esEl25(),
+            this.esEl50(),
+            this.esEl100())
 
             .catch((error) => {
                 this.errors = [];
@@ -150,6 +156,21 @@ export default {
 
     },
 
+    getLogroDe25Comentarios(){
+        const path = `http://localhost:8000/api/v1.0/logros/6/`
+
+        axios.get(path).then((response) =>{
+
+                this.logroDe25Comentarios.nombre = response.data.nombre
+                this.logroDe25Comentarios.usuarios = response.data.usuarios
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+    },
+
     getLogroDe50Comentarios(){
         const path = `http://localhost:8000/api/v1.0/logros/4/`
 
@@ -165,10 +186,32 @@ export default {
 
     },
 
+    getLogroDe100Comentarios(){
+        const path = `http://localhost:8000/api/v1.0/logros/7/`
+
+        axios.get(path).then((response) =>{
+
+                this.logroDe100Comentarios.nombre = response.data.nombre
+                this.logroDe100Comentarios.usuarios = response.data.usuarios
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+    },
+
     esElPrimero(){
         if(this.comentariosDelUsuario.length === 0){
             this.logro.usuarios.push(this.getUsuarioId());
             this.asignarLogroAUsuario();
+        }
+    },
+
+    esEl25(){
+        if(this.comentariosDelUsuario.length === 24){
+            this.logroDe25Comentarios.usuarios.push(this.getUsuarioId());
+            this.asignarLogroDe25ComentariosAUsuario();
         }
     },
 
@@ -179,10 +222,30 @@ export default {
         }
     },
 
+    esEl100(){
+        if(this.comentariosDelUsuario.length === 99){
+            this.logroDe100Comentarios.usuarios.push(this.getUsuarioId());
+            this.asignarLogroDe100ComentariosAUsuario();
+        }
+    },
+
     asignarLogroAUsuario(){
         const path = `http://localhost:8000/api/v1.0/logros/2/`
 
         axios.put(path, this.logro)
+        swal("¡Has conseguido un logro!", "", "success")
+
+        .catch((error) => {
+            console.log(error)
+            swal("¡Fallo al asignar!", "", "error")
+        })
+    },
+
+    asignarLogroDe25ComentariosAUsuario(){
+        const path = `http://localhost:8000/api/v1.0/logros/6/`
+
+        axios.put(path, this.logroDe25Comentarios)
+        swal("¡Has conseguido un logro!", "", "success")
 
         .catch((error) => {
             console.log(error)
@@ -194,6 +257,19 @@ export default {
         const path = `http://localhost:8000/api/v1.0/logros/4/`
 
         axios.put(path, this.logroDe50Comentarios)
+        swal("¡Has conseguido un logro!", "", "success")
+
+        .catch((error) => {
+            console.log(error)
+            swal("¡Fallo al asignar!", "", "error")
+        })
+    },
+
+    asignarLogroDe100ComentariosAUsuario(){
+        const path = `http://localhost:8000/api/v1.0/logros/7/`
+
+        axios.put(path, this.logroDe100Comentarios)
+        swal("¡Has conseguido un logro!", "", "success")
 
         .catch((error) => {
             console.log(error)
@@ -213,7 +289,9 @@ export default {
     created() {
         this.getComentarios(),
         this.getLogro(),
-        this.getLogroDe50Comentarios()
+        this.getLogroDe25Comentarios(),
+        this.getLogroDe50Comentarios(),
+        this.getLogroDe100Comentarios()
     }
 }
 </script>>

@@ -47,13 +47,16 @@ export default {
         return {
             comentarioId: this.$route.params.comentarioId,
             form: {
-                meGustas: ''
+                momento: '',
+                texto: '',
+                meGustas: '',
+                autor: '',
+                partido: ''
             },
             configuracion: {
                 valorComentariosPositivos: '',
                 premioComentariosPositivos: ''
             },
-            usuarioId: this.getUsuarioId(),
             usuario: {
                 username: '',
                 password: '',
@@ -73,34 +76,23 @@ export default {
             }
         },
 
-        getUsuarioId(){
-            var decodedPayload = atob(this.$session.get('token').split('.')[1]);
-            var payloadSplittedByComa = decodedPayload.split(',')[0];
-            return payloadSplittedByComa.split(':')[1];
-        },
-
         onSubmit(evt){
             evt.preventDefault()
 
             const path = `http://localhost:8000/api/v1.0/comentarios/${this.comentarioId}/`
 
-            axios.get(path).then((response) =>{
+            this.form.meGustas = parseInt(this.form.meGustas) + 1    
 
-                this.form.meGustas = this.form.meGustas + 1
+            axios.put(path, this.form).then(() => {
 
-            }).then(() => {
-                 axios.put(path, this.form).then((response) =>{
+            swal({
+                title: "¡Gracias por apoyar el comentario!",
+                icon: "success",
+                button: "Continuar"}).then(function() {
+                window.location = "/pronosticadorUsuario";
+                });
 
-                this.form.meGustas = this.form.meGustas + 1
-
-                swal({
-                    title: "¡Gracias por apoyar el comentario!",
-                    icon: "success",
-                    button: "Continuar"}).then(function() {
-                    window.location = "/pronosticadorUsuario";
-                    });
-                })
-            }, this.esPositivo())
+            },this.esPositivo())
             .catch((error) => {
                 console.log(error)
             })
@@ -108,14 +100,16 @@ export default {
         },
 
         esPositivo(){
-            if(this.form.meGustas == this.configuracion.valorComentariosPositivos - 1){
+            if(this.form.meGustas == this.configuracion.valorComentariosPositivos){
                 this.usuario.karma = parseInt(this.usuario.karma) + parseInt(this.configuracion.premioComentariosPositivos);
                 this.sumarKarma();
             }
         },
 
         sumarKarma(){
-            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+            const usuarioId = this.form.autor
+
+            const path = `http://localhost:8000/api/v1.0/usuarios/${usuarioId}/`
 
             axios.put(path, this.usuario)
 
@@ -126,7 +120,9 @@ export default {
         },
 
         getUsuario(){
-            const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
+            const usuarioId = this.form.autor
+
+            const path = `http://localhost:8000/api/v1.0/usuarios/${usuarioId}/`
 
             axios.get(path).then((response) =>{
 
@@ -169,6 +165,8 @@ export default {
                 this.form.autor = response.data.autor
                 this.form.partido = response.data.partido
 
+            }).then(() => {
+                this.getUsuario()
             })
             .catch((error) => {
                 console.log(error)
@@ -177,8 +175,7 @@ export default {
     },
     created() {
         this.getComentario(),
-        this.getConfiguracion(),
-        this.getUsuario()
+        this.getConfiguracion()
     }
 }
 </script>>
