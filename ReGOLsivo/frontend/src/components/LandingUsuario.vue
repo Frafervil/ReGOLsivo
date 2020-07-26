@@ -21,6 +21,8 @@
     <br>
     <h3>Contacto</h3>
     <h4>Correo electrónico: primodepapadecho@gmail.com</h4>
+    <br>
+    <b-button type="button" class="btn btn-link" variant="info" :to="{ name: 'TerminosYCondicionesUsuario'}">Términos y condiciones</b-button>
   </div>
 </template>
 

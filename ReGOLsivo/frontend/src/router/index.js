@@ -6,6 +6,7 @@ import LandingAdministrador from '@/components/LandingAdministrador'
 import Auth from '@/components/Auth'
 import Bienvenido from '@/components/Bienvenido'
 import TerminosYCondiciones from '@/components/TerminosYCondiciones'
+import TerminosYCondicionesUsuario from '@/components/TerminosYCondicionesUsuario'
 
 import ListUsuario from '@/components/Usuario/ListUsuario'
 import CreateUsuario from '@/components/Usuario/CreateUsuario'
@@ -77,6 +78,11 @@ export default new Router({
       path: '/terminosYCondiciones',
       name: 'TerminosYCondiciones',
       component: TerminosYCondiciones
+    },
+    {
+      path: '/terminosYCondicionesUsuario',
+      name: 'TerminosYCondicionesUsuario',
+      component: TerminosYCondicionesUsuario
     },
     {
       path: '/usuarios',

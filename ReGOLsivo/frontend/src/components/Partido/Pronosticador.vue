@@ -10,8 +10,13 @@
         </div>
         <br>
         <div class="col-md-12">
-          <b-table striped hover :items="partidos" :fields="fields">
-
+          <b-table 
+          id="tabla"
+          striped hover 
+          :items="partidos" 
+          :fields="fields"
+          :per-page="perPage" 
+          :current-page="currentPage">
             <template v-slot:cell(action)="data">
               <b-button size="sm" variant="info" :to="{ name:'ShowPartidoAdministrador', params: {partidoId: data.item.id} }">
                 Ver detalles
@@ -23,8 +28,17 @@
                 Eliminar
               </b-button>
             </template>
-
           </b-table>
+          <b-pagination 
+            v-model="currentPage" 
+            :total-rows="rows" 
+            :per-page="perPage" 
+            aria-controls="tabla" 
+            first-text="Primera jornada" 
+            prev-text="Jornada anterior" 
+            next-text="Siguiente jornada" 
+            last-text="Última jornada">
+          </b-pagination>
           <b-button type="submit" class="btn-large-space" :to="{ name: 'LandingAdministrador'}">Atrás</b-button>
         </div>
       </div>
@@ -44,6 +58,9 @@ export default {
 
   data () {
     return {
+      currentPage: 1,
+      perPage: 10,
+
       fields: [
         { key: 'nombreLocal', label: 'Local' },
         { key: 'nombreVisitante', label: 'Visitante' },
@@ -74,6 +91,13 @@ export default {
       })
     }
   },
+
+  computed: {
+      rows() {
+        return this.partidos.length
+      },
+
+    },
 
   created(){
     this.getPartidos()
