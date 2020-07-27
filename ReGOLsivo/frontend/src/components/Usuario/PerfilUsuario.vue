@@ -113,7 +113,7 @@ export default {
 
             const path = `http://localhost:8000/api/v1.0/usuarios/${usuarioId}/`
 
-            axios.put(path, this.form, auth).then((response) =>{
+            axios.put(path, this.form).then((response) =>{
 
                 this.form.email = response.data.email
                 this.form.first_name = response.data.first_name

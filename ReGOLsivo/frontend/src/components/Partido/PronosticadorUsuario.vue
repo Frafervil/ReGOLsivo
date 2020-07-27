@@ -83,7 +83,7 @@ export default {
 
       camposPronosticos: [
         { key: 'resultado', label: 'Resultado' },
-        { key: 'acertado', label: '¿Acertado?' },
+        { key: 'acertado', label: '¿Acertado?', sortable: true},
         { key: 'partido', formatter: "localYVisitante", label: 'Partido' },
         { key: 'action', label: '' }
       ],

@@ -105,7 +105,7 @@ export default {
 
             const path = `http://localhost:8000/api/v1.0/pronosticos/`
 
-            axios.post(path, this.form, auth).then((response) =>{
+            axios.post(path, this.form).then((response) =>{
 
                 this.form.resultado = response.data.resultado
 

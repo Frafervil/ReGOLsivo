@@ -98,7 +98,7 @@ export default {
 
             const path = `http://localhost:8000/api/v1.0/comentarios/`
 
-            axios.post(path, this.form, auth).then((response) =>{
+            axios.post(path, this.form).then((response) =>{
 
                 this.form.texto = response.data.texto
 

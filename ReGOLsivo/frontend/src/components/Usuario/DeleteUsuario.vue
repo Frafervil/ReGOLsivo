@@ -77,7 +77,7 @@ export default {
         deleteUsuario () {
             const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
 
-            axios.delete(path, auth).then((response) => {
+            axios.delete(path).then((response) => {
                 swal({
                     title: "¡Usuario eliminado con éxito!",
                     icon: "success",
