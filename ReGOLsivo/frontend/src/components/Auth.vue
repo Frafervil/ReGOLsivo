@@ -103,7 +103,7 @@ export default {
 
         getAdministrador(){
             return this.administradores.filter(administrador => 
-                administrador.username === this.credentials.username)
+                administrador.username == this.credentials.username)
         },
 
         redirect(array){

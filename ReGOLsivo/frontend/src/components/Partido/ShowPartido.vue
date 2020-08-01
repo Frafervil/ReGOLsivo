@@ -72,7 +72,7 @@
 
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button :disabled="form.dia < diaActual || (form.dia == diaActual && form.hora < horaActual) || noEsElUnico" size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }"> <!--  && form.hora < horaActual -->
+                            <b-button :disabled="form.dia < diaActual || (form.dia == diaActual && form.hora < horaActual) || noEsElUnico" size="sm" variant="info" :to="{ name:'CreatePronostico', params: {partidoId: this.partidoId} }">
                             Pronosticar
                             </b-button>    
                             <b-button size="sm" variant="primary" :to="{ name:'CreateComentario', params: {partidoId: this.partidoId}}">
@@ -96,7 +96,7 @@
                                     <b-button size="sm" variant="primary" :to="{ name:'CreateComentarioRespuesta', params: {comentarioId: data.item.id} }">
                                         Responder
                                     </b-button>
-                                    <b-button size="sm" variant="success" :to="{ name:'DarMeGusta', params: {comentarioId: data.item.id} }">
+                                    <b-button v-if="data.item.autor != usuarioId" size="sm" variant="success" :to="{ name:'DarMeGusta', params: {comentarioId: data.item.id} }">
                                         Me gusta
                                     </b-button>
                                     <b-button v-if="data.item.autor == usuarioId" size="sm" variant="primary" :to="{ name:'EditComentario', params: {comentarioId: data.item.id} }">

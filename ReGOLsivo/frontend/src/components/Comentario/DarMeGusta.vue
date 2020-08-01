@@ -16,7 +16,7 @@
 
                         <div class="rows">
                             <div class="col text-left">
-                            <b-button type="submit" variant="primary">Si</b-button>
+                            <b-button v-if="form.autor != usuarioId" type="submit" variant="primary">Si</b-button>
                             <b-button type="submit" class="btn-large-space" :to="{ name: 'PronosticadorUsuario'}">Cancelar</b-button>
                             </div>
                         </div>
@@ -65,6 +65,7 @@ export default {
                 last_name: '',
                 karma: ''
             },
+            usuarioId: this.getUsuarioId()
         }
     },
     methods: {
@@ -74,6 +75,12 @@ export default {
         if (!this.$session.has("token")) {
             router.push("/auth");
             }
+        },
+
+        getUsuarioId(){
+            var decodedPayload = atob(this.$session.get('token').split('.')[1]);
+            var payloadSplittedByComa = decodedPayload.split(',')[0];
+            return payloadSplittedByComa.split(':')[1];
         },
 
         onSubmit(evt){
