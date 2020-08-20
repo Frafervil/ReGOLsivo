@@ -10,6 +10,10 @@
                 <p>Pronóstico del sistema : {{ this.element.pronosticoSistema }}</p>
                 <p>Premio : {{ this.element.premio }}</p>
                 <p>Dificultad : {{ this.element.dificultad }}</p>
+                <p>Proporción de puntos del equipo local : {{ this.element.proporcion_de_puntos_del_equipo_local }}</p>
+                <p>Proporción de puntos del equipo visitante : {{ this.element.proporcion_de_puntos_del_equipo_visitante }}</p>
+                <p>Proporción de goles por partido del equipo local : {{ this.element.goles_por_partido_del_equipo_local }}</p>
+                <p>Proporción de goles por partido del equipo visitante : {{ this.element.goles_por_partido_del_equipo_visitante }}</p>
 
             </div> 
         </div> 
@@ -44,7 +48,11 @@ export default {
                 resultado: '',
                 pronosticoSistema: '',
                 premio: '',
-                dificultad: ''
+                dificultad: '',
+                proporcion_de_puntos_del_equipo_local: '',
+                proporcion_de_puntos_del_equipo_visitante: '',
+                goles_por_partido_del_equipo_local: '',
+                goles_por_partido_del_equipo_visitante: ''
             }
         }
     },
@@ -68,6 +76,10 @@ export default {
                 this.element.pronosticoSistema = response.data.pronosticoSistema
                 this.element.premio = response.data.premio
                 this.element.dificultad = response.data.dificultad
+                this.element.proporcion_de_puntos_del_equipo_local = response.data.proporcion_de_puntos_del_equipo_local
+                this.element.proporcion_de_puntos_del_equipo_visitante = response.data.proporcion_de_puntos_del_equipo_visitante
+                this.element.goles_por_partido_del_equipo_local = response.data.goles_por_partido_del_equipo_local
+                this.element.goles_por_partido_del_equipo_visitante = response.data.goles_por_partido_del_equipo_visitante
 
             })
             .catch((error) => {

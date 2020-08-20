@@ -70,6 +70,34 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="proporcion_de_puntos_del_equipo_local" class="col-sm-2 col-form-label">Proporción de puntos del equipo local</label>    
+                            <div class="col-sm-6">
+                             <input type="number" step="any" placeholder="0.614975317" name="proporcion_de_puntos_del_equipo_local" class="form-control" readonly v-model.trim="form.proporcion_de_puntos_del_equipo_local">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="proporcion_de_puntos_del_equipo_visitante" class="col-sm-2 col-form-label">Proporción de puntos del equipo visitante</label>    
+                            <div class="col-sm-6">
+                             <input type="number" step="any" placeholder="0.614975317" name="proporcion_de_puntos_del_equipo_visitante" class="form-control" readonly v-model.trim="form.proporcion_de_puntos_del_equipo_visitante">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="goles_por_partido_del_equipo_local" class="col-sm-2 col-form-label">Proporción de goles por partido del equipo local</label>    
+                            <div class="col-sm-6">
+                             <input type="number" step="any" placeholder="0.614975317" name="goles_por_partido_del_equipo_local" class="form-control" readonly v-model.trim="form.goles_por_partido_del_equipo_local">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="goles_por_partido_del_equipo_visitante" class="col-sm-2 col-form-label">Proporción de goles por partido del equipo visitante</label>    
+                            <div class="col-sm-6">
+                             <input type="number" step="any" placeholder="0.614975317" name="goles_por_partido_del_equipo_visitante" class="form-control" readonly v-model.trim="form.goles_por_partido_del_equipo_visitante">
+                            </div>
+                        </div>
+
                         </form>
                         <br>
                         <h2>Comentarios</h2>
@@ -127,7 +155,11 @@ export default {
                 hora: '',
                 pronosticoSistema: '',
                 premio: '',
-                dificultad: ''
+                dificultad: '',
+                proporcion_de_puntos_del_equipo_local: '',
+                proporcion_de_puntos_del_equipo_visitante: '',
+                goles_por_partido_del_equipo_local: '',
+                goles_por_partido_del_equipo_visitante: ''
             },
         
             fields: [
@@ -202,6 +234,10 @@ export default {
                 this.form.pronosticoSistema = response.data.pronosticoSistema
                 this.form.premio = response.data.premio
                 this.form.dificultad = response.data.dificultad
+                this.form.proporcion_de_puntos_del_equipo_local = response.data.proporcion_de_puntos_del_equipo_local
+                this.form.proporcion_de_puntos_del_equipo_visitante = response.data.proporcion_de_puntos_del_equipo_visitante
+                this.form.goles_por_partido_del_equipo_local = response.data.goles_por_partido_del_equipo_local
+                this.form.goles_por_partido_del_equipo_visitante = response.data.goles_por_partido_del_equipo_visitante
 
             })
             .catch((error) => {
@@ -223,6 +259,10 @@ export default {
                 this.form.pronosticoSistema = response.data.pronosticoSistema
                 this.form.premio = response.data.premio
                 this.form.dificultad = response.data.dificultad
+                this.form.proporcion_de_puntos_del_equipo_local = response.data.proporcion_de_puntos_del_equipo_local
+                this.form.proporcion_de_puntos_del_equipo_visitante = response.data.proporcion_de_puntos_del_equipo_visitante
+                this.form.goles_por_partido_del_equipo_local = response.data.goles_por_partido_del_equipo_local
+                this.form.goles_por_partido_del_equipo_visitante = response.data.goles_por_partido_del_equipo_visitante
 
             })
             .catch((error) => {

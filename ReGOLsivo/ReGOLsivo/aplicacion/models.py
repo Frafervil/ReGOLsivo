@@ -2,6 +2,11 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 
+import numpy as np
+
+import pandas as pd
+from joblib import dump, load
+
 # Create your models here.
 
 class Actor(AbstractUser):
@@ -39,6 +44,20 @@ class Partido(models.Model):
     pronosticoSistema = models.CharField(max_length=35, null=False, blank=False)
     premio = models.PositiveIntegerField(null=False, blank=False)
     dificultad = models.CharField(max_length=35, choices=Dificultad.choices, null=False, blank=False)
+    proporcion_de_puntos_del_equipo_local = models.DecimalField(max_digits=11, decimal_places=9, null=False, blank=False)
+    proporcion_de_puntos_del_equipo_visitante = models.DecimalField(max_digits=11, decimal_places=9, null=False, blank=False)
+    goles_por_partido_del_equipo_local = models.DecimalField(max_digits=11, decimal_places=9, null=False, blank=False)
+    goles_por_partido_del_equipo_visitante = models.DecimalField(max_digits=11, decimal_places=9, null=False, blank=False)
+
+    def calcular_pronostico(self):
+        # Cargar el modelo
+        clf = load('partidos_knn.joblib')
+
+        # Crear un registro para un partido
+        registro = np.array([self.proporcion_de_puntos_del_equipo_local, self.proporcion_de_puntos_del_equipo_visitante, self.goles_por_partido_del_equipo_local, self.goles_por_partido_del_equipo_visitante])
+
+        # Obtener la predicción
+        self.pronosticoSistema = clf.predict([registro])[0]
 
     def __str__(self):
         cadena = "{0} - {1}"
