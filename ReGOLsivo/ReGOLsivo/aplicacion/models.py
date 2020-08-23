@@ -1,12 +1,14 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
+from computed_property import ComputedDecimalField
 
-import numpy as np
+#import numpy as np
 
-import pandas as pd
+#import pandas as pd
 from joblib import dump, load
 
+import os.path
 # Create your models here.
 
 class Actor(AbstractUser):
@@ -41,7 +43,7 @@ class Partido(models.Model):
     resultado = models.CharField(max_length=35, null=False, blank=False)
     hora = models.TimeField(null=False, blank=False)
     dia = models.DateField(null=False, blank=False)
-    pronosticoSistema = models.CharField(max_length=35, null=False, blank=False)
+    pronosticoSistema = ComputedDecimalField(compute_from='calcular_pronostico', max_digits=11, decimal_places=9, null=False, blank=False) #models.CharField(max_length=35, null=False, blank=False)
     premio = models.PositiveIntegerField(null=False, blank=False)
     dificultad = models.CharField(max_length=35, choices=Dificultad.choices, null=False, blank=False)
     proporcion_de_puntos_del_equipo_local = models.DecimalField(max_digits=11, decimal_places=9, null=False, blank=False)
@@ -49,15 +51,19 @@ class Partido(models.Model):
     goles_por_partido_del_equipo_local = models.DecimalField(max_digits=11, decimal_places=9, null=False, blank=False)
     goles_por_partido_del_equipo_visitante = models.DecimalField(max_digits=11, decimal_places=9, null=False, blank=False)
 
+    @property
     def calcular_pronostico(self):
         # Cargar el modelo
-        clf = load('partidos_knn.joblib')
+
+        my_path = os.path.abspath(os.path.dirname(__file__))
+        path = os.path.join(my_path, "partidos_knn.joblib")
+        clf = load(path)
 
         # Crear un registro para un partido
-        registro = np.array([self.proporcion_de_puntos_del_equipo_local, self.proporcion_de_puntos_del_equipo_visitante, self.goles_por_partido_del_equipo_local, self.goles_por_partido_del_equipo_visitante])
+        registro = [self.proporcion_de_puntos_del_equipo_local, self.proporcion_de_puntos_del_equipo_visitante, self.goles_por_partido_del_equipo_local, self.goles_por_partido_del_equipo_visitante]
 
         # Obtener la predicción
-        self.pronosticoSistema = clf.predict([registro])[0]
+        return clf.predict([registro])[0]
 
     def __str__(self):
         cadena = "{0} - {1}"

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'computed_property',
 ]
 
 AUTH_USER_MODEL = 'aplicacion.Actor'
