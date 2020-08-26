@@ -239,6 +239,9 @@ export default {
                 this.form.hora = response.data.hora
                 this.form.resultado = response.data.resultado
                 this.form.pronosticoSistema = response.data.pronosticoSistema
+                this.form.probabilidadVictoriaLocal = response.data.probabilidadVictoriaLocal
+                this.form.probabilidadEmpate = response.data.probabilidadEmpate
+                this.form.probabilidadVictoriaVisitante = response.data.probabilidadVictoriaVisitante
                 this.form.premio = response.data.premio
                 this.form.dificultad = response.data.dificultad
                 this.form.proporcion_de_puntos_del_equipo_local = response.data.proporcion_de_puntos_del_equipo_local

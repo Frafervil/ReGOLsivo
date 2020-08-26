@@ -8,6 +8,9 @@
                 <p>Visitante : {{ this.element.nombreVisitante }}</p>
                 <p>Resultado : {{ this.element.resultado }}</p>
                 <p>Pronóstico del sistema : {{ this.element.pronosticoSistema }}</p>
+                <p>Probabilidad de victoria del equipo local (%) : {{ this.element.probabilidadVictoriaLocal }}</p>
+                <p>Probabilidad de empate (%) : {{ this.element.probabilidadEmpate }}</p>
+                <p>Probabilidad de victoria del equipo visitante (%) : {{ this.element.probabilidadVictoriaVisitante }}</p>
                 <p>Premio : {{ this.element.premio }}</p>
                 <p>Dificultad : {{ this.element.dificultad }}</p>
                 <p>Proporción de puntos del equipo local : {{ this.element.proporcion_de_puntos_del_equipo_local }}</p>
@@ -47,6 +50,9 @@ export default {
                 nombreVisitante: '',
                 resultado: '',
                 pronosticoSistema: '',
+                probabilidadVictoriaLocal: '',
+                probabilidadEmpate: '',
+                probabilidadVictoriaVisitante: '',
                 premio: '',
                 dificultad: '',
                 proporcion_de_puntos_del_equipo_local: '',
@@ -74,6 +80,9 @@ export default {
                 this.element.nombreVisitante = response.data.nombreVisitante
                 this.element.resultado = response.data.resultado
                 this.element.pronosticoSistema = response.data.pronosticoSistema
+                this.element.probabilidadVictoriaLocal = response.data.probabilidadVictoriaLocal
+                this.element.probabilidadEmpate = response.data.probabilidadEmpate
+                this.element.probabilidadVictoriaVisitante = response.data.probabilidadVictoriaVisitante
                 this.element.premio = response.data.premio
                 this.element.dificultad = response.data.dificultad
                 this.element.proporcion_de_puntos_del_equipo_local = response.data.proporcion_de_puntos_del_equipo_local

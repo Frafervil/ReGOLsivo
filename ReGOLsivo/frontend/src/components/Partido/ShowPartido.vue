@@ -12,7 +12,7 @@
                    <div class="card-body">
 
                        <form>
-                        <form @submit="onSubmit">
+                        <form>
 
                         <div class="form-group row">
                             <label for="nombreLocal" class="col-sm-2 col-form-label">Local</label>    
@@ -31,7 +31,7 @@
                         <div class="form-group row">
                             <label for="resultado" class="col-sm-2 col-form-label">Resultado</label>    
                             <div class="col-sm-6">
-                             <input type="number" name="resultado" class="form-control" readonly v-model.trim="form.resultado">
+                             <input type="text" name="resultado" class="form-control" readonly v-model.trim="form.resultado">
                             </div>
                         </div>
 
@@ -53,6 +53,27 @@
                             <label for="pronosticoSistema" class="col-sm-2 col-form-label">Pronóstico del sistema</label>    
                             <div class="col-sm-6">
                              <input type="number" name="pronosticoSistema" class="form-control" readonly v-model.trim="form.pronosticoSistema">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="probabilidadVictoriaLocal" class="col-sm-2 col-form-label">Probabilidad de victoria del equipo local (%)</label>    
+                            <div class="col-sm-6">
+                             <input type="number" name="probabilidadVictoriaLocal" class="form-control" readonly v-model.trim="form.probabilidadVictoriaLocal">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="probabilidadEmpate" class="col-sm-2 col-form-label">Probabilidad de empate (%)</label>    
+                            <div class="col-sm-6">
+                             <input type="number" name="probabilidadEmpate" class="form-control" readonly v-model.trim="form.probabilidadEmpate">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="probabilidadVictoriaVisitante" class="col-sm-2 col-form-label">Probabilidad de victoria del equipo visitante (%)</label>    
+                            <div class="col-sm-6">
+                             <input type="number" name="probabilidadVictoriaVisitante" class="form-control" readonly v-model.trim="form.probabilidadVictoriaVisitante">
                             </div>
                         </div>
 
@@ -142,6 +163,9 @@ export default {
                 dia: '',
                 hora: '',
                 pronosticoSistema: '',
+                probabilidadVictoriaLocal: '',
+                probabilidadEmpate: '',
+                probabilidadVictoriaVisitante: '',
                 premio: '',
                 dificultad: ''
             },
@@ -226,29 +250,6 @@ export default {
 
         },
 
-        onSubmit(evt){
-            evt.preventDefault()
-
-            const path = `http://localhost:8000/api/v1.0/partidos/${this.partidoId}/`
-
-            axios.get(path).then((response) =>{
-
-                this.form.nombreLocal = response.data.nombreLocal
-                this.form.nombreVisitante = response.data.nombreVisitante
-                this.form.resultado = response.data.resultado
-                this.form.dia = response.data.dia
-                this.form.hora = response.data.hora
-                this.form.pronosticoSistema = response.data.pronosticoSistema
-                this.form.premio = response.data.premio
-                this.form.dificultad = response.data.dificultad
-
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-
-        },
-
         getUsuario(){
             const path = `http://localhost:8000/api/v1.0/usuarios/${this.usuarioId}/`
 
@@ -279,6 +280,9 @@ export default {
                 this.form.dia = response.data.dia
                 this.form.hora = response.data.hora
                 this.form.pronosticoSistema = response.data.pronosticoSistema
+                this.form.probabilidadVictoriaLocal = response.data.probabilidadVictoriaLocal
+                this.form.probabilidadEmpate = response.data.probabilidadEmpate
+                this.form.probabilidadVictoriaVisitante = response.data.probabilidadVictoriaVisitante
                 this.form.premio = response.data.premio
                 this.form.dificultad = response.data.dificultad
 
