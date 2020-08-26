@@ -152,10 +152,5 @@ export default {
 
         },
     },
-    created() {
-    }
 }
 </script>>
-
-<style lang="css" scoped>
-</style>

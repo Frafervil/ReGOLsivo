@@ -31,7 +31,7 @@
                         <div class="form-group row">
                             <label for="resultado" class="col-sm-2 col-form-label">Resultado</label>    
                             <div class="col-sm-6">
-                             <input type="text" name="resultado" class="form-control" readonly v-model.trim="form.resultado">
+                             <input type="number" name="resultado" class="form-control" readonly v-model.trim="form.resultado">
                             </div>
                         </div>
 
@@ -52,7 +52,7 @@
                         <div class="form-group row">
                             <label for="pronosticoSistema" class="col-sm-2 col-form-label">Pronóstico del sistema</label>    
                             <div class="col-sm-6">
-                             <input type="text" name="pronosticoSistema" class="form-control" readonly v-model.trim="form.pronosticoSistema">
+                             <input type="number" name="pronosticoSistema" class="form-control" readonly v-model.trim="form.pronosticoSistema">
                             </div>
                         </div>
 
@@ -296,6 +296,3 @@ export default {
     }
 }
 </script>>
-
-<style lang="css" scoped>
-</style>

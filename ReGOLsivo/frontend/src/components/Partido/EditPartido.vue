@@ -64,20 +64,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="pronosticoSistema" class="col-sm-2 col-form-label">Pronóstico del sistema</label>    
-                            <div class="col-sm-6">
-                             <input type="radio" id="1" value="1" v-model.trim="form.pronosticoSistema">
-                             <label for="1">1</label>
-                             <br>
-                             <input type="radio" id="X" value="X" v-model.trim="form.pronosticoSistema">
-                             <label for="X">X</label>
-                             <br>
-                             <input type="radio" id="2" value="2" v-model.trim="form.pronosticoSistema">
-                             <label for="2">2</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="premio" class="col-sm-2 col-form-label">Premio</label>    
                             <div class="col-sm-6">
                              <input type="number" min="0" placeholder="0" name="premio" class="form-control" v-model.trim="form.premio">
@@ -150,7 +136,6 @@ export default {
                 resultado: '',
                 dia: '',
                 hora: '',
-                pronosticoSistema: '',
                 premio: '',
                 dificultad: '',
                 proporcion_de_puntos_del_equipo_local: '',
@@ -191,7 +176,6 @@ export default {
                 this.form.dia = response.data.dia
                 this.form.hora = response.data.hora
                 this.form.resultado = response.data.resultado
-                this.form.pronosticoSistema = response.data.pronosticoSistema
                 this.form.premio = response.data.premio
                 this.form.dificultad = response.data.dificultad
                 this.form.proporcion_de_puntos_del_equipo_local = response.data.proporcion_de_puntos_del_equipo_local
@@ -222,9 +206,6 @@ export default {
                 }
                 if(this.form.resultado == ''){
                     this.errors.push('El resultado es obligatorio');
-                }
-                if(this.form.pronosticoSistema == ''){
-                    this.errors.push('El pronóstico del sistema es obligatorio');
                 }
                 if(this.form.premio == ''){
                     this.errors.push('El premio es obligatorio');
@@ -276,6 +257,3 @@ export default {
     }
 }
 </script>>
-
-<style lang="css" scoped>
-</style>

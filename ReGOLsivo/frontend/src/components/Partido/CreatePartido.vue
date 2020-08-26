@@ -121,7 +121,7 @@ export default {
                 resultado: 'Por determinar',
                 dia: '',
                 hora: '',
-                pronosticoSistema: 'Por determinar',
+                pronosticoSistema: '',
                 premio: '',
                 dificultad: '',
                 proporcion_de_puntos_del_equipo_local: '',
@@ -210,10 +210,5 @@ export default {
 
         },
     },
-    created() {
-    }
 }
 </script>>
-
-<style lang="css" scoped>
-</style>
