@@ -142,7 +142,7 @@ export default {
      },
 
     getLogro(){
-        const path = `http://localhost:8000/api/v1.0/logros/2/`
+        const path = `http://localhost:8000/api/v1.0/logros/1/`
 
         axios.get(path).then((response) =>{
 
@@ -157,7 +157,7 @@ export default {
     },
 
     getLogroDe25Comentarios(){
-        const path = `http://localhost:8000/api/v1.0/logros/6/`
+        const path = `http://localhost:8000/api/v1.0/logros/2/`
 
         axios.get(path).then((response) =>{
 
@@ -172,7 +172,7 @@ export default {
     },
 
     getLogroDe50Comentarios(){
-        const path = `http://localhost:8000/api/v1.0/logros/4/`
+        const path = `http://localhost:8000/api/v1.0/logros/3/`
 
         axios.get(path).then((response) =>{
 
@@ -187,7 +187,7 @@ export default {
     },
 
     getLogroDe100Comentarios(){
-        const path = `http://localhost:8000/api/v1.0/logros/7/`
+        const path = `http://localhost:8000/api/v1.0/logros/4/`
 
         axios.get(path).then((response) =>{
 
@@ -230,7 +230,7 @@ export default {
     },
 
     asignarLogroAUsuario(){
-        const path = `http://localhost:8000/api/v1.0/logros/2/`
+        const path = `http://localhost:8000/api/v1.0/logros/1/`
 
         axios.put(path, this.logro)
         swal("¡Has conseguido un logro!", "", "success")
@@ -242,7 +242,7 @@ export default {
     },
 
     asignarLogroDe25ComentariosAUsuario(){
-        const path = `http://localhost:8000/api/v1.0/logros/6/`
+        const path = `http://localhost:8000/api/v1.0/logros/2/`
 
         axios.put(path, this.logroDe25Comentarios)
         swal("¡Has conseguido un logro!", "", "success")
@@ -254,7 +254,7 @@ export default {
     },
 
     asignarLogroDe50ComentariosAUsuario(){
-        const path = `http://localhost:8000/api/v1.0/logros/4/`
+        const path = `http://localhost:8000/api/v1.0/logros/3/`
 
         axios.put(path, this.logroDe50Comentarios)
         swal("¡Has conseguido un logro!", "", "success")
@@ -266,7 +266,7 @@ export default {
     },
 
     asignarLogroDe100ComentariosAUsuario(){
-        const path = `http://localhost:8000/api/v1.0/logros/7/`
+        const path = `http://localhost:8000/api/v1.0/logros/4/`
 
         axios.put(path, this.logroDe100Comentarios)
         swal("¡Has conseguido un logro!", "", "success")

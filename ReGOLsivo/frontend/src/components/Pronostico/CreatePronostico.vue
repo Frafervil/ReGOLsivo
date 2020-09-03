@@ -150,7 +150,7 @@ export default {
      },
 
     getLogro(){
-        const path = `http://localhost:8000/api/v1.0/logros/3/`
+        const path = `http://localhost:8000/api/v1.0/logros/5/`
 
         axios.get(path).then((response) =>{
 
@@ -165,7 +165,7 @@ export default {
     },
 
     getLogroDe25Pronosticos(){
-        const path = `http://localhost:8000/api/v1.0/logros/8/`
+        const path = `http://localhost:8000/api/v1.0/logros/6/`
 
         axios.get(path).then((response) =>{
 
@@ -180,7 +180,7 @@ export default {
     },
 
     getLogroDe50Pronosticos(){
-        const path = `http://localhost:8000/api/v1.0/logros/5/`
+        const path = `http://localhost:8000/api/v1.0/logros/7/`
 
         axios.get(path).then((response) =>{
 
@@ -195,7 +195,7 @@ export default {
     },
 
     getLogroDe100Pronosticos(){
-        const path = `http://localhost:8000/api/v1.0/logros/9/`
+        const path = `http://localhost:8000/api/v1.0/logros/8/`
 
         axios.get(path).then((response) =>{
 
@@ -238,7 +238,7 @@ export default {
     },
 
     asignarLogroAUsuario(){
-        const path = `http://localhost:8000/api/v1.0/logros/3/`
+        const path = `http://localhost:8000/api/v1.0/logros/5/`
 
         axios.put(path, this.logro)
         swal("¡Has conseguido un logro!", "", "success")
@@ -250,7 +250,7 @@ export default {
     },
 
     asignarLogroDe25PronosticosAUsuario(){
-        const path = `http://localhost:8000/api/v1.0/logros/8/`
+        const path = `http://localhost:8000/api/v1.0/logros/6/`
 
         axios.put(path, this.logroDe25Pronosticos)
         swal("¡Has conseguido un logro!", "", "success")
@@ -262,7 +262,7 @@ export default {
     },
 
     asignarLogroDe50PronosticosAUsuario(){
-        const path = `http://localhost:8000/api/v1.0/logros/5/`
+        const path = `http://localhost:8000/api/v1.0/logros/7/`
 
         axios.put(path, this.logroDe50Pronosticos)
         swal("¡Has conseguido un logro!", "", "success")
@@ -274,7 +274,7 @@ export default {
     },
 
     asignarLogroDe100PronosticosAUsuario(){
-        const path = `http://localhost:8000/api/v1.0/logros/9/`
+        const path = `http://localhost:8000/api/v1.0/logros/8/`
 
         axios.put(path, this.logroDe100Pronosticos)
         swal("¡Has conseguido un logro!", "", "success")
